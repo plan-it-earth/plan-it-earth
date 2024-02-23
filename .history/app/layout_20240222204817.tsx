@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Plan-It-Earth",
-  description: "Plan-It-Earth is a calendar application for professors and students",
+  description: "Plan-It-Earth is a calendar application ",
 };
 
 export default function RootLayout({
