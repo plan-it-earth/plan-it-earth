@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [userData, setUserData] = useState<AuthState>({ userData: null});
 
     useEffect(() => {
+        console.log(userData);
         const unsubscribe = onAuthStateChanged(auth, async (user: firebaseUser | null) => {
             try {
                 // If user is logged in, get user data from firestore and route to calendar page

@@ -39,7 +39,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                     return () => unsubscribeUser();
                 } else {
                     setUserData({ userData: null });
-                    router.push('/');
                     return () => {};
                 }
             } catch (error) {

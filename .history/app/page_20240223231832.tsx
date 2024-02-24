@@ -13,6 +13,17 @@ import google from './Images/google.png';
 
 export default function Home() {
   const router = useRouter();
+
+  console.log('auth: ', auth.currentUser);
+
+  // if user is logged in, route to calendar page
+  useEffect(() => {
+    if (auth.currentUser) {
+      // route to calendar page
+      router.push('/pages/calendar');
+    }
+  }, [router]);
+  
   
   // continue with google function
   const continueWithGoogle = async () => {
@@ -31,6 +42,8 @@ export default function Home() {
             email: user.email,
             uid: user.uid
           });
+          // route to calendar page
+          router.push('/pages/calendar');
         }
       }) .catch((error) => {
         const errorCode = error.code;
