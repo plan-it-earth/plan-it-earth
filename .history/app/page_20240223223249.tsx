@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import Image from "next/image";
 import UserContext from "./lib/firebase/UserContext";
 
@@ -13,12 +13,11 @@ import google from './Images/google.png';
 
 export default function Home() {
   const router = useRouter();
-
-  // if user is logged in, route to calendar page
+  // TODO: if user is logged in, route to calendar page
   useEffect(() => {
     if (auth.currentUser) {
       // route to calendar page
-      router.push('/pages/calendar');
+      router.push('/calendar');
     }
   }, [router]);
   
@@ -41,7 +40,7 @@ export default function Home() {
             uid: user.uid
           });
           // route to calendar page
-          router.push('/pages/calendar');
+          router.push('/calendar');
         }
       }) .catch((error) => {
         const errorCode = error.code;

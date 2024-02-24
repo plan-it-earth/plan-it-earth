@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     if (auth.currentUser) {
       // route to calendar page
-      router.push('/pages/calendar');
+      router.push('/calendar');
     }
   }, [router]);
   
@@ -41,7 +41,7 @@ export default function Home() {
             uid: user.uid
           });
           // route to calendar page
-          router.push('/pages/calendar');
+          router.push('/calendar');
         }
       }) .catch((error) => {
         const errorCode = error.code;
