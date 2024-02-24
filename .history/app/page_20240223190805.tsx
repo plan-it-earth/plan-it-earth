@@ -5,7 +5,6 @@ import UserContext from "./lib/firebase/UserContext";
 
 import { signInWithPopup,  GoogleAuthProvider } from 'firebase/auth';
 import { auth, db } from '../firebaseConfig';
-import { setDoc, doc } from 'firebase/firestore';
 
 import logo from './Images/logo.png';
 import google from './Images/google.png';

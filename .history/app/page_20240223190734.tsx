@@ -4,8 +4,7 @@ import Image from "next/image";
 import UserContext from "./lib/firebase/UserContext";
 
 import { signInWithPopup,  GoogleAuthProvider } from 'firebase/auth';
-import { auth, db } from '../firebaseConfig';
-import { setDoc, doc } from 'firebase/firestore';
+import { auth } from '../firebaseConfig';
 
 import logo from './Images/logo.png';
 import google from './Images/google.png';
@@ -16,7 +15,7 @@ export default function Home() {
     if (auth.currentUser) {
       // route to calendar page
     }
-  }, []);
+  })
   
   
   // continue with google function

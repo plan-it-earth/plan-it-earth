@@ -4,19 +4,13 @@ import Image from "next/image";
 import UserContext from "./lib/firebase/UserContext";
 
 import { signInWithPopup,  GoogleAuthProvider } from 'firebase/auth';
-import { auth, db } from '../firebaseConfig';
-import { setDoc, doc } from 'firebase/firestore';
+import { auth } from '../firebaseConfig';
 
 import logo from './Images/logo.png';
 import google from './Images/google.png';
 
 export default function Home() {
   // TODO: if user is logged in, route to calendar page
-  useEffect(() => {
-    if (auth.currentUser) {
-      // route to calendar page
-    }
-  }, []);
   
   
   // continue with google function
@@ -34,8 +28,8 @@ export default function Home() {
         const credential = GoogleAuthProvider.credentialFromError(error);
         console.log("Error: ", errorCode, errorMessage);
       });
-      // if user is logged in, create new document in users collection, then route to calendar page
       if (auth.currentUser) {
+        // route to calendar page
 
       }
       
