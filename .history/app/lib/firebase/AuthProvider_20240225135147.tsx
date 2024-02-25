@@ -5,6 +5,7 @@ import { onAuthStateChanged, User as firebaseUser } from 'firebase/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { doc, onSnapshot } from 'firebase/firestore';
 import UserContext from './UserContext';
+import { useRouter } from 'next/navigation';
 
 export interface UserData {
     email: string;

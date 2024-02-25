@@ -5,6 +5,7 @@ import { onAuthStateChanged, User as firebaseUser } from 'firebase/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { doc, onSnapshot } from 'firebase/firestore';
 import UserContext from './UserContext';
+import { useRouter } from 'next/navigation';
 
 export interface UserData {
     email: string;
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user: firebaseUser | null) => {
             try {
-                // If user is logged in, get user data from firestore
+                // If user is logged in, get user data from firestore and route to calendar page
                 if (user) {
                     const uid = user.uid;
                     const userRef = doc(db, 'users', uid);
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             }
         });
         return () => unsubscribe();
-    }, []);
+    }, [router]);
     return (
         <UserContext.Provider value={userData}>
             {children}

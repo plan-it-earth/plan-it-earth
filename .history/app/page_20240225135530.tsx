@@ -1,9 +1,10 @@
 'use client'
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
+import UserContext from "./lib/firebase/UserContext";
 
-import { signInWithPopup,  GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
+import { signInWithPopup,  GoogleAuthProvider } from 'firebase/auth';
 import { auth, db } from '../firebaseConfig';
 import { getDoc, setDoc, doc } from 'firebase/firestore';
 
@@ -15,12 +16,9 @@ export default function Home() {
 
   // route to calendar page if user is logged in
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        router.push('/pages/calendar');
-      }
-    });
-    return () => unsubscribe();
+    if (user) {
+      router.push('/calendar');
+    }
   }, [router])
   
   // continue with google function
