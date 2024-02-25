@@ -14,8 +14,8 @@ export default function Header() {
             <div className="w-52 sm:hidden lg:block"></div>
             <Search />
             <div className="flex flex-row h-full items-center gap-20">
-                <Image src={alarm} alt="Notifications" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
-                <Image src={share} alt="Share" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
+                <Image src={alarm} alt="Notifications" height={35} width={35} className="h-8 w-8 align-bottom"/>
+                <Image src={share} alt="Share" height={35} width={35} className="h-8 w-8"/>
                 <button className="px-5 py-2 rounded-md text-sm font-medium bg-[#E53265] outline-none border-none shadow hover:brightness-110">Sign out</button>
             </div>
         </div>
