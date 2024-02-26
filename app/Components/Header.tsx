@@ -7,7 +7,25 @@ import logo from '../Images/headerlogo.png';
 import alarm from '../Images/headeralarm.png';
 import share from '../Images/headershare.png';
 
-import { SignOut } from '../lib/firebase/SignOut';
+import { getAuth, signOut } from "firebase/auth";
+
+const SignOut = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        console.log("User signed out");
+    }).catch((error) => {
+        console.log("Error signing out: ", error);
+    });
+
+    let handleClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+
+    handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        console.log("Sign out clicked");
+        location.href = "/";
+    };
+
+    return handleClick;
+}
 
 export default function Header() {
     return (
