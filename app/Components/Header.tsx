@@ -9,7 +9,7 @@ import share from '../Images/headershare.png';
 
 import { getAuth, signOut } from "firebase/auth";
 
-const SignOut = () => {
+function logOut() {
     const auth = getAuth();
     signOut(auth).then(() => {
         console.log("User signed out");
@@ -17,14 +17,8 @@ const SignOut = () => {
         console.log("Error signing out: ", error);
     });
 
-    let handleClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-
-    handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        console.log("Sign out clicked");
-        location.href = "/";
-    };
-
-    return handleClick;
+    console.log("Sign out clicked");
+    location.href = "/";
 }
 
 export default function Header() {
@@ -36,7 +30,7 @@ export default function Header() {
             <div className="flex flex-row h-full items-center gap-20">
                 <Image src={alarm} alt="Notifications" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
                 <Image src={share} alt="Share" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
-                <button onClick={SignOut()} className="px-5 py-2 rounded-md text-sm font-medium bg-[#E53265] outline-none border-none shadow hover:brightness-110">Sign out</button>
+                <button onClick={() => logOut()} className="px-5 py-2 rounded-md text-sm font-medium bg-[#E53265] outline-none border-none shadow hover:brightness-110">Sign out</button>
             </div>
         </div>
     )
