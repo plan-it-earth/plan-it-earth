@@ -7,6 +7,8 @@ import logo from '../Images/headerlogo.png';
 import alarm from '../Images/headeralarm.png';
 import share from '../Images/headershare.png';
 
+import { SignOut } from '../lib/firebase/SignOut';
+
 export default function Header() {
     return (
         <div className="flex h-24 w-full px-10 py-5 bg-[#1A1926] shadow justify-between">
@@ -16,7 +18,7 @@ export default function Header() {
             <div className="flex flex-row h-full items-center gap-20">
                 <Image src={alarm} alt="Notifications" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
                 <Image src={share} alt="Share" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
-                <button className="px-5 py-2 rounded-md text-sm font-medium bg-[#E53265] outline-none border-none shadow hover:brightness-110">Sign out</button>
+                <button onClick={SignOut()} className="px-5 py-2 rounded-md text-sm font-medium bg-[#E53265] outline-none border-none shadow hover:brightness-110">Sign out</button>
             </div>
         </div>
     )
