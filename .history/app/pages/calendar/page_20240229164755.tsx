@@ -27,7 +27,7 @@ export default function Calendar() {
 
     const handleDateClick = () => {
         console.log('date clicked');
-        // TO DO: popup modal to add event
+        // TO DO: route to create note page passing the data as props
     }
 
     return (

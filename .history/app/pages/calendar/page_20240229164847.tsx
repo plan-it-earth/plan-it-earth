@@ -16,6 +16,8 @@ import '../../Styles/calendar.css';
 export default function Calendar() {
     const router = useRouter();
 
+    const [clickOnce, setClickOnce] = useState(false);
+
     useEffect(() => {
         // if user is not logged in, redirect to login page
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -27,7 +29,7 @@ export default function Calendar() {
 
     const handleDateClick = () => {
         console.log('date clicked');
-        // TO DO: popup modal to add event
+        // TO DO: route to create note page passing the data as props
     }
 
     return (

@@ -1,5 +1,5 @@
 'use client'
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../../firebaseConfig';
@@ -23,12 +23,7 @@ export default function Calendar() {
                 router.push('/');
             }
         });
-    }, [router]);
-
-    const handleDateClick = () => {
-        console.log('date clicked');
-        // TO DO: popup modal to add event
-    }
+    }, []);
 
     return (
         <div>
@@ -47,7 +42,6 @@ export default function Calendar() {
                     selectMirror={true}
                     dayMaxEvents={true}
                     weekends={true}
-                    select={handleDateClick}
                 />
             </main>
         </div>

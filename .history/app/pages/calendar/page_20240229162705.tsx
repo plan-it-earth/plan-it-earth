@@ -1,10 +1,4 @@
 'use client'
-import React, {useState, useEffect} from 'react';
-
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../../firebaseConfig';
-import { useRouter} from 'next/navigation';
-
 import Header from '../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -14,26 +8,12 @@ import interactionPlugin from '@fullcalendar/interaction';
 import '../../Styles/calendar.css';
 
 export default function Calendar() {
-    const router = useRouter();
 
-    useEffect(() => {
-        // if user is not logged in, redirect to login page
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                router.push('/');
-            }
-        });
-    }, [router]);
-
-    const handleDateClick = () => {
-        console.log('date clicked');
-        // TO DO: popup modal to add event
-    }
 
     return (
         <div>
             <Header />
-            <main className="mt-12">
+            <main className="my-12">
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                     headerToolbar={{
@@ -47,7 +27,6 @@ export default function Calendar() {
                     selectMirror={true}
                     dayMaxEvents={true}
                     weekends={true}
-                    select={handleDateClick}
                 />
             </main>
         </div>
