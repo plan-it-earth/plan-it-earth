@@ -10,6 +10,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import iCalendarPlugin from '@fullcalendar/icalendar'
 
 import '../../Styles/calendar.css';
 
@@ -35,7 +36,7 @@ export default function Calendar() {
             <Header />
             <main className="mt-12">
                 <FullCalendar
-                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}
                     headerToolbar={{
                         left: 'prev,next today',
                         center: 'title',
@@ -48,6 +49,12 @@ export default function Calendar() {
                     dayMaxEvents={true}
                     weekends={true}
                     select={handleDateClick}
+                    events={[
+                        {
+                            url: 'https://p24-calendars.icloud.com/holiday/US_en.ics',
+                            format: 'ics'
+                        }
+                    ]}
                 />
             </main>
         </div>
