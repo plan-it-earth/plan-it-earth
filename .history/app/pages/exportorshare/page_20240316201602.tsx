@@ -1,13 +1,9 @@
-'use client'
 import Header from '../../Components/Header';
 
-export default function Calendar() {
+export default function Home() {
     return (
         <div>
             <Header />
-            <main>
-                
-            </main>
         </div>
     )
 }
