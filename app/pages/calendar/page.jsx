@@ -13,7 +13,6 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import iCalendarPlugin from '@fullcalendar/icalendar'
 
-
 import '../../Styles/calendar.css';
 
 export default function Calendar() {
@@ -56,8 +55,9 @@ export default function Calendar() {
                     select={handleDateClick}
                     events={
                         {
-                            url: 'https://p24-calendars.icloud.com/holiday/US_en.ics',
-                            format: 'ics'
+                            url: '/US_en.ics',
+                            format: 'ics',
+                            failure: console.log('failed to fetch events'),
                         }
                     }
                 />
