@@ -54,12 +54,12 @@ export default function Calendar() {
                     dayMaxEvents={true}
                     weekends={true}
                     select={handleDateClick}
-                    events={[
+                    events={
                         {
                             url: 'https://p24-calendars.icloud.com/holiday/US_en.ics',
                             format: 'ics'
                         }
-                    ]}
+                    }
                 />
             </main>
         </div>
