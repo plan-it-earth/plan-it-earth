@@ -57,7 +57,7 @@ export default function Calendar() {
                         {
                             url: '/US_en.ics',
                             format: 'ics',
-                            failure: console.log('failed to fetch events'),
+                            failure: function() {console.log('failed to fetch events')},
                         }
                     }
                 />
