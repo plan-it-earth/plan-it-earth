@@ -31,6 +31,8 @@ export default function Calendar() {
     const handleDateClick = () => {
         console.log('date clicked');
         // TO DO: route to create note page passing in the data as props or creating new useContext hook
+        router.push('/pages/createnote')
+        // still needs to pass date to new page
     }
 
     return (
