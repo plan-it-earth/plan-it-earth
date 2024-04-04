@@ -19,7 +19,6 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 export default function Calendar() {
     const router = useRouter();
     const calendarRef = useRef(null);
-    let uid = null;
 
     useEffect(() => {
         // if user is not logged in, redirect to login page
@@ -37,6 +36,7 @@ export default function Calendar() {
         // still needs to pass date to new page
     }
 
+    // TODO: once fetch events is done, move these two functions to a library
     const storeEvents = async () => {
         const calendarApi = calendarRef.current.getApi()
         const eventArray = calendarApi.getEvents();
@@ -60,28 +60,31 @@ export default function Calendar() {
         });
     }
 
-    // FIXME: fetchEvents is not working, user appears to be signed out
+    // FIXME: fetchEvents returns early, need to wait for the data to be fetched
     const fetchEvents = async () => {
         console.log('fetching events');
         let events = null;
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                // User is signed in
-                const uid = user.uid;
-                const docRef = doc(db, "users", uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    console.log(docSnap.data());
-                    events = docSnap.data().events;
+
+        setTimeout(() => {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    // User is signed in
+                    const uid = user.uid;
+                    const docRef = doc(db, "users", uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        console.log(docSnap.data());
+                        events = docSnap.data().events;
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
                 } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
+                    console.log('user not signed in');
                 }
-            } else {
-                console.log('user not signed in');
-            }
-        });
-        console.log(events);
+            });
+        }, 2000);
+        
         return events;
     }
 
@@ -114,8 +117,9 @@ export default function Calendar() {
                     }
                     eventSources={
                         {
-                            url: fetchEvents(),
+                            url: userEvents,
                             failure: function() {console.log('failed to fetch events from DB')},
+                            success: function() {console.log('fetched events from DB')},
                         }
                     }
                 />
