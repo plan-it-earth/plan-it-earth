@@ -61,6 +61,7 @@ export default function Calendar() {
     }
 
     const fetchEvents = async () => {
+        console.log('fetching events');
         let events = null;
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -69,13 +70,17 @@ export default function Calendar() {
                 const docRef = doc(db, "users", uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
+                    console.log(docSnap.data());
                     events = docSnap.data().events;
                 } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
                 }
+            } else {
+                console.log('user not signed in');
             }
         });
+        console.log(events);
         return events;
     }
 
