@@ -60,6 +60,7 @@ export default function Calendar() {
         });
     }
 
+    // FIXME: fetchEvents is not working, user appears to be signed out
     const fetchEvents = async () => {
         console.log('fetching events');
         let events = null;
