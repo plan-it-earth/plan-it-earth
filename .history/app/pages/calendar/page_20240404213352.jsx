@@ -24,7 +24,7 @@ export default function Calendar() {
 
     useEffect(() => {
         // if user is not logged in, redirect to login page
-        if (!userData) {
+        if (userData) {
             router.push('/');
         }
     }, [router, userData]);
