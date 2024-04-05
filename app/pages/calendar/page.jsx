@@ -15,7 +15,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import UserContext from '../../lib/firebase/UserContext'
 
 import '../../Styles/calendar.css';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
 
 export default function Calendar() {
     const router = useRouter();
@@ -50,7 +50,7 @@ export default function Calendar() {
 
         if (userData) {
             const uid = userData.uid;
-            await setDoc(doc(db, "users", uid), {
+            await updateDoc(doc(db, "users", uid), {
                 events: eventJson
             });
         }
@@ -105,13 +105,17 @@ export default function Calendar() {
                             failure: function() {console.log('failed to fetch events')},
                         }
                     }
-                    /*eventSources={
+                    eventSources={
                         {
-                            url: fetchEvents(),
-                            failure: function() {console.log('failed to fetch events from DB')},
-                            success: function() {console.log('fetched events from DB')},
+                            events: async (fetchInfo, successCallback, failureCallback) => {
+                                const events = await fetchEvents();
+                                console.log(events);
+                                if (events) {
+                                    successCallback(JSON.parse(events));
+                                }
+                            }
                         }
-                    }*/
+                    }
                 />
             </main>
         </div>
