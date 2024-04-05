@@ -11,6 +11,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import iCalendarPlugin from '@fullcalendar/icalendar';
 import UserContext from '../../lib/firebase/UserContext';
+import { FaPlus } from 'react-icons/fa';
 
 import '../../Styles/calendar.css';
 
@@ -30,7 +31,6 @@ export default function Calendar() {
     const handleDateClick = () => {
         console.log('date clicked');
         // TO DO: route to create note page passing in the data as props or creating new useContext hook
-        router.push('/pages/createnote')
         // still needs to pass date to new page
     }
 
@@ -75,6 +75,11 @@ export default function Calendar() {
                     ]}
                 />
             </main>
+            <div className="fixed bottom-5 inset-x-0 flex justify-center z-10">
+                <button className="bg-[#E53265] text-white w-12 h-12 rounded-full flex items-center justify-center" onClick={function () {router.push('/pages/createnote')}}>
+                    <FaPlus className="text-2xl" />
+                </button>
+            </div>
         </div>
     )
 }
