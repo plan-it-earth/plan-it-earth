@@ -4,7 +4,7 @@ import React, {useState, useEffect, useRef, useContext} from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { useRouter} from 'next/navigation';
-import { useEventActions } from '../../lib/Hooks/useEventActions';
+import { useEventActions } from '../../lib/useEventActions';
 
 import Header from '../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
