@@ -39,7 +39,7 @@ export default function Home() {
           await setDoc(userDocRef, {
             email: user.email,
             uid: user.uid,
-            events: "[]",
+            events: "",
           });
         }
         // route to calendar page
