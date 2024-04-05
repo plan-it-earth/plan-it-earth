@@ -65,23 +65,25 @@ export default function Calendar() {
         console.log('fetching events');
         let events = null;
 
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                // User is signed in
-                const uid = user.uid;
-                const docRef = doc(db, "users", uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    console.log(docSnap.data());
-                    events = docSnap.data().events;
+        setTimeout(() => {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    // User is signed in
+                    const uid = user.uid;
+                    const docRef = doc(db, "users", uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        console.log(docSnap.data());
+                        events = docSnap.data().events;
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
                 } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
+                    console.log('user not signed in');
                 }
-            } else {
-                console.log('user not signed in');
-            }
-        });
+            });
+        }, 2000);
         
         return events;
     }
@@ -115,7 +117,7 @@ export default function Calendar() {
                     }
                     eventSources={
                         {
-                            url: fetchEvents(),
+                            url: userEvents,
                             failure: function() {console.log('failed to fetch events from DB')},
                             success: function() {console.log('fetched events from DB')},
                         }
