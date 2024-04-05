@@ -1,8 +1,6 @@
 'use client';
-import React, {useState, useEffect, useRef, useContext} from 'react';
+import React, {useEffect, useRef, useContext} from 'react';
 
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth, db } from '../../../firebaseConfig';
 import { useRouter} from 'next/navigation';
 import { useEventActions } from '../../lib/Hooks/useEventActions';
 
@@ -15,7 +13,6 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import UserContext from '../../lib/firebase/UserContext';
 
 import '../../Styles/calendar.css';
-import { doc, updateDoc, getDoc } from 'firebase/firestore';
 
 export default function Calendar() {
     const router = useRouter();
