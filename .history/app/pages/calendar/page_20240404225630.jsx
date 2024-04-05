@@ -4,7 +4,9 @@ import React, {useState, useEffect, useRef, useContext} from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { useRouter} from 'next/navigation';
-import { useEventActions } from '../../lib/Hooks/useEventActions';
+import { storeEvents } from '../../lib/useEventActions';
+import { fetchEvents } from '../../lib/useEventActions';
+import { useEventActions } from './useEventActions';
 
 import Header from '../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
@@ -41,7 +43,7 @@ export default function Calendar() {
         <div>
             <Header />
             <div id="portal-root"></div>
-            <main className="mt-12 mx-2 md:mx-10">
+            <main className="mt-12">
                 <FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}

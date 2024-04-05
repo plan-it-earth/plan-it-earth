@@ -4,7 +4,6 @@ import React, {useState, useEffect, useRef, useContext} from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { useRouter} from 'next/navigation';
-import { useEventActions } from '../../lib/Hooks/useEventActions';
 
 import Header from '../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
@@ -12,7 +11,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import iCalendarPlugin from '@fullcalendar/icalendar';
-import UserContext from '../../lib/firebase/UserContext';
 
 import '../../Styles/calendar.css';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
@@ -20,8 +18,7 @@ import { doc, updateDoc, getDoc } from 'firebase/firestore';
 export default function Calendar() {
     const router = useRouter();
     const calendarRef = useRef(null);
-    const { userData } = useContext(UserContext);
-    const { storeEvents, fetchEvents } = useEventActions(calendarRef);
+    const { userData } = useContext(UserContext)
 
     useEffect(() => {
         // if user is not logged in, redirect to login page
@@ -41,7 +38,7 @@ export default function Calendar() {
         <div>
             <Header />
             <div id="portal-root"></div>
-            <main className="mt-12 mx-2 md:mx-10">
+            <main className="mt-12">
                 <FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}
