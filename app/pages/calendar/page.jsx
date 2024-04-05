@@ -105,6 +105,8 @@ export default function Calendar() {
                                 console.log(events);
                                 if (events) {
                                     successCallback(JSON.parse(events));
+                                } else {
+                                    failureCallback();
                                 }
                             }
                         },
