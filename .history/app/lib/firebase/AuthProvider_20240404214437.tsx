@@ -9,7 +9,7 @@ import UserContext from './UserContext';
 export interface UserData {
     email: string;
     uid: string;
-    events: "";
+    events: [];
 }
 
 export interface AuthState {
