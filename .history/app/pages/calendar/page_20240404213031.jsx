@@ -12,7 +12,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import iCalendarPlugin from '@fullcalendar/icalendar';
-import UserContext from '../../lib/firebase/UserContext'
+import UserContext from '../../lib/firebase/AuthProvider'
 
 import '../../Styles/calendar.css';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
@@ -27,7 +27,7 @@ export default function Calendar() {
         if (userData) {
             router.push('/');
         }
-    }, [router, userData]);
+    }, [router]);
 
     const handleDateClick = () => {
         console.log('date clicked');
@@ -74,7 +74,9 @@ export default function Calendar() {
                 }
             } else {
                 console.log('user not signed in');
-            }        
+            }
+        }
+        
         return events;
     }
 

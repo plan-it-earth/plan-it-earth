@@ -12,7 +12,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import iCalendarPlugin from '@fullcalendar/icalendar';
-import UserContext from '../../lib/firebase/UserContext'
 
 import '../../Styles/calendar.css';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
@@ -20,14 +19,16 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 export default function Calendar() {
     const router = useRouter();
     const calendarRef = useRef(null);
-    const { userData } = useContext(UserContext)
+    
 
     useEffect(() => {
         // if user is not logged in, redirect to login page
-        if (userData) {
-            router.push('/');
-        }
-    }, [router, userData]);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                router.push('/');
+            }
+        });
+    }, [router]);
 
     const handleDateClick = () => {
         console.log('date clicked');
@@ -48,12 +49,16 @@ export default function Calendar() {
 
         const eventJson = JSON.stringify(eventArray);
 
-        if (userData) {
-            const uid = userData.uid;
-            await setDoc(doc(db, "users", uid), {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+              // User is signed in
+              const uid = user.uid;
+              
+              await setDoc(doc(db, "users", uid), {
                 events: eventJson
             });
-        }
+            }
+        });
     }
 
     // FIXME: fetchEvents returns early, need to wait for the data to be fetched
@@ -61,9 +66,11 @@ export default function Calendar() {
         console.log('fetching events');
         let events = null;
 
-        if (userData) {
-            const uid = userData.uid;
-            const docRef = doc(db, "users", uid);
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in
+                const uid = user.uid;
+                const docRef = doc(db, "users", uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     console.log(docSnap.data());
@@ -74,7 +81,9 @@ export default function Calendar() {
                 }
             } else {
                 console.log('user not signed in');
-            }        
+            }
+        });
+        
         return events;
     }
 
