@@ -1,5 +1,5 @@
 'use client';
-import Header from '../../Components/Header';
+import Header from '../../../Components/Header';
 import {useState} from 'react';
 
 export default function CreateNote() {
