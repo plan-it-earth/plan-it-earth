@@ -2,6 +2,7 @@
 import React, {useEffect, useRef, useContext} from 'react';
 
 import { useRouter} from 'next/navigation';
+import Link from 'next/link';
 import { useEventActions } from '../../lib/Hooks/useEventActions';
 
 import Header from '../../Components/Header';
@@ -76,9 +77,10 @@ export default function Calendar() {
                 />
             </main>
             <div className="fixed bottom-5 inset-x-0 flex justify-center z-10">
-                <button className="bg-[#E53265] text-white w-12 h-12 rounded-full flex items-center justify-center" onClick={function () {router.push('/pages/calendar/createnote')}}>
+                <Link className="bg-[#E53265] text-white w-12 h-12 rounded-full flex items-center justify-center"
+                      href={{ pathname: '/pages/calendar/createnote' }}>
                     <FaPlus className="text-2xl" />
-                </button>
+                </Link>
             </div>
         </div>
     )
