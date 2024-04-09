@@ -15,6 +15,21 @@ export default function CreateNote() {
         alert(
             `Title: ${formData.title}, Date: ${formData.date}, Alarm: ${formData.alarm}, Image: ${formData.image}, Label: ${formData.label}, Description: ${formData.description}` 
         );
+
+        // Add event to calendar
+        /*
+        const calendarApi = calendarRef.current.getApi();
+        calendarApi.addEvent({
+            title: formData.title,
+            date: formData.date,
+            alarm: formData.alarm,
+            image: formData.image,
+            label: formData.label,
+            description: formData.description
+        });
+        
+        // Add event to database
+        storeEvents();*/
     }
 
     return (
