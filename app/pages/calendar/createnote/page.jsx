@@ -20,8 +20,8 @@ export default function CreateNote() {
     return (
         <div className="black  min-h-screen">
             <Header />
+            <h2 className="flex flex-col items-center justify-center text-2xl font-semibold mb-6 mt-16">Create Note</h2>
             <div className="max-w-md mx-auto mt-16 p-8 bg-[#1A1926]  rounded-lg shadow-md">
-                <h2 className="text-2xl font-semibold mb-6">Create Note</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
@@ -34,6 +34,7 @@ export default function CreateNote() {
                 </form>
             </div>
         </div>
+        
     )
     /*
     // handles title input box
