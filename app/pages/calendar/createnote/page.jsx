@@ -18,15 +18,19 @@ export default function CreateNote() {
     }
 
     return (
-        <div>
+        <div className="black  min-h-screen">
             <Header />
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="title">Title:</label>
-                    <input type="text" id="title" title="title" value={formData.title} onChange={handleChange}/>  
-
-
-                    <button type="submit">Submit</button>
+            <div className="max-w-md mx-auto mt-16 p-8 bg-[#1A1926]  rounded-lg shadow-md">
+                <h2 className="text-2xl font-semibold mb-6">Create Note</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
+                        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-200" />
+                    </div>
+                    {/* Add other form fields similarly */}
+                    <div>
+                        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
