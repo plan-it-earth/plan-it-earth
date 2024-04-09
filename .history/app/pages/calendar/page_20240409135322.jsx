@@ -38,9 +38,9 @@ export default function Calendar() {
     }
 
     return (
-        <div className="bg-[#16141C]">
+        <div>
             <Header />
-            <main className="mt-12 mx-2 md:mx-10">
+            <main className="mt-12 mx-2 bg-[#16141C] md:mx-10">
                 <FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}

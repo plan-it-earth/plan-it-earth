@@ -38,7 +38,7 @@ export default function Calendar() {
     }
 
     return (
-        <div className="bg-[#16141C]">
+        <div>
             <Header />
             <main className="mt-12 mx-2 md:mx-10">
                 <FullCalendar
