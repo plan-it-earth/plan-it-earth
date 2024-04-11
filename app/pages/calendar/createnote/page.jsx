@@ -12,7 +12,8 @@ export default function CreateNote() {
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {
         const { title, value } = event.target;
-        setFormData((prevFormData) => ({...prevFormData, [title]: value}));
+        //setFormData((prevFormData) => ({...prevFormData, [title]: value}));  <- Might be relevant not sure
+        setFormData(event.target.value);
     };
 
     const handleSubmit = (event) => {
@@ -25,9 +26,6 @@ export default function CreateNote() {
              Label: ${formData.label}, 
              Description: ${formData.description}` 
         );
-
-    const [selectedAlarmOption, setSelectedAlarmOption] = useState("alarmOption5");
-    const handleAlarmDropdownChange = (event) => {setSelectedAlarmOption(event.target.value);};
 
         // Add event to calendar
         /*
@@ -72,7 +70,7 @@ export default function CreateNote() {
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
                         <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-200" />
                     </div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Select an alarm:</label>
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Select Alarm:</label>
                             <select value={formData} onChange = {handleChange}>
                                 <option value="alarmOption1">5 minutes from now</option>
                                 <option value="alarmOption2">10 minutes from now</option>
@@ -81,14 +79,14 @@ export default function CreateNote() {
                                 <option value="alarmOption5">none</option>
                             </select>
                     <div>
-                    <label htmlFor="title" className="block text-sm font-medium text-gray-700">Select a label:</label>
-                        <select value={formData} onChange = {handleChange}>
-                            <option value="labelOption1">Assignment</option>
-                            <option value="labelOption2">Lecture</option>
-                            <option value="labelOption3">Lab</option>
-                            <option value="labelOption4">Office Hours</option>
-                            <option value="labelOption5">none</option>
-                        </select>
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Select Label:</label>
+                            <select value={formData} onChange = {handleChange}>
+                                <option value="labelOption1">Assignment</option>
+                                <option value="labelOption2">Lecture</option>
+                                <option value="labelOption3">Lab</option>
+                                <option value="labelOption4">Office Hours</option>
+                                <option value="labelOption5">none</option>
+                            </select>
                     </div>
 
                     <div>
