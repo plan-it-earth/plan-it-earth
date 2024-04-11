@@ -67,28 +67,32 @@ export default function CreateNote() {
             <div className="max-w-md mx-auto mt-16 p-8 bg-[#1A1926]  rounded-lg shadow-md">
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
-                        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-200" />
-                    </div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Select Alarm:</label>
-                            <select value={formData} onChange = {handleChange}>
+
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-200">Title:</label>
+                        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} className="text-white bg-gray-600 mt-1 p-2  rounded-md " />
+                        
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-200">Select Alarm:</label>
+                            <select id="select" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
+                                <option disabled ="disabled" selected="selected">none</option>
                                 <option value="alarmOption1">5 minutes from now</option>
                                 <option value="alarmOption2">10 minutes from now</option>
                                 <option value="alarmOption3">15 minutes from now</option>
                                 <option value="alarmOption4">60 minutes from now</option>
                                 <option value="alarmOption5">none</option>
                             </select>
+                    </div>
                     <div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Select Label:</label>
-                            <select value={formData} onChange = {handleChange}>
+                        <button type="image" className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Upload Image</button>
+                    </div>
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-200">Select Label:</label>
+                            <select id="select" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
+                                <option disabled ="disabled" selected="selected">none</option>
                                 <option value="labelOption1">Assignment</option>
                                 <option value="labelOption2">Lecture</option>
                                 <option value="labelOption3">Lab</option>
                                 <option value="labelOption4">Office Hours</option>
-                                <option value="labelOption5">none</option>
+                                <option value="labelOption5">Other</option>
                             </select>
-                    </div>
-
                     <div>
                         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit</button>
                     </div>
