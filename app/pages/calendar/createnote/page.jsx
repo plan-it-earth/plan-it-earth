@@ -69,7 +69,7 @@ export default function CreateNote() {
                     <div>
 
                         <label htmlFor="title" className="block text-sm font-medium text-gray-200">Title:</label>
-                        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} className="text-white bg-gray-600 mt-1 p-2  rounded-md " />
+                        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} className="text-white bg-gray-600 mt-1 p-2  rounded-md" />
                         
                         <label htmlFor="title" className="block text-sm font-medium text-gray-200">Select Alarm:</label>
                             <select id="select" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
@@ -93,6 +93,16 @@ export default function CreateNote() {
                                 <option value="labelOption4">Office Hours</option>
                                 <option value="labelOption5">Other</option>
                             </select>
+                        
+                        <label className="block text-sm font-medium text-gray-200">Notes:</label>
+                        <textarea 
+                            name ="description"
+                            rows="4" 
+                            cols="30" 
+                            htmlFor="note" 
+                            className="text-white bg-gray-600 mt-1 p-2  rounded-md"
+                            placeholder ="Enter note description here">
+                        </textarea>
                     <div>
                         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit</button>
                     </div>
