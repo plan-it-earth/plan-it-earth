@@ -1,8 +1,13 @@
 'use client';
 import Header from '../../../Components/Header';
 import {useState} from 'react';
+import { useRouter} from 'next/navigation';
+
 
 export default function CreateNote() {
+
+    const router = useRouter();
+
 
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {
@@ -13,7 +18,12 @@ export default function CreateNote() {
     const handleSubmit = (event) => {
         event.preventDefault();
         alert(
-            `Title: ${formData.title}, Date: ${formData.date}, Alarm: ${formData.alarm}, Image: ${formData.image}, Label: ${formData.label}, Description: ${formData.description}` 
+            `Title: ${formData.title},
+             Date: ${formData.date},
+             Alarm: ${formData.alarm},
+             Image: ${formData.image}, 
+             Label: ${formData.label}, 
+             Description: ${formData.description}` 
         );
 
         // Add event to calendar
@@ -30,6 +40,8 @@ export default function CreateNote() {
         
         // Add event to database
         storeEvents();*/
+
+        router.push('/pages/calendar');
     }
 
     return (
