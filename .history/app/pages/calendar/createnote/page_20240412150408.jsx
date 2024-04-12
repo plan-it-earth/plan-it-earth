@@ -66,24 +66,13 @@ export default function CreateNote() {
             <h2 className="flex items-center justify-center text-2xl font-medium mb-6 mt-16">Create Note</h2>
             <div className="max-w-md mx-auto mt-16 p-8 bg-[#1A1926] rounded-lg shadow-md border border-white">
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-                    <div>
+                    <div">
                         <label htmlFor="title" className="block text-sm font-medium text-gray-200 placeholder-[#A7A7A7]">Title:</label>
                         <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} placeholder="Enter title of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md" />
                     </div>
-                    <div>
-                        <label htmlFor="fromDate" className="block text-sm font-sm text-gray-200">From:</label>
-                        <div>
-                            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md" />
-                            <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md"/>
-                        </div>
-                    </div>
-                    <div>
-                        <label htmlFor="toDate" className="block text-sm font-medium text-gray-200">To:</label>
-                        <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md" />
-                    </div>
-                    <div>    
+                    <div className="shadow-sm">    
                         <label htmlFor="alarm" className="block text-sm font-medium text-gray-200">Select Alarm:</label>
-                            <select id="select" defaultValue="alarmOption5" className="text-white bg-gray-600 mt-1 px-2 py-2 rounded-md w-full">
+                            <select id="select" defaultValue="alarmOption5" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full">
                                 <option value="alarmOption1">none</option>
                                 <option value="alarmOption2">5 minutes from now</option>
                                 <option value="alarmOption3">10 minutes from now</option>
