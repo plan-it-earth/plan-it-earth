@@ -52,19 +52,7 @@ export default function CreateNote() {
         // Add event to database
         storeEvents();
         */
-        /*
-        const onSubmit = async (data: object) => {
-            const response = await saveFormData(data)
 
-            if (response.status === 400) {
-                // Validation error
-            } else if (response.ok){
-                // succesful
-            } else {
-                // unknown error
-            }
-        }
-        */
         router.push('/pages/calendar');
     }
 
