@@ -12,7 +12,6 @@ export default function CreateNote() {
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {
         const { title, value } = event.target;
-        //setFormData((prevFormData) => ({...prevFormData, [title]: value}));  <- Might be relevant not sure
         setFormData(event.target.value);
     };
 
