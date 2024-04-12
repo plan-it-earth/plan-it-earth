@@ -91,7 +91,7 @@ export default function CreateNote() {
                             <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md"/>
                         </div>
                         
-                        <label className="block text-sm font-medium text-gray-200">Select Alarm:</label>
+                        <label className="block text-sm font-medium text-gray-200">Select when alarm goes off before event time:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
                                 <option disabled ="disabled" selected="selected">none</option>
                                 <option value="5">5 minutes from now</option>
