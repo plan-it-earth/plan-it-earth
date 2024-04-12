@@ -134,49 +134,4 @@ export default function CreateNote() {
         </div>
         
     )
-    /*
-    // handles title input box
-    const [inputValue,setInputValue] = useState('');
-    const handleChange = (event) => {setInputValue(event.target.value);};
-
-    // Handles label drop down
-    const [selectedLabelOption, setSelectedLabelOption] = useState("labelOption5");
-    const handleLabelDropdownChange = (event) => {setSelectedLabelOption(event.target.value);};
-
-    return (
-        <div>
-            <Header />
-            <div>
-                <form>
-                    <label>Input Event Title:
-                    <input type="test" value={inputValue} onChange={handleChange} />
-                    </label>
-                    <label>Pick Event Date:
-                    <input type="test" value={inputValue} onChange={handleChange} />
-                    </label>
-                </form>
-                <label>
-                    Select an alarm:
-                        <select value={selectedAlarmOption} onChange = {handleAlarmDropdownChange}>
-                            <option value="alarmOption1">5 minutes from now</option>
-                            <option value="alarmOption2">10 minutes from now</option>
-                            <option value="alarmOption3">15 minutes from now</option>
-                            <option value="alarmOption4">60 minutes from now</option>
-                            <option value="alarmOption5">none</option>
-                        </select>
-                </label>
-                <label>
-                    Select a label:
-                        <select value={selectedLabelOption} onChange = {handleLabelDropdownChange}>
-                            <option value="labelOption1">Assignment</option>
-                            <option value="labelOption2">Lecture</option>
-                            <option value="labelOption3">Lab</option>
-                            <option value="labelOption4">Office Hours</option>
-                            <option value="labelOption5">none</option>
-                        </select>
-                </label>
-            </div>
-        </div>
-    );
-}*/
 }
