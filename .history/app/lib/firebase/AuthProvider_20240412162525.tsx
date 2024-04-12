@@ -48,9 +48,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }, []);
     return (
         <UserContext.Provider value={userData}>
-            <CalendarProvider>
-                {children}
-            </CalendarProvider>
+            {children}
         </UserContext.Provider>
     )
 }
