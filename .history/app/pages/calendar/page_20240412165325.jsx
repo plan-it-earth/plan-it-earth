@@ -23,7 +23,7 @@ export default function Calendar() {
     
     const { setCalendarApi } = useCalendarApi();
 
-    const calendarRef = (calendarComponent) => {
+    const calendarComponentRef = (calendarComponent) => {
         if (calendarComponent) {
             const api = calendarComponent.getApi();
             setCalendarApi(api);

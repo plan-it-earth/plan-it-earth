@@ -23,7 +23,7 @@ export default function Calendar() {
     
     const { setCalendarApi } = useCalendarApi();
 
-    const calendarRef = (calendarComponent) => {
+    const calendarComponentRef = (calendarComponent) => {
         if (calendarComponent) {
             const api = calendarComponent.getApi();
             setCalendarApi(api);
@@ -51,7 +51,7 @@ export default function Calendar() {
             <div id="portal-root"></div>
             <main className="mt-12 mx-2 md:mx-10">
                 <FullCalendar
-                    ref={calendarRef}
+                    ref={calendarComponentRef}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}
                     headerToolbar={{
                         left: 'prev,next today',

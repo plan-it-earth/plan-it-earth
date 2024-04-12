@@ -11,6 +11,10 @@ export default function CreateNote() {
     
     const { calendarApi } = useCalendarApi();
 
+    if (calendarApi) {
+        console.log('calendarApi is not null');
+    }
+
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {
         const { title, value } = event.target;

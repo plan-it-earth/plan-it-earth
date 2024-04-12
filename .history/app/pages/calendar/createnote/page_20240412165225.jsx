@@ -9,7 +9,14 @@ export default function CreateNote() {
 
     const router = useRouter();
     
-    const { calendarApi } = useCalendarApi();
+    const { setCalendarApi } = useCalendarApi();
+
+    const calendarComponentRef = (calendarComponent) => {
+        if (calendarComponent) {
+            const api = calendarComponent.getApi();
+            setCalendarApi(api);
+        }
+    };
 
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {

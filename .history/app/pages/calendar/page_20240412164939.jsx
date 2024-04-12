@@ -20,16 +20,7 @@ import '../../Styles/calendar.css';
 export default function Calendar() {
     const router = useRouter();
     const { userData } = useContext(UserContext);
-    
-    const { setCalendarApi } = useCalendarApi();
-
-    const calendarRef = (calendarComponent) => {
-        if (calendarComponent) {
-            const api = calendarComponent.getApi();
-            setCalendarApi(api);
-        }
-    };
-
+    const calendarApi = useCalendarApi();
     const { storeEvents, fetchEvents } = useEventActions(calendarRef);
 
     useEffect(() => {

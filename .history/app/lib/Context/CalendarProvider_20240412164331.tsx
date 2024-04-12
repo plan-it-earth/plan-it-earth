@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, RefObject } from 'react';
+import React, { createContext, useContext, useRef, ReactNode, RefObject } from 'react';
 
 interface CalendarProviderProps {
     children: ReactNode;
@@ -11,17 +11,16 @@ interface CalendarContextType {
 
 const CalendarContext = createContext<CalendarContextType | null>(null);
 
-export const CalendarProvider: React.FC<CalendarProviderProps> = ({ children }) => {
-    const [calendarApi, setCalendarApi] = useState<any>(null);
-
+export const CalendarProvider = ({ children }: CalendarProviderProps) => {
+    const calendarRef = useRef<HTMLDivElement>(null!);
     return (
-        <CalendarContext.Provider value={{ calendarApi, setCalendarApi }}>
+        <CalendarContext.Provider value={calendarRef}>
             {children}
         </CalendarContext.Provider>
     );
 };
 
-export const useCalendarApi = () => {
+export const useCalendarRef = (): RefObject<HTMLDivElement> => {
     const context = useContext(CalendarContext);
     if (context === null) {
         throw new Error('useCalendarRef must be used within a CalendarProvider');
