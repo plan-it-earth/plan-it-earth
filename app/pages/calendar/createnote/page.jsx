@@ -18,14 +18,21 @@ export default function CreateNote() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        var title = document.getElementById("title");
+        var date = document.getElementById("date");
+        var alarm = document.getElementById("alarm");
+        var image = document.getElementById("image");
+        var label = document.getElementById("label");
+        var description = document.getElementById("description");
+
         alert(
-            `Title: ${formData.title},
-             Date: ${formData.date},
-             Alarm: ${formData.alarm},
-             Image: ${formData.image}, 
-             Label: ${formData.label}, 
-             Description: ${formData.description}` 
+            `Title: ${title.value},
+             Alarm: ${alarm.value},
+             Image: ${image.value}, 
+             Label: ${label.value}, 
+             Description: ${description.value}` 
         );
+
 
         // Add event to calendar
         /*
@@ -78,42 +85,48 @@ export default function CreateNote() {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="toDate" className="block text-sm font-medium text-gray-200">To:</label>
-                        <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md" />
-                    </div>
-                    <div>    
-                        <label htmlFor="alarm" className="block text-sm font-medium text-gray-200">Select Alarm:</label>
-                            <select id="select" defaultValue="alarmOption5" className="text-white bg-gray-600 mt-1 px-2 py-2 rounded-md w-full">
-                                <option value="alarmOption1">none</option>
-                                <option value="alarmOption2">5 minutes from now</option>
-                                <option value="alarmOption3">10 minutes from now</option>
-                                <option value="alarmOption4">15 minutes from now</option>
-                                <option value="alarmOption5">60 minutes from now</option>
+
+                        <label className="block text-sm font-medium text-gray-200">Title:</label>
+                        <input
+                        id = "title" 
+                        type="text" 
+                        placeholder="Enter title here..."
+                        required
+                        value={formData.title} 
+                        onChange={handleChange} 
+                        className="text-white bg-gray-600 mt-1 p-2  rounded-md" />
+                        
+                        <label className="block text-sm font-medium text-gray-200">Select Alarm:</label>
+                            <select id="alarm" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
+                                <option disabled ="disabled" selected="selected">none</option>
+                                <option value="5">5 minutes from now</option>
+                                <option value="10">10 minutes from now</option>
+                                <option value="15">15 minutes from now</option>
+                                <option value="60">60 minutes from now</option>
+                                <option value="-1">none</option>
                             </select>
                     </div>
                     <div>
-                        <button type="image" className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Upload Image</button>
+                        <button id="image" type="image" className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Upload Image</button>
                     </div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-200">Select Label:</label>
-                            <select id="select" defaultValue="labelOption1" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
-                                <option value="labelOption1">none</option>
-                                <option value="labelOption2">Assignment</option>
-                                <option value="labelOption3">Lecture</option>
-                                <option value="labelOption4">Lab</option>
-                                <option value="labelOption5">Office Hours</option>
-                                <option value="labelOption6">Club</option>
-                                <option value="labelOption7">Exam</option>
-                                <option value="labelOption8">Quiz</option>
+                        <label className="block text-sm font-medium text-gray-200">Select Label:</label>
+                            <select id="label" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
+                                <option disabled ="disabled" selected="selected">none</option>
+                                <option value="Assignment">Assignment</option>
+                                <option value="Lecture">Lecture</option>
+                                <option value="Lab">Lab</option>
+                                <option value="OfficeHours">Office Hours</option>
+                                <option value="Other">Other</option>
                             </select>
                         
                         <label className="block text-sm font-medium text-gray-200">Notes:</label>
                         <textarea 
-                            name ="description"
+                            id="description"
+                            type="text"
                             rows="4" 
                             cols="30" 
-                            htmlFor="note" 
                             className="text-white bg-gray-600 mt-1 p-2  rounded-md"
-                            placeholder ="Enter note description here">
+                            placeholder ="Enter note description here...">
                         </textarea>
                     <div>
                         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit</button>
