@@ -36,22 +36,22 @@ export default function CreateNote() {
              Description: ${description.value}` 
         );
 
-
-        // Add event to calendar
         /*
+        // Add event to calendar
         const calendarApi = calendarRef.current.getApi();
         calendarApi.addEvent({
-            title: formData.title,
-            date: formData.date,
-            alarm: formData.alarm,
-            image: formData.image,
-            label: formData.label,
-            description: formData.description
+            title: title.value,
+            date: date.value,
+            time: time.value,
+            alarm: alarm.value,
+            image: image.value,
+            label: label.value,
+            description: description.value
         });
         
         // Add event to database
-        storeEvents();*/
-
+        storeEvents();
+        */
         /*
         const onSubmit = async (data: object) => {
             const response = await saveFormData(data)
@@ -88,19 +88,19 @@ export default function CreateNote() {
                         onChange={handleChange} 
                         className="text-white bg-gray-600 mt-1 p-2  rounded-md" />
 
-                        <label htmlFor="fromDate" className="block text-sm font-sm text-gray-200">From:</label>
+                        <label className="block text-sm font-sm text-gray-200">From:</label>
                         <div>
                             <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md" />
                             <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md"/>
                         </div>
                         
-                        <label className="block text-sm font-medium text-gray-200">Select when alarm goes off before event time:</label>
+                        <label className="block text-sm font-medium text-gray-200">Select Alarm:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
                                 <option disabled ="disabled" selected="selected">none</option>
-                                <option value="5">5 minutes from now</option>
-                                <option value="10">10 minutes from now</option>
-                                <option value="15">15 minutes from now</option>
-                                <option value="60">60 minutes from now</option>
+                                <option value="5">5 minutes before event</option>
+                                <option value="10">10 minutes before event</option>
+                                <option value="15">15 minutes before event</option>
+                                <option value="60">60 minutes before event</option>
                                 <option value="-1">none</option>
                             </select>
                     </div>
