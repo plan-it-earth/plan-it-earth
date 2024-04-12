@@ -20,6 +20,7 @@ export default function CreateNote() {
         event.preventDefault();
         var title = document.getElementById("title");
         var date = document.getElementById("date");
+        var time = document.getElementById("time");
         var alarm = document.getElementById("alarm");
         var image = document.getElementById("image");
         var label = document.getElementById("label");
@@ -27,6 +28,8 @@ export default function CreateNote() {
 
         alert(
             `Title: ${title.value},
+             Date: ${date.value},
+             Time: ${time.value},
              Alarm: ${alarm.value},
              Image: ${image.value}, 
              Label: ${label.value}, 
