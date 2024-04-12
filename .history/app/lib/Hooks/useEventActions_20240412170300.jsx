@@ -14,6 +14,7 @@ export const useEventActions = (calendarRef) => {
             return;
         }
         
+        const calendarApi = calendarRef.current.getApi();
         const eventArray = calendarApi.getEvents();
 
         if (!eventArray) {
