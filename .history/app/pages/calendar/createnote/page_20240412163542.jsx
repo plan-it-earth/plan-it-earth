@@ -2,14 +2,14 @@
 import Header from '../../../Components/Header';
 import {useState} from 'react';
 import { useRouter} from 'next/navigation';
-import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
-
+import { useCalendarRef } from '../../../lib/Context/CalendarProvider';
 
 
 export default function CreateNote() {
 
     const router = useRouter();
-    const { calendarApi } = useCalendarApi();
+    const calendarRef = useCalendarRef();
+    const calendarApi = calendarRef.current.getApi();
 
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {

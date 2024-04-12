@@ -2,11 +2,9 @@ import {useContext} from 'react';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import UserContext from '../firebase/UserContext';
 import { db } from '../../../firebaseConfig';
-import { useCalendarApi } from '../Context/CalendarProvider';
 
 export const useEventActions = (calendarRef) => {
     const { userData } = useContext(UserContext);
-    const { calendarApi } = useCalendarApi();
 
     const storeEvents = async () => {
         if (!userData) {
@@ -14,6 +12,7 @@ export const useEventActions = (calendarRef) => {
             return;
         }
         
+        const calendarApi = calendarRef.current.getApi();
         const eventArray = calendarApi.getEvents();
 
         if (!eventArray) {

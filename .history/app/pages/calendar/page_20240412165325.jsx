@@ -23,7 +23,7 @@ export default function Calendar() {
     
     const { setCalendarApi } = useCalendarApi();
 
-    const calendarRef = (calendarComponent) => {
+    const calendarComponentRef = (calendarComponent) => {
         if (calendarComponent) {
             const api = calendarComponent.getApi();
             setCalendarApi(api);
@@ -46,8 +46,9 @@ export default function Calendar() {
     }
 
     return (
-        <div className="bg-[#16141C]">
+        <div>
             <Header />
+            <div id="portal-root"></div>
             <main className="mt-12 mx-2 md:mx-10">
                 <FullCalendar
                     ref={calendarRef}

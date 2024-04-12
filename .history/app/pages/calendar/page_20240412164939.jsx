@@ -20,16 +20,7 @@ import '../../Styles/calendar.css';
 export default function Calendar() {
     const router = useRouter();
     const { userData } = useContext(UserContext);
-    
-    const { setCalendarApi } = useCalendarApi();
-
-    const calendarRef = (calendarComponent) => {
-        if (calendarComponent) {
-            const api = calendarComponent.getApi();
-            setCalendarApi(api);
-        }
-    };
-
+    const calendarApi = useCalendarApi();
     const { storeEvents, fetchEvents } = useEventActions(calendarRef);
 
     useEffect(() => {
@@ -46,8 +37,9 @@ export default function Calendar() {
     }
 
     return (
-        <div className="bg-[#16141C]">
+        <div>
             <Header />
+            <div id="portal-root"></div>
             <main className="mt-12 mx-2 md:mx-10">
                 <FullCalendar
                     ref={calendarRef}

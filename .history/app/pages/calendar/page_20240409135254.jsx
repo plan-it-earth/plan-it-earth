@@ -1,10 +1,10 @@
 'use client';
-import React, {useEffect, useRef, useContext} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db } from '../../../firebaseConfig';
 import { useRouter} from 'next/navigation';
-import Link from 'next/link';
 import { useEventActions } from '../../lib/Hooks/useEventActions';
-import { useCalendarApi } from '../../lib/Context/CalendarProvider'; 
 
 import Header from '../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
@@ -13,23 +13,14 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import iCalendarPlugin from '@fullcalendar/icalendar';
 import UserContext from '../../lib/firebase/UserContext';
-import { FaPlus } from 'react-icons/fa';
 
 import '../../Styles/calendar.css';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
 
 export default function Calendar() {
     const router = useRouter();
+    const calendarRef = useRef(null);
     const { userData } = useContext(UserContext);
-    
-    const { setCalendarApi } = useCalendarApi();
-
-    const calendarRef = (calendarComponent) => {
-        if (calendarComponent) {
-            const api = calendarComponent.getApi();
-            setCalendarApi(api);
-        }
-    };
-
     const { storeEvents, fetchEvents } = useEventActions(calendarRef);
 
     useEffect(() => {
@@ -42,13 +33,14 @@ export default function Calendar() {
     const handleDateClick = () => {
         console.log('date clicked');
         // TO DO: route to create note page passing in the data as props or creating new useContext hook
+        router.push('/pages/createnote')
         // still needs to pass date to new page
     }
 
     return (
-        <div className="bg-[#16141C]">
+        <div>
             <Header />
-            <main className="mt-12 mx-2 md:mx-10">
+            <main className="mt-12 mx-2 bg:[#16141C] md:mx-10">
                 <FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}
@@ -85,12 +77,6 @@ export default function Calendar() {
                     ]}
                 />
             </main>
-            <div className="fixed bottom-5 inset-x-0 flex justify-center z-10">
-                <Link className="bg-[#E53265] text-white w-12 h-12 rounded-full flex items-center justify-center"
-                      href={{ pathname: '/pages/calendar/createnote' }}>
-                    <FaPlus className="text-2xl" />
-                </Link>
-            </div>
         </div>
     )
 }

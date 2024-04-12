@@ -46,8 +46,9 @@ export default function Calendar() {
     }
 
     return (
-        <div className="bg-[#16141C]">
+        <div>
             <Header />
+            <div id="portal-root"></div>
             <main className="mt-12 mx-2 md:mx-10">
                 <FullCalendar
                     ref={calendarRef}

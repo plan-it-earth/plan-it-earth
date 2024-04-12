@@ -4,7 +4,7 @@ import React, {useEffect, useRef, useContext} from 'react';
 import { useRouter} from 'next/navigation';
 import Link from 'next/link';
 import { useEventActions } from '../../lib/Hooks/useEventActions';
-import { useCalendarApi } from '../../lib/Context/CalendarProvider'; 
+import { useCalendarRef } from '../../lib/Context/CalendarProvider'; 
 
 import Header from '../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
@@ -20,16 +20,7 @@ import '../../Styles/calendar.css';
 export default function Calendar() {
     const router = useRouter();
     const { userData } = useContext(UserContext);
-    
-    const { setCalendarApi } = useCalendarApi();
-
-    const calendarRef = (calendarComponent) => {
-        if (calendarComponent) {
-            const api = calendarComponent.getApi();
-            setCalendarApi(api);
-        }
-    };
-
+    const calendarRef = useCalendarRef();
     const { storeEvents, fetchEvents } = useEventActions(calendarRef);
 
     useEffect(() => {
@@ -46,8 +37,9 @@ export default function Calendar() {
     }
 
     return (
-        <div className="bg-[#16141C]">
+        <div>
             <Header />
+            <div id="portal-root"></div>
             <main className="mt-12 mx-2 md:mx-10">
                 <FullCalendar
                     ref={calendarRef}
