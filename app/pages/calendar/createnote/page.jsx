@@ -74,17 +74,6 @@ export default function CreateNote() {
             <div className="max-w-md mx-auto mt-16 p-8 bg-[#1A1926] rounded-lg shadow-md border border-white">
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                     <div>
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-200 placeholder-[#A7A7A7]">Title:</label>
-                        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} placeholder="Enter title of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md" />
-                    </div>
-                    <div>
-                        <label htmlFor="fromDate" className="block text-sm font-sm text-gray-200">From:</label>
-                        <div>
-                            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md" />
-                            <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md"/>
-                        </div>
-                    </div>
-                    <div>
 
                         <label className="block text-sm font-medium text-gray-200">Title:</label>
                         <input
@@ -95,6 +84,12 @@ export default function CreateNote() {
                         value={formData.title} 
                         onChange={handleChange} 
                         className="text-white bg-gray-600 mt-1 p-2  rounded-md" />
+
+                        <label htmlFor="fromDate" className="block text-sm font-sm text-gray-200">From:</label>
+                        <div>
+                            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md" />
+                            <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md"/>
+                        </div>
                         
                         <label className="block text-sm font-medium text-gray-200">Select Alarm:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
