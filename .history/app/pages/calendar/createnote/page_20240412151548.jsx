@@ -73,8 +73,8 @@ export default function CreateNote() {
                     <div>
                         <label htmlFor="fromDate" className="block text-sm font-sm text-gray-200">From:</label>
                         <div>
-                            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md" />
-                            <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md"/>
+                            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md" />
+                            <input type="text" id="time" name="time" value={formData.time}></input> 
                         </div>
                     </div>
                     <div>
