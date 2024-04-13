@@ -40,7 +40,7 @@ export default function CreateNote() {
 
     const validateTime = () => {
         const [hours, minutes] = time.split(':').map(Number);
-        if (hours < 13 && minutes < 60) {
+        if (hours < 24 && minutes < 60) {
         setIsValid(true); 
         } else {
         setIsValid(false); 
@@ -111,12 +111,12 @@ export default function CreateNote() {
                         <div className="flex flex-row justify-between">
                             <input type="date" id="date" name="date" required value={formData.date} onChange={handleChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-48 dark focus:outline-none" />
                             <input type="text" id="time" name="time" required value={time} onChange={handleTimeChange} onBlur={validateTime} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-20 text-center focus:outline-none"/>
+                            {isValid ? null : <p className="text-red-500 text-sm">Invalid time</p>}
                             <select id="am/pm" className="text-white bg-gray-600 mt-1 p-2 rounded-md focus:outline-none">
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
                             </select>
                         </div>
-                        {isValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
                         
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
@@ -129,7 +129,7 @@ export default function CreateNote() {
                     </div>
                     <div className="flex flex-col justify-center">
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>
-                        <input type="file" id="image" name="image" accept="image/*" className="mt-1 text-sm" />
+                        <input type="file" id="image" name="image" accept="image/*" className="mt-1" />
                     </div>
                     <div>
                         <label className="block text-sm font-normal text-gray-200">Select Label:</label>
@@ -154,7 +154,7 @@ export default function CreateNote() {
                         </textarea>
                     </div>
                     <div>
-                        <button type="submit" className="bg-[#374fae] text-white w-full px-4 py-2 rounded-md hover:opacity-85 focus:outline-none">Submit</button>
+                        <button type="submit" className="bg-[#3f5edc] text-white w-full px-4 py-2 rounded-md hover:opacity-85 focus:outline-none">Submit</button>
                     </div>
                 </form>
             </div>

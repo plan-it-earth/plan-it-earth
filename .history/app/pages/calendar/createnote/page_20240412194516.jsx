@@ -7,8 +7,6 @@ import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
 
 
 export default function CreateNote() {
-    const [time, setTime] = useState('');
-    const [isValid, setIsValid] = useState(true);
 
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
@@ -18,34 +16,6 @@ export default function CreateNote() {
         const { title, value } = event.target;
         setFormData(event.target.value);
     };
-
-    const handleTimeChange =(event) => {
-        let inputValue = event.target.value;
-        inputValue = inputValue.replace(/[^0-9:]/g, '');
-
-        if (time.length > inputValue.length && time[time.length - 1] === ':') {
-        inputValue = inputValue.slice(0, -1);  
-        }
-
-        let numericInput = inputValue.replace(/:/g, ''); 
-        if (numericInput.length > 4) {
-        numericInput = numericInput.slice(0, 4); 
-        }
-        if (numericInput.length >= 2) {
-        numericInput = numericInput.slice(0, 2) + ':' + numericInput.slice(2);
-        }
-
-        setTime(numericInput);
-    };
-
-    const validateTime = () => {
-        const [hours, minutes] = time.split(':').map(Number);
-        if (hours < 13 && minutes < 60) {
-        setIsValid(true); 
-        } else {
-        setIsValid(false); 
-        }
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -108,18 +78,13 @@ export default function CreateNote() {
                         className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md focus:outline-none" />
 
                         <label className="block text-sm font-normal mt-3 text-gray-200">From:</label>
-                        <div className="flex flex-row justify-between">
-                            <input type="date" id="date" name="date" required value={formData.date} onChange={handleChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-48 dark focus:outline-none" />
-                            <input type="text" id="time" name="time" required value={time} onChange={handleTimeChange} onBlur={validateTime} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-20 text-center focus:outline-none"/>
-                            <select id="am/pm" className="text-white bg-gray-600 mt-1 p-2 rounded-md focus:outline-none">
-                                <option value="AM">AM</option>
-                                <option value="PM">PM</option>
-                            </select>
+                        <div>
+                            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md focus:outline-none" />
+                            <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md focus:outline-none"/>
                         </div>
-                        {isValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
                         
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
-                            <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
+                            <select id="alarm" selected="5" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
                                 <option value="-1">none</option>
                                 <option value="5">5 minutes before event</option>
                                 <option value="10">10 minutes before event</option>
@@ -129,18 +94,17 @@ export default function CreateNote() {
                     </div>
                     <div className="flex flex-col justify-center">
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>
-                        <input type="file" id="image" name="image" accept="image/*" className="mt-1 text-sm" />
+                        <input type="file" id="image" name="image" accept="image/*" className="mt-1" />
                     </div>
                     <div>
                         <label className="block text-sm font-normal text-gray-200">Select Label:</label>
                             <select id="label" className="text-white bg-gray-600 mt-1 p-2 w-full rounded-md focus:outline-none">
-                                <option value="-1">none</option>
+                                <option disabled ="disabled" selected="selected">none</option>
                                 <option value="Assignment">Assignment</option>
                                 <option value="Lecture">Lecture</option>
                                 <option value="Lab">Lab</option>
                                 <option value="OfficeHours">Office Hours</option>
-                                <option value="Quiz">Quiz</option>
-                                <option value="Exam">Exam</option>
+                                <option value="Other">Other</option>
                             </select>
                         
                         <label className="block text-sm font-normal text-gray-200 mt-3">Notes:</label>
@@ -154,7 +118,7 @@ export default function CreateNote() {
                         </textarea>
                     </div>
                     <div>
-                        <button type="submit" className="bg-[#374fae] text-white w-full px-4 py-2 rounded-md hover:opacity-85 focus:outline-none">Submit</button>
+                        <button type="submit" className="bg-[#3f5edc] text-white w-full px-4 py-2 rounded-md hover:opacity-85 focus:outline-none">Submit</button>
                     </div>
                 </form>
             </div>

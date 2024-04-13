@@ -129,7 +129,7 @@ export default function CreateNote() {
                     </div>
                     <div className="flex flex-col justify-center">
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>
-                        <input type="file" id="image" name="image" accept="image/*" className="mt-1 text-sm" />
+                        <input type="file" id="image" name="image" accept="image/*" className="mt-1" />
                     </div>
                     <div>
                         <label className="block text-sm font-normal text-gray-200">Select Label:</label>
@@ -154,7 +154,7 @@ export default function CreateNote() {
                         </textarea>
                     </div>
                     <div>
-                        <button type="submit" className="bg-[#374fae] text-white w-full px-4 py-2 rounded-md hover:opacity-85 focus:outline-none">Submit</button>
+                        <button type="submit" className="bg-[#3f5edc] text-white w-full px-4 py-2 rounded-md hover:opacity-85 focus:outline-none">Submit</button>
                     </div>
                 </form>
             </div>
