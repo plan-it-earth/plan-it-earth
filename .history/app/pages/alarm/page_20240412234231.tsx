@@ -74,13 +74,13 @@ export default function Alarm() {
             <div className="flex w-full justify-center">
                 <h2 className="font-medium text-3xl mt-6">Edit/View Alarms</h2>
             </div>
-            <div className="flex flex-col mx-2 sm:mx-36 md:mx-36 lg:mx-36 py-8 bg-[#1A1926] mt-6 border shadow-md border-white rounded-md">
-                <div className="flex flex-row w-full pb-6 text-2xl font-normal justify-around border-b border-b-1 border-white">
+            <div className="flex flex-col mx-36 py-8 bg-[#1A1926] mt-6 border border-white rounded-md">
+                <div className="flex flex-row w-full pb-6 text-2xl font-normal justify-around px-6 border-b border-b-1 border-white">
                     <h1>Note</h1>
                     <h1>Time</h1>
                     <h1>Alarm</h1>
                 </div>
-                <div className="flex flex-col w-full gap-6 mt-6">
+                <div className="flex flex-col w-full gap-4 px-10 mt-6">
                     <AlarmRow title="Test Event" time="02/16/2024 @ 12:00pm" alarm={5} id={1} />
                     <AlarmRow title="Test Event" time="02/24/2024 @ 3:00pm" alarm={10} id={2} />
                     <AlarmRow title="Test Event" time="02/30/2024 @ 10:00am" alarm={15} id={3} />
