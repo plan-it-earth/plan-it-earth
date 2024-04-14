@@ -50,26 +50,3 @@
 .group-OfficeHours {
     background-color: blue;
 }
-
-.group-OfficeHours:hover {
-    background-color: blue;
-    opacity: .9;
-}
-
-.group-Quiz {
-    background-color: darkgoldenrod;
-}
-
-.group-Quiz:hover {
-    background-color: darkgoldenrod;
-    opacity: .9;
-}
-
-.group-Exam {
-    background-color: indigo;
-}
-
-.group-Exam:hover {
-    background-color: indigo;
-    opacity: .9;
-}
