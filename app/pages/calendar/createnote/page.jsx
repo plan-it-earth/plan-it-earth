@@ -97,9 +97,10 @@ export default function CreateNote() {
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>
                         <input type="file" id="image" name="image" accept="image/*" className="mt-1 text-sm" />
                     </div>
-                        <label className="block text-sm font-medium text-gray-200">Select Label:</label>
-                            <select id="label" className="text-white bg-gray-600 mt-1 p-2  rounded-md ">
-                                <option disabled ="disabled" selected="selected">none</option>
+                    <div>
+                        <label className="block text-sm font-normal text-gray-200">Select Label:</label>
+                            <select id="label" className="text-white bg-gray-600 mt-1 p-2 w-full rounded-md focus:outline-none">
+                                <option value="UserEvent">none</option>
                                 <option value="Assignment">Assignment</option>
                                 <option value="Lecture">Lecture</option>
                                 <option value="Lab">Lab</option>
