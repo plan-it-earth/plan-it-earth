@@ -3,7 +3,8 @@ import Header from '../../../Components/Header';
 import {useState} from 'react';
 import { useRouter} from 'next/navigation';
 import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
-import { useEventActions } from '../../../lib/Hooks/useEventActions';
+
+
 
 export default function CreateNote() {
     const [time, setTime] = useState('');
@@ -11,7 +12,6 @@ export default function CreateNote() {
 
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
-    const { storeEvents, fetchEvents } = useEventActions();
 
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {
@@ -57,7 +57,7 @@ export default function CreateNote() {
         var label = document.getElementById("label");
         var description = document.getElementById("description");
 
-        console.log(
+        alert(
             `Title: ${title.value},
              Date: ${date.value},
              Time: ${time.value},
@@ -67,22 +67,22 @@ export default function CreateNote() {
              Description: ${description.value}` 
         );
 
-        let start = new Date(date.value + "T" + time.value);
-        
+        /*
+        // Add event to calendar
+        const calendarApi = calendarRef.current.getApi();
         calendarApi.addEvent({
-            id: calendarApi.getEvents().length + 1,
             title: title.value,
-            start: start,
-            groupId: label.value,
-            extendedProps: {
-                alarm: alarm.value,
-                image: image.value,
-                description: description.value
-            },
+            date: date.value,
+            time: time.value,
+            alarm: alarm.value,
+            image: image.value,
+            label: label.value,
+            description: description.value
         });
         
         // Add event to database
-        //storeEvents();
+        storeEvents();
+        */
 
         router.push('/pages/calendar');
     }

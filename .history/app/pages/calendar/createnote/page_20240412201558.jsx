@@ -3,7 +3,8 @@ import Header from '../../../Components/Header';
 import {useState} from 'react';
 import { useRouter} from 'next/navigation';
 import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
-import { useEventActions } from '../../../lib/Hooks/useEventActions';
+
+
 
 export default function CreateNote() {
     const [time, setTime] = useState('');
@@ -11,7 +12,6 @@ export default function CreateNote() {
 
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
-    const { storeEvents, fetchEvents } = useEventActions();
 
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {
@@ -40,7 +40,7 @@ export default function CreateNote() {
 
     const validateTime = () => {
         const [hours, minutes] = time.split(':').map(Number);
-        if (hours < 13 && minutes < 60) {
+        if (hours < 24 && minutes < 60) {
         setIsValid(true); 
         } else {
         setIsValid(false); 
@@ -57,7 +57,7 @@ export default function CreateNote() {
         var label = document.getElementById("label");
         var description = document.getElementById("description");
 
-        console.log(
+        alert(
             `Title: ${title.value},
              Date: ${date.value},
              Time: ${time.value},
@@ -67,22 +67,22 @@ export default function CreateNote() {
              Description: ${description.value}` 
         );
 
-        let start = new Date(date.value + "T" + time.value);
-        
+        /*
+        // Add event to calendar
+        const calendarApi = calendarRef.current.getApi();
         calendarApi.addEvent({
-            id: calendarApi.getEvents().length + 1,
             title: title.value,
-            start: start,
-            groupId: label.value,
-            extendedProps: {
-                alarm: alarm.value,
-                image: image.value,
-                description: description.value
-            },
+            date: date.value,
+            time: time.value,
+            alarm: alarm.value,
+            image: image.value,
+            label: label.value,
+            description: description.value
         });
         
         // Add event to database
-        //storeEvents();
+        storeEvents();
+        */
 
         router.push('/pages/calendar');
     }
@@ -116,7 +116,7 @@ export default function CreateNote() {
                                 <option value="PM">PM</option>
                             </select>
                         </div>
-                        {isValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
+                        {isValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-center">Invalid time</p>}
                         
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
@@ -129,7 +129,7 @@ export default function CreateNote() {
                     </div>
                     <div className="flex flex-col justify-center">
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>
-                        <input type="file" id="image" name="image" accept="image/*" className="mt-1 text-sm" />
+                        <input type="file" id="image" name="image" accept="image/*" className="mt-1" />
                     </div>
                     <div>
                         <label className="block text-sm font-normal text-gray-200">Select Label:</label>
@@ -154,7 +154,7 @@ export default function CreateNote() {
                         </textarea>
                     </div>
                     <div>
-                        <button type="submit" className="bg-[#374fae] text-white w-full px-4 py-2 rounded-md hover:opacity-85 focus:outline-none">Submit</button>
+                        <button type="submit" className="bg-[#3f5edc] text-white w-full px-4 py-2 rounded-md hover:opacity-85 focus:outline-none">Submit</button>
                     </div>
                 </form>
             </div>
