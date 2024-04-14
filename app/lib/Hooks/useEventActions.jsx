@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 import UserContext from '../firebase/UserContext';
 import { db } from '../../../firebaseConfig';
 import { useCalendarApi } from '../Context/CalendarProvider';
@@ -40,7 +40,7 @@ export const useEventActions = () => {
         const docSnap = await getDoc(docRef);
         
         if (docSnap.exists()) {
-            console.log(docSnap.data());
+            //console.log(docSnap.data());
             return docSnap.data().events;
         } else {
             console.log("No such document!");
