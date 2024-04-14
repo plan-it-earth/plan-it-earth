@@ -31,14 +31,12 @@ export default function Home() {
                     </Link>
                 </div>
                 </Link>
-                <Link className="flex flex-col gap-4 items-center justify-center" href={{pathname: './exportorshare/viewshared'}}>
                 <div className="w-52 h-52 p-12 bg-[#1A1926] rounded-lg shadow-md hover:border">
                     <Link className="flex flex-col gap-4 items-center justify-center" href={{pathname: './exportorshare/viewshared'}}>
                         <Image src={ViewShared} alt="view shared" height={80} width={80} />
                         <span>View Shared</span>
                     </Link>
                 </div>
-                </Link>
             </div>
         </div>
     );
