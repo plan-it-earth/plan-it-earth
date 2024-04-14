@@ -23,6 +23,8 @@ export const useEventActions = () => {
 
         const eventJson = JSON.stringify(eventArray.filter(event => event.groupId !== ''));
 
+        print(eventJson);
+
         const uid = userData.uid;
         await updateDoc(doc(db, "users", uid), {
             events: eventJson

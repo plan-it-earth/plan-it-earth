@@ -6,6 +6,8 @@ import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
 import { useEventActions } from '../../../lib/Hooks/useEventActions';
 
 export default function CreateNote() {
+    const [time, setTime] = useState('');
+    const [isValid, setIsValid] = useState(true);
 
     const router = useRouter();
     const { calendarApi } = useCalendarApi();

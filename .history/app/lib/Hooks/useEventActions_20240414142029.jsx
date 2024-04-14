@@ -21,7 +21,9 @@ export const useEventActions = () => {
             return;
         }
 
-        const eventJson = JSON.stringify(eventArray.filter(event => event.groupId !== ''));
+        const eventJson = JSON.stringify(eventArray.filter(event => event.groupId != 'defaultEvents'));
+
+        print(eventJson);
 
         const uid = userData.uid;
         await updateDoc(doc(db, "users", uid), {

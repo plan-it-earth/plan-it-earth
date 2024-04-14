@@ -66,6 +66,14 @@ export default function Calendar() {
                     dayMaxEvents={true}
                     weekends={true}
                     select={handleDateClick}
+                    initialEvents={[
+                        {
+                            url: '/US_en.ics',
+                            format: 'ics',
+                            groupId: 'defaultEvents',
+                            failure: function() {console.log('failed to fetch events')},
+                        }
+                    ]}
                     eventSources={[
                         {
                             events: async (fetchInfo, successCallback, failureCallback) => {
@@ -77,11 +85,6 @@ export default function Calendar() {
                                     failureCallback();
                                 }
                             }
-                        },
-                        {
-                            url: '/US_en.ics',
-                            format: 'ics',
-                            failure: function() {console.log('failed to fetch events')},
                         }
                     ]}
                 />
