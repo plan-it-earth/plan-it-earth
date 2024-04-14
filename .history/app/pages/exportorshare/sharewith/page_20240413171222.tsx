@@ -51,23 +51,8 @@ export default function Home() {
     console.log('Downloading PDF for the date range:', selectedDate1, 'to', selectedDate2);
   };
 
-  const handleEmailChange = (e:any) => {
-    const email = e.target.value;
-    setRecipientEmail(email);
-  };
+  const handleEmailChange = (e) => {
 
-  const validateEmail = (e:any) => {
-    const email = e.target.value;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setEmailValid(!emailRegex.test(email));
-  }
-
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
-    if (emailValid) {
-      // share calendar with the recipient
-
-    }
   }
 
   return (
@@ -75,26 +60,12 @@ export default function Home() {
       <Header />
       <Image src={Exportorshareicon} alt="export share logo" height={100} width={100} className="mx-auto mb-6 mt-16" />
       <h2 className="flex flex-col items-center justify-center text-2xl font-semibold mb-6">Pick a date range to share</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-4 max-w-md pt-8 px-10 border border-white bg-[#1A1926] rounded-md justify-center mx-auto">
-          <div className="flex flex-col w-full gap-2">
-            <label>Share with:</label>
-            <input type="text" placeholder="johndoe@gmail.com" onChange={handleEmailChange} onBlur={validateEmail} className="bg-[#35334D] px-3 py-2 rounded-md focus:outline-none"/>
-            {emailValid ? null : <p className="text-red-500 text-sm">Please enter a valid email</p>}
-          </div>
-          <div className="flex flex-col w-full gap-2">
-            <label>From:</label>
-            <input type="date" required className="text-white bg-gray-600 px-3 py-2 rounded-md cursor-pointer focus:outline-none"/>
-          </div>
-          <div className="flex flex-col w-full gap-2">
-            <label>To:</label>
-            <input type="date" required className="text-white bg-gray-600 px-3 py-2 rounded-md cursor-pointer focus:outline-none"/>
-          </div>
-          <div className="flex w-full mt-2 pb-4">
-            <button type="submit" className="w-full bg-[#35334D] text-white font-medium py-2 px-4 rounded-lg hover:bg-opacity-90 focus:outline-none">Share</button>
-          </div>
+      <div className="flex p-10 border border-white bg-[#1A1926] rounded-md">
+        <div className="flex flex-col">
+          <label>Share with</label>
+          <input type="text" placeholder="johndoe@gmail.com" onChange={handleEmailChange} />
         </div>
-      </form>
+      </div>
      {/*
       
       <div className="max-w-md mx-auto mt-16">

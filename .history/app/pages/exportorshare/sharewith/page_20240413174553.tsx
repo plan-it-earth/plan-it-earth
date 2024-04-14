@@ -59,7 +59,7 @@ export default function Home() {
   const validateEmail = (e:any) => {
     const email = e.target.value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setEmailValid(!emailRegex.test(email));
+    setEmailValid(emailRegex.test(email));
   }
 
   const handleSubmit = (e:any) => {
