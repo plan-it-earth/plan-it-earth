@@ -62,7 +62,7 @@ export default function Home() {
     setEmailValid(emailRegex.test(email));
   }
 
-  const handleSubmit = (e:HTMLFormElement) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     if (emailValid) {
       // share calendar with the recipient
@@ -79,8 +79,8 @@ export default function Home() {
         <div className="flex flex-col gap-4 max-w-md pt-8 px-10 border border-white bg-[#1A1926] rounded-md justify-center mx-auto">
           <div className="flex flex-col w-full gap-2">
             <label>Share with:</label>
-            <input type="text" placeholder="johndoe@gmail.com" onChange={handleEmailChange} onBlur={validateEmail} className="bg-[#35334D] px-3 py-2 rounded-md focus:outline-none"/>
-            {!emailValid && <p className="text-red-500 text-sm">Please enter a valid email</p>}
+            <input type="text" placeholder="johndoe@gmail.com" required onChange={handleEmailChange} onBlur={validateEmail} className="bg-[#35334D] px-3 py-2 rounded-md focus:outline-none"/>
+            {emailValid && <p className="text-red-500 text-sm">Please enter a valid email</p>}
           </div>
           <div className="flex flex-col w-full gap-2">
             <label>From:</label>
