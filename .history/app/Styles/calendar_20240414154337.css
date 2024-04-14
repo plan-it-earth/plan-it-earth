@@ -1,0 +1,12 @@
+:root {
+    --fc-border-color: #7C7C7C;
+}
+
+.group-UserEvent {
+    background-color: red;
+
+}
+
+.group-UserEvent a {
+    background-color: white !important;
+}
