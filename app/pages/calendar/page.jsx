@@ -20,15 +20,16 @@ import '../../Styles/calendar.css';
 export default function Calendar() {
     const router = useRouter();
     const { userData } = useContext(UserContext);
+    const calendarRef = useRef(null);
     
     const { setCalendarApi } = useCalendarApi();
 
-    const calendarRef = (calendarComponent) => {
-        if (calendarComponent) {
-            const api = calendarComponent.getApi();
+    useEffect(() => {
+        if (calendarRef.current) {
+            const api = calendarRef.current.getApi();
             setCalendarApi(api);
         }
-    };
+    }, [calendarRef, setCalendarApi]);
 
     const { storeEvents, fetchEvents } = useEventActions();
 
@@ -43,6 +44,9 @@ export default function Calendar() {
         console.log('date clicked');
         // TO DO: route to create note page passing in the data as props or creating new useContext hook
         // still needs to pass date to new page
+
+        // print events to console
+        console.log(calendarRef.current.getApi().getEvents());
     }
 
     return (
