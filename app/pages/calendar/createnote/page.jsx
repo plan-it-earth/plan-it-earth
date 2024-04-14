@@ -67,19 +67,36 @@ export default function CreateNote() {
              Description: ${description.value}` 
         );
 
-        let start = new Date(date.value + "T" + time.value);
-        
-        calendarApi.addEvent({
-            id: calendarApi.getEvents().length + 1,
-            title: title.value,
-            start: start,
-            groupId: label.value,
-            extendedProps: {
-                alarm: alarm.value,
-                image: image.value,
-                description: description.value
-            },
-        });
+        if(time.value) {
+            let start = new Date(date.value + "T" + time.value);
+            
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: image.value,
+                    description: description.value
+                },
+            });
+        } else {
+            let start = new Date(date.value);
+
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                allDay: 'true',
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: image.value,
+                    description: description.value
+                },
+            });
+        }
         
         // Add event to database
         storeEvents();
