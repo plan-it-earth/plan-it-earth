@@ -1,0 +1,83 @@
+:root {
+    --fc-border-color: #7C7C7C;
+}
+
+.group-UserEvent {
+    background-color: darkred;
+    cursor: pointer;
+}
+
+.group-UserEvent:hover {
+    background-color: darkred;
+    opacity: .9;
+}
+
+.group-Assignment {
+    background-color: darkgreen;
+    cursor: pointer;
+}
+
+.group-Assignment:hover {
+    background-color: darkgreen;
+    opacity: .9;
+}
+
+.group-Lecture {
+    background-color: blueviolet;
+    cursor: pointer;
+}
+
+.group-Lecture:hover {
+    background-color: blueviolet;
+    opacity: .9;
+}
+
+.group-Lecture {
+    background-color: cadetblue;
+    cursor: pointer;
+}
+
+.group-Lecture:hover {
+    background-color: cadetblue;
+    opacity: .9;
+}
+
+.group-Lab {
+    background-color: darkorange;
+    cursor: pointer;
+}
+
+.group-Lab:hover {
+    background-color: darkorange;
+    opacity: .9;
+}
+
+.group-OfficeHours {
+    background-color: blue;
+    cursor: pointer;
+}
+
+.group-OfficeHours:hover {
+    background-color: blue;
+    opacity: .9;
+}
+
+.group-Quiz {
+    background-color: darkgoldenrod;
+    cursor: pointer;
+}
+
+.group-Quiz:hover {
+    background-color: darkgoldenrod;
+    opacity: .9;
+}
+
+.group-Exam {
+    background-color: indigo;
+    cursor: pointer;
+}
+
+.group-Exam:hover {
+    background-color: indigo;
+    opacity: .9;
+}
