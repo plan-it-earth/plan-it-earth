@@ -53,7 +53,7 @@ export default function CreateNote() {
         });
         
         // Add event to database
-        //storeEvents();
+        storeEvents();
 
         router.push('/pages/calendar');
     }
