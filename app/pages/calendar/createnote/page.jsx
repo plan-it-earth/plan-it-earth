@@ -31,14 +31,13 @@ export default function CreateNote() {
         console.log(
             `Title: ${title.value},
              Date: ${date.value},
-             Time: ${time.value},
              Alarm: ${alarm.value},
              Image: ${image.value}, 
              Label: ${label.value}, 
              Description: ${description.value}` 
         );
 
-        let start = new Date(date.value + "T" + time.value);
+        let start = new Date(date.value);
                 
         calendarApi.addEvent({
             id: calendarApi.getEvents().length + 1,
@@ -81,7 +80,6 @@ export default function CreateNote() {
                         <label className="block text-sm font-sm text-gray-200">From:</label>
                         <div>
                             <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md" />
-                            <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md"/>
                         </div>
                         
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
