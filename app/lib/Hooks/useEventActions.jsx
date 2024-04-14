@@ -4,7 +4,7 @@ import UserContext from '../firebase/UserContext';
 import { db } from '../../../firebaseConfig';
 import { useCalendarApi } from '../Context/CalendarProvider';
 
-export const useEventActions = (calendarRef) => {
+export const useEventActions = () => {
     const { userData } = useContext(UserContext);
     const { calendarApi } = useCalendarApi();
 
