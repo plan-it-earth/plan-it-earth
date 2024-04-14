@@ -30,7 +30,7 @@ export default function Calendar() {
         }
     };
 
-    const { storeEvents, fetchEvents } = useEventActions(calendarRef);
+    const { storeEvents, fetchEvents } = useEventActions();
 
     useEffect(() => {
         // if user is not logged in, redirect to login page
