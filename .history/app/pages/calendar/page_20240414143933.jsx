@@ -81,6 +81,7 @@ export default function Calendar() {
                         {
                             url: '/US_en.ics',
                             format: 'ics',
+                            groupId: 'defaultEvents',
                             failure: function() {console.log('failed to fetch events')},
                         }
                     ]}
