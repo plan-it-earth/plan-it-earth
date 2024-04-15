@@ -1,11 +1,18 @@
 'use client';
 import Header from '../../../Components/Header';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import { useRouter} from 'next/navigation';
 import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
 import { useEventActions } from '../../../lib/Hooks/useEventActions';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import UserContext from '../../../lib/firebase/UserContext';
+
+const storage = getStorage();
 
 export default function CreateNote() {
+    const { userData } = useContext(UserContext);
+    const [imageUrl, setImageUrl] = useState('');
+
     const [time, setTime] = useState('');
     const [isValid, setIsValid] = useState(true);
 
@@ -47,6 +54,20 @@ export default function CreateNote() {
         }
     }
 
+    const uploadImage = async (event) => {
+        // Upload the image to Firebase storage
+        const imageFile = event.target.files[0];
+        const storageRef = ref(storage, userData.uid + '/images/' + imageFile.name);
+        uploadBytes(storageRef, imageFile).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+
+            // Get the download URL of the uploaded image
+            getDownloadURL(storageRef).then((url) => {
+                setImageUrl(url.toString());
+            });
+        });
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         var title = document.getElementById("title");
@@ -62,10 +83,12 @@ export default function CreateNote() {
              Date: ${date.value},
              Time: ${time.value},
              Alarm: ${alarm.value},
-             Image: ${image.value}, 
+             Image: ${imageUrl}, 
              Label: ${label.value}, 
              Description: ${description.value}` 
         );
+
+        console.log('Image url: ' + imageUrl)
 
         if(time.value) {
             let start = new Date(date.value + "T" + time.value);
@@ -77,7 +100,7 @@ export default function CreateNote() {
                 groupId: label.value,
                 extendedProps: {
                     alarm: alarm.value,
-                    image: image.value,
+                    image: imageUrl,
                     description: description.value
                 },
             });
@@ -93,7 +116,7 @@ export default function CreateNote() {
                 allDay: 'true',
                 extendedProps: {
                     alarm: alarm.value,
-                    image: image.value,
+                    image: imageUrl,
                     description: description.value
                 },
             });
@@ -147,7 +170,7 @@ export default function CreateNote() {
                     </div>
                     <div className="flex flex-col justify-center">
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>
-                        <input type="file" id="image" name="image" accept="image/*" className="mt-1 text-sm" />
+                        <input onChange={uploadImage} type="file" id="image" name="image" accept="image/*" className="mt-1 text-sm" />
                     </div>
                     <div>
                         <label className="block text-sm font-normal text-gray-200">Select Label:</label>
