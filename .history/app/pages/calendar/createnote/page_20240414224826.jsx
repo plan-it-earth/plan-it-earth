@@ -3,7 +3,7 @@ import Header from '../../../Components/Header';
 import {useState, useContext} from 'react';
 import { useRouter} from 'next/navigation';
 import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
-import { storeEvents } from '../../../lib/Hooks/dbActions';
+import { useEventActions } from '../../../lib/Hooks/useEventActions';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import UserContext from '../../../lib/firebase/UserContext';
 
@@ -26,7 +26,7 @@ export default function CreateNote() {
     const uploadImage = async (event) => {
         // Upload the image to Firebase storage
         const imageFile = event.target.files[0];
-        const storageRef = ref(storage, userData.uid + '/' + (calendarApi.getEvents().length + 1) + '/' + imageFile.name);
+        const storageRef = ref(storage, userData.uid + '/images/' + imageFile.name);
         uploadBytes(storageRef, imageFile).then((snapshot) => {
             console.log('Uploaded a blob or file!');
 
@@ -41,6 +41,7 @@ export default function CreateNote() {
         event.preventDefault();
         var title = document.getElementById("title");
         var date = document.getElementById("date");
+        var time = document.getElementById("time");
         var alarm = document.getElementById("alarm");
         var image = document.getElementById("image");
         var label = document.getElementById("label");
@@ -49,30 +50,49 @@ export default function CreateNote() {
         console.log(
             `Title: ${title.value},
              Date: ${date.value},
+             Time: ${time.value},
              Alarm: ${alarm.value},
              Image: ${imageUrl}, 
              Label: ${label.value}, 
              Description: ${description.value}` 
         );
 
-        // All day event
-        const start = new Date(date.value.replace(/-/g, '\/'));
+        console.log('Image url: ' + imageUrl)
 
-        calendarApi.addEvent({
-            id: calendarApi.getEvents().length + 1,
-            title: title.value,
-            start: start,
-            groupId: label.value,
-            allDay: 'true',
-            extendedProps: {
-                alarm: alarm.value,
-                image: imageUrl,
-                description: description.value
-            },
-        });
+        if(time.value) {
+            let start = new Date(date.value + "T" + time.value);
+            
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
+        } else {
+            // All day event
+            let start = new Date(date.value);
+
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                allDay: 'true',
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
+        }
         
         // Add event to database
-        storeEvents(userData, calendarApi);
+        storeEvents();
 
         router.push('/pages/calendar');
     }

@@ -1,0 +1,20 @@
+:root {
+    --fc-border-color: #7C7C7C;
+}
+
+.group-UserEvent {
+    background-color: red;
+
+}
+
+.group-Assignment {
+    background-color: darkgreen;
+}
+
+.group-Lecture {
+    background-color: blueviolet;
+}
+
+.group-Lecture {
+    background-color: cadetblue;
+}

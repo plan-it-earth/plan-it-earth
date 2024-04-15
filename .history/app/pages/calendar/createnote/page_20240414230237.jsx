@@ -3,7 +3,7 @@ import Header from '../../../Components/Header';
 import {useState, useContext} from 'react';
 import { useRouter} from 'next/navigation';
 import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
-import { storeEvents } from '../../../lib/Hooks/dbActions';
+import { useEventActions } from '../../../lib/Hooks/useEventActions';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import UserContext from '../../../lib/firebase/UserContext';
 
@@ -26,7 +26,7 @@ export default function CreateNote() {
     const uploadImage = async (event) => {
         // Upload the image to Firebase storage
         const imageFile = event.target.files[0];
-        const storageRef = ref(storage, userData.uid + '/' + (calendarApi.getEvents().length + 1) + '/' + imageFile.name);
+        const storageRef = ref(storage, userData.uid + '/images/' + imageFile.name);
         uploadBytes(storageRef, imageFile).then((snapshot) => {
             console.log('Uploaded a blob or file!');
 
@@ -55,8 +55,10 @@ export default function CreateNote() {
              Description: ${description.value}` 
         );
 
+        console.log('Image url: ' + imageUrl)
+
         // All day event
-        const start = new Date(date.value.replace(/-/g, '\/'));
+        let start = new Date(date.value);
 
         calendarApi.addEvent({
             id: calendarApi.getEvents().length + 1,
@@ -72,7 +74,7 @@ export default function CreateNote() {
         });
         
         // Add event to database
-        storeEvents(userData, calendarApi);
+        storeEvents();
 
         router.push('/pages/calendar');
     }
