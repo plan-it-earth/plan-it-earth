@@ -22,17 +22,10 @@ export default function CreateNote() {
         setFormData(event.target.value);
     };
 
-    if (calendarApi) {
-        const idNum = calendarApi.getEvents().length + 1;
-    } else {
-        console.error('Calendar API not found');
-        router.push('/pages/calendar');
-    }
-
     const uploadImage = async (event) => {
         // Upload the image to Firebase storage
         const imageFile = event.target.files[0];
-        const storageRef = ref(storage, userData.uid + '/' + idNum + '/' + imageFile.name);
+        const storageRef = ref(storage, userData.uid + '/' + (calendarApi.getEvents().length + 1) + '/' + imageFile.name);
         uploadBytes(storageRef, imageFile).then((snapshot) => {
             console.log('Uploaded a blob or file!');
 
@@ -67,7 +60,7 @@ export default function CreateNote() {
         const start = new Date(date.value.replace(/-/g, '\/'));
 
         calendarApi.addEvent({
-            id: idNum,
+            id: calendarApi.getEvents().length + 1,
             title: title.value,
             start: start,
             groupId: label.value,
