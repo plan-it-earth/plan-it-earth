@@ -64,7 +64,6 @@
 
 .group-Quiz {
     background-color: darkgoldenrod;
-    cursor: pointer;
 }
 
 .group-Quiz:hover {
@@ -74,7 +73,6 @@
 
 .group-Exam {
     background-color: indigo;
-    cursor: pointer;
 }
 
 .group-Exam:hover {

@@ -1,5 +1,5 @@
 'use client';
-import React, {useState, useEffect, useRef, useContext} from 'react';
+import React, {useEffect, useRef, useContext} from 'react';
 
 import { useRouter} from 'next/navigation';
 import Link from 'next/link';
@@ -14,8 +14,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import iCalendarPlugin from '@fullcalendar/icalendar';
 import UserContext from '../../lib/firebase/UserContext';
 import { FaPlus } from 'react-icons/fa';
-
-import EventModal from '../../Components/EventModal.jsx';
+import { Tooltip } from 'react-tooltip';
 
 import '../../Styles/calendar.css';
 
@@ -25,9 +24,6 @@ export default function Calendar() {
     const calendarRef = useRef(null);
     
     const { setCalendarApi } = useCalendarApi();
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalData, setModalData] = useState([]);
 
     useEffect(() => {
         if (calendarRef.current) {
@@ -59,19 +55,15 @@ export default function Calendar() {
         const alarm = eventInfo.event._def.extendedProps.alarm;
         const image = eventInfo.event._def.extendedProps.image;
 
-        setModalData({title, label, description, alarm, image});
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
+        /* display event details in html */
+        
+    }
 
     return (
         <div className="bg-[#16141C]">
             <Header />
             <main className="mt-12 mx-2 md:mx-10">
-                {!isModalOpen && <FullCalendar
+                <FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}
                     headerToolbar={{
@@ -106,15 +98,15 @@ export default function Calendar() {
                             failure: function() {console.log('failed to fetch events')},
                         }
                     ]}
-                />}
-                {isModalOpen && <EventModal {...modalData} onClose={closeModal} />}
+                />
+                
             </main>
-            {!isModalOpen && <div className="fixed bottom-5 inset-x-0 flex justify-center z-10">
+            <div className="fixed bottom-5 inset-x-0 flex justify-center z-10">
                 <Link className="bg-[#E53265] text-white w-12 h-12 rounded-full flex items-center justify-center"
                       href={{ pathname: '/pages/calendar/createnote' }}>
                     <FaPlus className="text-2xl" />
                 </Link>
-            </div>}
+            </div>
         </div>
     )
 }

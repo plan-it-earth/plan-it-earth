@@ -24,7 +24,6 @@
 
 .group-Lecture {
     background-color: blueviolet;
-    cursor: pointer;
 }
 
 .group-Lecture:hover {
@@ -34,7 +33,6 @@
 
 .group-Lecture {
     background-color: cadetblue;
-    cursor: pointer;
 }
 
 .group-Lecture:hover {
@@ -54,7 +52,6 @@
 
 .group-OfficeHours {
     background-color: blue;
-    cursor: pointer;
 }
 
 .group-OfficeHours:hover {
@@ -64,7 +61,6 @@
 
 .group-Quiz {
     background-color: darkgoldenrod;
-    cursor: pointer;
 }
 
 .group-Quiz:hover {
@@ -74,7 +70,6 @@
 
 .group-Exam {
     background-color: indigo;
-    cursor: pointer;
 }
 
 .group-Exam:hover {

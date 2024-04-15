@@ -1,5 +1,5 @@
 'use client';
-import React, {useState, useEffect, useRef, useContext} from 'react';
+import React, {useState, suseEffect, useRef, useContext} from 'react';
 
 import { useRouter} from 'next/navigation';
 import Link from 'next/link';
@@ -27,7 +27,7 @@ export default function Calendar() {
     const { setCalendarApi } = useCalendarApi();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalData, setModalData] = useState([]);
+    const [modalData, setModalData] = useState({title: '', label: '', description: '', alarm: '', image: ''});
 
     useEffect(() => {
         if (calendarRef.current) {
@@ -63,15 +63,11 @@ export default function Calendar() {
         setIsModalOpen(true);
     };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
     return (
         <div className="bg-[#16141C]">
             <Header />
             <main className="mt-12 mx-2 md:mx-10">
-                {!isModalOpen && <FullCalendar
+                <FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}
                     headerToolbar={{
@@ -106,15 +102,15 @@ export default function Calendar() {
                             failure: function() {console.log('failed to fetch events')},
                         }
                     ]}
-                />}
-                {isModalOpen && <EventModal {...modalData} onClose={closeModal} />}
+                />
+                {isModalOpen && <EventModal {...modalData} />}
             </main>
-            {!isModalOpen && <div className="fixed bottom-5 inset-x-0 flex justify-center z-10">
+            <div className="fixed bottom-5 inset-x-0 flex justify-center z-10">
                 <Link className="bg-[#E53265] text-white w-12 h-12 rounded-full flex items-center justify-center"
                       href={{ pathname: '/pages/calendar/createnote' }}>
                     <FaPlus className="text-2xl" />
                 </Link>
-            </div>}
+            </div>
         </div>
     )
 }
