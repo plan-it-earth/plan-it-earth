@@ -3,7 +3,7 @@ import Header from '../../../Components/Header';
 import {useState, useContext} from 'react';
 import { useRouter} from 'next/navigation';
 import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
-import { useEventActions } from '../../../lib/Hooks/useEventActions';
+import { storeEvents } from '../../../lib/Hooks/dbActions';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import UserContext from '../../../lib/firebase/UserContext';
 
@@ -15,7 +15,6 @@ export default function CreateNote() {
 
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
-    const { storeEvents, fetchEvents } = useEventActions();
 
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});
     const handleChange = (event) => {
@@ -58,7 +57,7 @@ export default function CreateNote() {
         console.log('Image url: ' + imageUrl)
 
         // All day event
-        const start = new Date(date.value);
+        const start = new Date(date.value.replace(/-/g, '\/'));
 
         calendarApi.addEvent({
             id: calendarApi.getEvents().length + 1,
@@ -74,7 +73,7 @@ export default function CreateNote() {
         });
         
         // Add event to database
-        storeEvents();
+        storeEvents(userData, calendarApi);
 
         router.push('/pages/calendar');
     }

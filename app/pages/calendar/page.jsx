@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useContext} from 'react';
 
 import { useRouter} from 'next/navigation';
 import Link from 'next/link';
-import { useEventActions } from '../../lib/Hooks/useEventActions';
+import { fetchEvents } from '../../lib/Hooks/dbActions';
 import { useCalendarApi } from '../../lib/Context/CalendarProvider'; 
 
 import Header from '../../Components/Header';
@@ -30,8 +30,6 @@ export default function Calendar() {
             setCalendarApi(api);
         }
     }, [calendarRef, setCalendarApi]);
-
-    const { storeEvents, fetchEvents } = useEventActions();
 
     useEffect(() => {
         // if user is not logged in, redirect to login page
@@ -70,7 +68,7 @@ export default function Calendar() {
                     eventSources={[
                         {
                             events: async (fetchInfo, successCallback, failureCallback) => {
-                                const events = await fetchEvents();
+                                const events = await fetchEvents(userData);
                                 console.log(events);
                                 if (events) {
                                     successCallback(JSON.parse(events));
