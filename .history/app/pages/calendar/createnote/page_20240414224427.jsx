@@ -13,6 +13,9 @@ export default function CreateNote() {
     const { userData } = useContext(UserContext);
     const [imageUrl, setImageUrl] = useState('');
 
+    const [time, setTime] = useState('');
+    const [isValid, setIsValid] = useState(true);
+
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
     const { storeEvents, fetchEvents } = useEventActions();
@@ -22,6 +25,34 @@ export default function CreateNote() {
         const { title, value } = event.target;
         setFormData(event.target.value);
     };
+
+    const handleTimeChange =(event) => {
+        let inputValue = event.target.value;
+        inputValue = inputValue.replace(/[^0-9:]/g, '');
+
+        if (time.length > inputValue.length && time[time.length - 1] === ':') {
+        inputValue = inputValue.slice(0, -1);  
+        }
+
+        let numericInput = inputValue.replace(/:/g, ''); 
+        if (numericInput.length > 4) {
+        numericInput = numericInput.slice(0, 4); 
+        }
+        if (numericInput.length >= 2) {
+        numericInput = numericInput.slice(0, 2) + ':' + numericInput.slice(2);
+        }
+
+        setTime(numericInput);
+    };
+
+    const validateTime = () => {
+        const [hours, minutes] = time.split(':').map(Number);
+        if (hours < 13 && minutes < 60) {
+        setIsValid(true); 
+        } else {
+        setIsValid(false); 
+        }
+    }
 
     const uploadImage = async (event) => {
         // Upload the image to Firebase storage
@@ -41,6 +72,7 @@ export default function CreateNote() {
         event.preventDefault();
         var title = document.getElementById("title");
         var date = document.getElementById("date");
+        var time = document.getElementById("time");
         var alarm = document.getElementById("alarm");
         var image = document.getElementById("image");
         var label = document.getElementById("label");
@@ -49,6 +81,7 @@ export default function CreateNote() {
         console.log(
             `Title: ${title.value},
              Date: ${date.value},
+             Time: ${time.value},
              Alarm: ${alarm.value},
              Image: ${imageUrl}, 
              Label: ${label.value}, 
@@ -57,21 +90,37 @@ export default function CreateNote() {
 
         console.log('Image url: ' + imageUrl)
 
-        // All day event
-        const start = new Date(date.value);
+        if(time.value) {
+            let start = new Date(date.value + "T" + time.value);
+            
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
+        } else {
+            // All day event
+            let start = new Date(date.value);
 
-        calendarApi.addEvent({
-            id: calendarApi.getEvents().length + 1,
-            title: title.value,
-            start: start,
-            groupId: label.value,
-            allDay: 'true',
-            extendedProps: {
-                alarm: alarm.value,
-                image: imageUrl,
-                description: description.value
-            },
-        });
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                allDay: 'true',
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
+        }
         
         // Add event to database
         storeEvents();
@@ -99,10 +148,11 @@ export default function CreateNote() {
                         onChange={handleChange} 
                         className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md focus:outline-none" />
 
-                        <label className="block text-sm font-sm text-gray-200">From:</label>
-                        <div>
-                            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md" />
-                        </div>
+                        <label className="block text-sm font-normal mt-3 text-gray-200 w-full">From:</label>
+                        <input type="date" id="date" name="date" required value={formData.date} onChange={handleChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-48 dark focus:outline-none" />
+            
+                    
+                        {isValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
                         
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">

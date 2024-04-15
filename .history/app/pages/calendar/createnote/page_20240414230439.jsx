@@ -99,11 +99,9 @@ export default function CreateNote() {
                         onChange={handleChange} 
                         className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md focus:outline-none" />
 
-                        <label className="block text-sm font-sm text-gray-200">From:</label>
-                        <div>
-                            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} placeholder="Enter date of note" className="text-white bg-gray-600 mt-1 px-3 py-2 w- rounded-md" />
-                        </div>
-                        
+                        <label className="block text-sm font-normal mt-3 text-gray-200">From:</label>
+                        <input type="date" id="date" name="date" required value={formData.date} onChange={handleChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md dark focus:outline-none w-full" />
+                                    
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
                                 <option value="-1">none</option>
