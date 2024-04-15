@@ -11,8 +11,8 @@ export default function EventModal({ title, label, description, alarm, image, on
             <div className="relative flex flex-col md:flex-row bg-[#35334D] text-white rounded-lg shadow-lg overflow-hidden w-11/12 md:w-1/2 lg:w-1/3" onClick={stopPropagation}>
                 <div className="p-6 flex-grow">
                     <h2 className="text-xl font-bold mb-2 text-center">{title}</h2>
-                    {label && <p className="mb-1 text-center">Type: {label}</p>}
-                    {description && <p className="mb-1 text-center">Description: {description}</p>}
+                    <p className="mb-1 text-center">Type: {label}</p>
+                    <p className="mb-1 text-center">Description: {description}</p>
                     {alarm && alarm !== "-1" && <p className="mb-1 text-center">Alarm: {alarm} minutes before</p>}
                     {image && (
                         <div className="flex mt-4 justify-center">

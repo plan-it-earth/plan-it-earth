@@ -12,7 +12,7 @@ export default function EventModal({ title, label, description, alarm, image, on
                 <div className="p-6 flex-grow">
                     <h2 className="text-xl font-bold mb-2 text-center">{title}</h2>
                     {label && <p className="mb-1 text-center">Type: {label}</p>}
-                    {description && <p className="mb-1 text-center">Description: {description}</p>}
+                    <p className="mb-1 text-center">Description: {description}</p>
                     {alarm && alarm !== "-1" && <p className="mb-1 text-center">Alarm: {alarm} minutes before</p>}
                     {image && (
                         <div className="flex mt-4 justify-center">
