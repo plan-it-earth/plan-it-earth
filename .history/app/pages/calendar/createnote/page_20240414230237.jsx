@@ -58,7 +58,7 @@ export default function CreateNote() {
         console.log('Image url: ' + imageUrl)
 
         // All day event
-        const start = new Date(date.value);
+        let start = new Date(date.value);
 
         calendarApi.addEvent({
             id: calendarApi.getEvents().length + 1,

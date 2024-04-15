@@ -15,6 +15,7 @@ export default function CreateNote() {
 
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
+    console.log(calendarApi);
     const { storeEvents, fetchEvents } = useEventActions();
 
     const [formData, setFormData] = useState({title: "",date: "", alarm: "", image: "", label: "", description: ""});

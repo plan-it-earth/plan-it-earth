@@ -57,21 +57,21 @@ export default function CreateNote() {
 
         console.log('Image url: ' + imageUrl)
 
-        // All day event
-        const start = new Date(date.value);
+            // All day event
+            let start = new Date(date.value);
 
-        calendarApi.addEvent({
-            id: calendarApi.getEvents().length + 1,
-            title: title.value,
-            start: start,
-            groupId: label.value,
-            allDay: 'true',
-            extendedProps: {
-                alarm: alarm.value,
-                image: imageUrl,
-                description: description.value
-            },
-        });
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                allDay: 'true',
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
         
         // Add event to database
         storeEvents();

@@ -13,6 +13,8 @@ export default function CreateNote() {
     const { userData } = useContext(UserContext);
     const [imageUrl, setImageUrl] = useState('');
 
+    const [isValid, setIsValid] = useState(true);
+
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
     const { storeEvents, fetchEvents } = useEventActions();
@@ -41,6 +43,7 @@ export default function CreateNote() {
         event.preventDefault();
         var title = document.getElementById("title");
         var date = document.getElementById("date");
+        var time = document.getElementById("time");
         var alarm = document.getElementById("alarm");
         var image = document.getElementById("image");
         var label = document.getElementById("label");
@@ -49,6 +52,7 @@ export default function CreateNote() {
         console.log(
             `Title: ${title.value},
              Date: ${date.value},
+             Time: ${time.value},
              Alarm: ${alarm.value},
              Image: ${imageUrl}, 
              Label: ${label.value}, 
@@ -57,21 +61,37 @@ export default function CreateNote() {
 
         console.log('Image url: ' + imageUrl)
 
-        // All day event
-        const start = new Date(date.value);
+        if(time.value) {
+            let start = new Date(date.value + "T" + time.value);
+            
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
+        } else {
+            // All day event
+            let start = new Date(date.value);
 
-        calendarApi.addEvent({
-            id: calendarApi.getEvents().length + 1,
-            title: title.value,
-            start: start,
-            groupId: label.value,
-            allDay: 'true',
-            extendedProps: {
-                alarm: alarm.value,
-                image: imageUrl,
-                description: description.value
-            },
-        });
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                allDay: 'true',
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
+        }
         
         // Add event to database
         storeEvents();
