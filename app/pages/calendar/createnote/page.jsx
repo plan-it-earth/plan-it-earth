@@ -22,7 +22,12 @@ export default function CreateNote() {
         setFormData(event.target.value);
     };
 
-    const idNum = calendarApi.getEvents().length + 1
+    if (calendarApi) {
+        const idNum = calendarApi.getEvents().length + 1;
+    } else {
+        console.error('Calendar API not found');
+        router.push('/pages/calendar');
+    }
 
     const uploadImage = async (event) => {
         // Upload the image to Firebase storage
