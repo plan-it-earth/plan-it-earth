@@ -54,8 +54,6 @@ export default function CreateNote() {
              Description: ${description.value}` 
         );
 
-        console.log('Image url: ' + imageUrl)
-
         // All day event
         const start = new Date(date.value.replace(/-/g, '\/'));
 
