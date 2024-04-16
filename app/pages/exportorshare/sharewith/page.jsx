@@ -51,18 +51,18 @@ export default function Home() {
     console.log('Downloading PDF for the date range:', selectedDate1, 'to', selectedDate2);
   };
 
-  const handleEmailChange = (e:any) => {
+  const handleEmailChange = (e) => {
     const email = e.target.value;
     setRecipientEmail(email);
   };
 
-  const validateEmail = (e:any) => {
+  const validateEmail = (e) => {
     const email = e.target.value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmailValid(emailRegex.test(email));
   }
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (emailValid) {
       // share calendar with the recipient
