@@ -14,7 +14,9 @@ export default function CreateNote() {
     const [imageUrl, setImageUrl] = useState('');
 
     const [time, setTime] = useState('');
-    const [isValid, setIsValid] = useState(true);
+    const [isTimeValid, setIsTimeValid] = useState(true);
+
+    const [isDateValid, setIsDateValid] = useState(true);
 
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
@@ -63,9 +65,19 @@ export default function CreateNote() {
     const validateTime = () => {
         const [hours, minutes] = time.split(':').map(Number);
         if (hours < 13 && minutes < 60) {
-        setIsValid(true); 
+        setIsTimeValid(true); 
         } else {
-        setIsValid(false); 
+        setIsTimeValid(false); 
+        }
+    }
+
+    const validateDate = () => {
+        var currentDate = new Date();
+        var date = document.getElementById("date");
+        if (date <= currentDate){
+            setIsDateValid(true);
+        } else {
+            setIsDateValid(false);
         }
     }
 
@@ -154,16 +166,23 @@ export default function CreateNote() {
                                 <option value="PM">PM</option>
                             </select>
                         </div>
-                        {isValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
-
+                        {isTimeValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
+                        <div>
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
-                            <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
+                            <select id="alarm" onBlur={validateDate} className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
                                 <option value="-1">none</option>
                                 <option value="5">5 minutes before event</option>
                                 <option value="10">10 minutes before event</option>
                                 <option value="15">15 minutes before event</option>
                                 <option value="60">60 minutes before event</option>
+                                <option value = "1440"> 1 day before event</option>
+                                <option value = "2880"> 2 days before event</option>
+                                <option value = "4320"> 3 days before event</option>
+                                <option value = "5760"> 4 days before event</option>
+                                <option value = "7200"> 5 days before event</option>
                             </select>
+                        </div>
+                        {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
                     </div>
                     <div className="flex flex-col justify-center">
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>
