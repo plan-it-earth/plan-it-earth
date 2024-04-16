@@ -1,0 +1,32 @@
+:root {
+    --fc-border-color: #7C7C7C;
+}
+
+.group-UserEvent {
+    background-color: darkred;
+}
+
+.group-UserEvent:hover {
+    background-color: darkred;
+    opacity: .9;
+}
+
+.group-Assignment {
+    background-color: darkgreen;
+}
+
+.group-Lecture {
+    background-color: blueviolet;
+}
+
+.group-Lecture {
+    background-color: cadetblue;
+}
+
+.group-Lab {
+    background-color: darkorange;
+}
+
+.group-OfficeHours {
+    background-color: blue;
+}
