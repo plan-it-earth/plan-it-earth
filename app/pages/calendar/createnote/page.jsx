@@ -13,6 +13,9 @@ export default function CreateNote() {
     const { userData } = useContext(UserContext);
     const [imageUrl, setImageUrl] = useState('');
 
+    const [time, setTime] = useState('');
+    const [isValid, setIsValid] = useState(true);
+
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
 
@@ -36,6 +39,36 @@ export default function CreateNote() {
         });
     }
 
+
+    const handleTimeChange =(event) => {
+        let inputValue = event.target.value;
+        inputValue = inputValue.replace(/[^0-9:]/g, '');
+
+        if (time.length > inputValue.length && time[time.length - 1] === ':') {
+        inputValue = inputValue.slice(0, -1);  
+        }
+
+        let numericInput = inputValue.replace(/:/g, ''); 
+        if (numericInput.length > 4) {
+        numericInput = numericInput.slice(0, 4); 
+        }
+        if (numericInput.length >= 2) {
+        numericInput = numericInput.slice(0, 2) + ':' + numericInput.slice(2);
+        }
+
+        setTime(numericInput);
+    };
+
+
+    const validateTime = () => {
+        const [hours, minutes] = time.split(':').map(Number);
+        if (hours < 13 && minutes < 60) {
+        setIsValid(true); 
+        } else {
+        setIsValid(false); 
+        }
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         var title = document.getElementById("title");
@@ -45,6 +78,38 @@ export default function CreateNote() {
         var label = document.getElementById("label");
         var description = document.getElementById("description");
 
+        if(time.value) {
+            let start = new Date(date.value + "T" + time.value);
+    
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
+        } else {
+            // All day event
+            let start = new Date(date.value);
+    
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                groupId: label.value,
+                allDay: 'true',
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value
+                },
+            });
+        }
+
         console.log(
             `Title: ${title.value},
              Date: ${date.value},
@@ -53,22 +118,6 @@ export default function CreateNote() {
              Label: ${label.value}, 
              Description: ${description.value}` 
         );
-
-        // All day event
-        const start = new Date(date.value.replace(/-/g, '\/'));
-
-        calendarApi.addEvent({
-            id: calendarApi.getEvents().length + 1,
-            title: title.value,
-            start: start,
-            groupId: label.value,
-            allDay: 'true',
-            extendedProps: {
-                alarm: alarm.value,
-                image: imageUrl,
-                description: description.value
-            },
-        });
         
         // Add event to database
         storeEvents(userData, calendarApi);
@@ -97,8 +146,16 @@ export default function CreateNote() {
                         className="text-white bg-gray-600 mt-1 px-3 py-2 w-full rounded-md focus:outline-none" />
 
                         <label className="block text-sm font-normal mt-3 text-gray-200">From:</label>
-                        <input type="date" id="date" name="date" required value={formData.date} onChange={handleChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md dark focus:outline-none w-full" />
-                                    
+                        <div className="flex flex-row justify-between">
+                            <input type="date" id="date" name="date" required value={formData.date} onChange={handleChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-48 dark focus:outline-none" />
+                            <input type="text" id="time" name="time" value={time} onChange={handleTimeChange} onBlur={validateTime} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-20 text-center focus:outline-none"/>
+                            <select id="am/pm" className="text-white bg-gray-600 mt-1 p-2 rounded-md focus:outline-none">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                        {isValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
+
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
                                 <option value="-1">none</option>

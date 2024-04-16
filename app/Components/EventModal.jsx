@@ -16,7 +16,7 @@ export default function EventModal({ title, label, description, alarm, image, on
                     {alarm && alarm !== "-1" && <p className="mb-1 text-center">Alarm: {alarm} minutes before</p>}
                     {image && (
                         <div className="flex mt-4 justify-center">
-                            <Image src={image} alt="Event image" height={100} width={100} className="rounded-md"/>
+                            <Image src={image} alt="Event image" height={500} width={500} className="rounded-md"/>
                         </div>
                     )}
                 </div>
