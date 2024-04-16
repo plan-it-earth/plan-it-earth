@@ -9,12 +9,12 @@ export default function Search() {
     const [searchInput, setSearchInput] = useState('');
     const router = useRouter();
 
-    const handleSubmit = (event:any) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        router.push(`/pages/search?search=${encodeURIComponent(searchInput)}`);
+        router.push(`/pages/search?query=${encodeURIComponent(searchInput)}`);
     };
 
-    const handleInputChange = (event:any) => {
+    const handleInputChange = (event) => {
         setSearchInput(event.target.value);
     };
 
@@ -23,7 +23,7 @@ export default function Search() {
             <button type="submit" className="border-none bg-none">
                 <Image src={search} alt='Search' height={18} width={18} className="h-4 w-4 ml-2 cursor-pointer md:ml-3"/>
             </button>
-            <input onChange={handleInputChange} type='text' placeholder="Search your notes" className="w-full text-black placeholder-gray-600 text-xs outline-none border-none md:text-sm"/>
+            <input type='text' placeholder="Search your notes" className="w-full text-black placeholder-gray-600 text-xs outline-none border-none md:text-sm"/>
         </form>
     )
 }

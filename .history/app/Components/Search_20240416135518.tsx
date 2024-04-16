@@ -11,7 +11,7 @@ export default function Search() {
 
     const handleSubmit = (event:any) => {
         event.preventDefault();
-        router.push(`/pages/search?search=${encodeURIComponent(searchInput)}`);
+        router.push(`/pages/search?query=${encodeURIComponent(searchInput)}`);
     };
 
     const handleInputChange = (event:any) => {
