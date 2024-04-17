@@ -4,7 +4,7 @@ import Header from '../../../Components/Header';
 import Image from 'next/image';
 import Exportorshareicon from '../../../Images/exportorshareicon.png';
 import UserContext from '../../../lib/firebase/UserContext';
-import { doc } from 'firebase/firestore';
+import { doc, where, collection, query, setDoc, getDocs } from 'firebase/firestore';
 import { db } from '@/firebaseConfig';
 
 export default function Home() {
@@ -33,12 +33,32 @@ export default function Home() {
     setEmailValid(emailRegex.test(email));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (emailValid) {
-      // share calendar with the recipient
-      const uid = userData.uid;
-      const docRef = doc(db, "users", uid);
+      // Get recipient's uid
+      let recipientUid = null;
+      const q = query(collection(db, "users"), where("email", "==", recipientEmail));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        recipientUid = doc.id;
+      });
+
+      // Check if recipient exists
+      if(!recipientUid) {
+        console.log("Recipient not found");
+        return;
+      }
+
+      // Add the shared calendar to the recipient's sharedCalendars
+      const currUserUID = userData.uid;
+      const currUserEmail = userData.email;
+      const docRef = doc(db, "users", recipientUid, "sharedCalendars", currUserEmail);
+      await setDoc(docRef, {
+        startDate: startDate,
+        endDate: endDate,
+        uid: currUserUID
+      });
     }
   }
 
