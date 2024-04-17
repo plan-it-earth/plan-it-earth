@@ -4,7 +4,7 @@ import Header from '../../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-const ViewShared = () => {
+export default function ViewShared() {
   // Sample array of shared calendars (replace with actual data)
   const sharedCalendars = [
     { id: 1, email: 'user1@example.com', calendarData: {} },
@@ -62,7 +62,6 @@ const ViewShared = () => {
   );
 };
 
-export default ViewShared;
 
 //This is old code of typing an email in and viewing the calendar they shared incase we need it again.
 
