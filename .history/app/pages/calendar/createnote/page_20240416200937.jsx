@@ -71,16 +71,14 @@ export default function CreateNote() {
         }
     }
 
-    const handleDateChange = (event) => {
-        const { name, value } = event.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-        validateDate(value);
-    };
-
-    const validateDate = (inputDate) => {
-        const input = new Date(inputDate);
-        const currentDate = new Date();
-        setIsDateValid(input >= currentDate);
+    const validateDate = () => {
+        var currentDate = new Date();
+        var date = document.getElementById("date");
+        if (date <= currentDate){
+            setIsDateValid(true);
+        } else {
+            setIsDateValid(false);
+        }
     }
 
     const handleSubmit = (event) => {
@@ -161,7 +159,7 @@ export default function CreateNote() {
 
                         <label className="block text-sm font-normal mt-3 text-gray-200">From:</label>
                         <div className="flex flex-row justify-between">
-                            <input type="date" id="date" name="date" required value={formData.date} onChange={handleDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-48 dark focus:outline-none" />
+                            <input type="date" id="date" name="date" required value={formData.date} onChange={handleChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-48 dark focus:outline-none" />
                             <input type="text" id="time" name="time" value={time} onChange={handleTimeChange} onBlur={validateTime} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-20 text-center focus:outline-none"/>
                             <select id="am/pm" className="text-white bg-gray-600 mt-1 p-2 rounded-md focus:outline-none">
                                 <option value="AM">AM</option>
@@ -169,10 +167,9 @@ export default function CreateNote() {
                             </select>
                         </div>
                         {isTimeValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
-                        {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}
                         <div>
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
-                            <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
+                            <select id="alarm" onBlur={validateDate} className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
                                 <option value="-1">none</option>
                                 <option value="5">5 minutes before event</option>
                                 <option value="10">10 minutes before event</option>
@@ -185,6 +182,7 @@ export default function CreateNote() {
                                 <option value = "7200"> 5 days before event</option>
                             </select>
                         </div>
+                        {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}
                     </div>
                     <div className="flex flex-col justify-center">
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>

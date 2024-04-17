@@ -169,7 +169,6 @@ export default function CreateNote() {
                             </select>
                         </div>
                         {isTimeValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
-                        {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}
                         <div>
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
                             <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
@@ -185,6 +184,7 @@ export default function CreateNote() {
                                 <option value = "7200"> 5 days before event</option>
                             </select>
                         </div>
+                        {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}
                     </div>
                     <div className="flex flex-col justify-center">
                         <label className="block text-sm font-normal text-gray-200">Select Image:</label>
