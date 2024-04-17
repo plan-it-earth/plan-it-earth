@@ -4,6 +4,7 @@ import Header from '../../../Components/Header';
 import Image from 'next/image';
 import Exportorshareicon from '../../../Images/exportorshareicon.png';
 import UserContext from '../../../lib/firebase/UserContext';
+import { useRouter} from 'next/navigation';
 import { doc, where, collection, query, setDoc, getDocs } from 'firebase/firestore';
 import { db } from '@/firebaseConfig';
 
@@ -13,6 +14,7 @@ export default function Home() {
   const [recipientEmail, setRecipientEmail ] = useState('');
   const [emailValid, setEmailValid] = useState(true);
   const { userData } = useContext(UserContext);
+  const router = useRouter();
 
   const handleStartDateClick = (date) => {
     setStartDate(date.target.value);
@@ -47,6 +49,7 @@ export default function Home() {
       // Check if recipient exists
       if(!recipientUid) {
         console.log("Recipient not found");
+        router.push('/pages/calendar')
         return;
       }
 
@@ -59,6 +62,8 @@ export default function Home() {
         endDate: endDate,
         uid: currUserUID
       });
+
+      router.push('/pages/calendar')
     }
   }
 
