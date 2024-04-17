@@ -20,6 +20,9 @@ event {
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export const exportEventArray = async (eventsArray) => {
+    // Sort eventsArray by start date
+    eventsArray.sort((a, b) => a.start - b.start);
+
     let docDefinition = {
         content: [],
         defaultStyle: {
