@@ -92,7 +92,7 @@ export default function Calendar() {
                                 const events = await fetchEvents(userData);
                                 console.log(events);
                                 if (events) {
-                                    successCallback(JSON.parse(events));
+                                    successCallback(events);
                                 } else {
                                     failureCallback();
                                 }
