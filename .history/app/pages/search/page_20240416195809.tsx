@@ -45,22 +45,6 @@ export default function Search () {
     };
 
     useEffect(() => {
-        // get current date
-        const today = new Date();
-        const month = today.getMonth() + 1;
-        const day = today.getDate();
-        const year = today.getFullYear();
-        
-        // set start date to 5 years ago
-        const fiveYearsAgo = new Date(year - 5, month, day);
-        setStartDate(fiveYearsAgo.toISOString().slice(0, 10));
-
-        // set end date to 5 years from now
-        const fiveYearsFromNow = new Date(year + 5, month, day);
-        setEndDate(fiveYearsFromNow.toISOString().slice(0, 10));
-    }, []);
-
-    useEffect(() => {
         const loadEvents = async () => {
 
             if (!userData) {
@@ -68,15 +52,33 @@ export default function Search () {
                 return;
             }
 
+            // get current date
+            const today = new Date();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            const year = today.getFullYear();
+            
+            // set start date to 5 years ago
+            const fiveYearsAgo = new Date(year - 5, month, day);
+            setStartDate(fiveYearsAgo.toISOString().slice(0, 10));
+
+            // set end date to 5 years from now
+            const fiveYearsFromNow = new Date(year + 5, month, day);
+            setEndDate(fiveYearsFromNow.toISOString().slice(0, 10));
+
             let fetchedEvents = await fetchEvents(userData);
             fetchedEvents = JSON.parse(fetchedEvents);
 
-            let title = searchParams.get('search') || '';
-            const filteredEvents = (fetchedEvents as Event[]).filter((event) => {
-                const eventDate = new Date(event.start).toISOString().slice(0, 10);
-                return (!startDate || eventDate >= startDate) && (!endDate || eventDate <= endDate) && event.title.toLowerCase().includes(title.toLowerCase());
-            });
-            setEvents(filteredEvents);    
+            if (Array.isArray(fetchEvents) && fetchEvents.length > 0) {
+                let title = searchParams.get('search') || '';
+                const filteredEvents = (fetchedEvents as Event[]).filter((event) => {
+                    const eventDate = new Date(event.start).toISOString().slice(0, 10);
+                    return (!startDate || eventDate >= startDate) && (!endDate || eventDate <= endDate) && event.title.toLowerCase().includes(title.toLowerCase());
+                });
+                setEvents(filteredEvents);
+            } else {
+                setEvents([]);
+            }
             setLoading(false);
         };
         loadEvents();
@@ -92,7 +94,7 @@ export default function Search () {
     return (
         <div className="flex flex-col bg-[#16141C]">
             <Header />
-            <h1 className="text-center text-2xl font-medium mt-16">Search</h1>
+            <h1 className="text-center text-2xl font-medium mt-16">Search Results</h1>
             <div className="flex flex-col justify-center mx-auto mt-16">
                 <h3 className="text-xl font-normal mb-4 text-center">Select start and end date</h3>
                 <div className="flex flex-row gap-2">

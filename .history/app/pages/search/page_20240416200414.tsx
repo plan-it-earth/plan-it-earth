@@ -92,7 +92,7 @@ export default function Search () {
     return (
         <div className="flex flex-col bg-[#16141C]">
             <Header />
-            <h1 className="text-center text-2xl font-medium mt-16">Search</h1>
+            <h1 className="text-center text-2xl font-medium mt-16">Search Results</h1>
             <div className="flex flex-col justify-center mx-auto mt-16">
                 <h3 className="text-xl font-normal mb-4 text-center">Select start and end date</h3>
                 <div className="flex flex-row gap-2">
@@ -108,6 +108,7 @@ export default function Search () {
             </div>
             {events.length > 0 ? (
                 <div>
+                    <h1>Search Results</h1>
                     <ul className="flex flex-col mt-6 items-center px-6 py-6 w-fit mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
                         {events.map((event: Event) => (
                             <li key={event.id}>{event.title} @ {event.start}</li>

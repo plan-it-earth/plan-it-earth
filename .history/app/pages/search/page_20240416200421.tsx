@@ -108,6 +108,7 @@ export default function Search () {
             </div>
             {events.length > 0 ? (
                 <div>
+                    <h1>Search Results</h1>
                     <ul className="flex flex-col mt-6 items-center px-6 py-6 w-fit mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
                         {events.map((event: Event) => (
                             <li key={event.id}>{event.title} @ {event.start}</li>

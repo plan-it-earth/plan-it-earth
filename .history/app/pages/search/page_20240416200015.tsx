@@ -76,7 +76,8 @@ export default function Search () {
                 const eventDate = new Date(event.start).toISOString().slice(0, 10);
                 return (!startDate || eventDate >= startDate) && (!endDate || eventDate <= endDate) && event.title.toLowerCase().includes(title.toLowerCase());
             });
-            setEvents(filteredEvents);    
+            setEvents(filteredEvents);
+         
             setLoading(false);
         };
         loadEvents();
@@ -92,7 +93,7 @@ export default function Search () {
     return (
         <div className="flex flex-col bg-[#16141C]">
             <Header />
-            <h1 className="text-center text-2xl font-medium mt-16">Search</h1>
+            <h1 className="text-center text-2xl font-medium mt-16">Search Results</h1>
             <div className="flex flex-col justify-center mx-auto mt-16">
                 <h3 className="text-xl font-normal mb-4 text-center">Select start and end date</h3>
                 <div className="flex flex-row gap-2">
