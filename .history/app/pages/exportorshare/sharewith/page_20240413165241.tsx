@@ -9,8 +9,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import iCalendarPlugin from '@fullcalendar/icalendar';
 import UserContext from '../../../lib/firebase/UserContext';
-import { useCalendarApi } from '../../../lib/Context/CalendarProvider';
-import { exportEventArray } from '../../../lib/exportEventArray';
+import { FaPlus } from 'react-icons/fa';
 
 export default function Home() {
   const calendarRef1 = useRef(null);
@@ -19,7 +18,7 @@ export default function Home() {
   const [isCalendarOpen2, setIsCalendarOpen2] = useState(false);
   const [selectedDate1, setSelectedDate1] = useState(null);
   const [selectedDate2, setSelectedDate2] = useState(null);
-  const { calendarApi } = useCalendarApi();
+  const [recipientEmail, setRecipientEmail ] = useState('');
 
   const handleDateClick1 = (date) => {
     setSelectedDate1(date);
@@ -30,6 +29,14 @@ export default function Home() {
     setSelectedDate2(date);
     setIsCalendarOpen2(false); // Close the calendar dropdown after selecting a date
   };
+
+  const handleEmailChange = (e) =>{
+    setRecipientEmail(e.target.value);
+  }
+
+  const handleDownlaodTXT = () => {
+    console.log('Sharing TXT for the date range:', selectedDate1, 'to', selectedDate2, 'for', recipientEmail);
+  }
   
   
 
@@ -39,24 +46,34 @@ export default function Home() {
     // You can use selectedDate1 and selectedDate2 to generate the PDF between the selected dates
     // For demonstration purpose, let's just console log a message
     console.log('Downloading PDF for the date range:', selectedDate1, 'to', selectedDate2);
-
-    const eventsArray = calendarApi.getEvents();
-    
-    // Filter events between selectedDate1 and selectedDate2
-    const filteredEvents = eventsArray.filter((event) => {
-      return event.start >= selectedDate1 && event.start <= selectedDate2;
-    });
-
-    exportEventArray(filteredEvents);
   };
 
   return (
     <div className="bg-[#16141C] min-h-screen">
       <Header />
       <Image src={Exportorshareicon} alt="export share logo" height={100} width={100} className="mx-auto mb-6 mt-16" />
-      <h2 className="flex flex-col items-center justify-center text-2xl font-semibold mb-6 mt-16">Pick a date range to export</h2>
+      <h2 className="flex flex-col items-center justify-center text-2xl font-semibold mb-6">Pick a date range to share</h2>
+      <div>
+
+      </div>
+     {/*
+      
       <div className="max-w-md mx-auto mt-16">
-        {/* First Dropdown and Calendar */}
+  
+        
+        <div className="mb-8 bg-[#1A1926] rounded-lg shadow-md">
+          <div className="p-8">
+            <input
+              type="email"
+              placeholder="Enter recipient's email"
+              value={recipientEmail}
+              onChange={handleEmailChange}
+              className="block w-full text-sm font-medium text-gray-700 bg-transparent border-b border-gray-500 focus:outline-none focus:border-blue-500"
+            />
+          </div>
+        </div>
+  
+        
         <div className="mb-8 bg-[#1A1926] rounded-lg shadow-md">
           <div className="p-8">
             <button
@@ -71,22 +88,12 @@ export default function Home() {
           </div>
           {isCalendarOpen1 && (
             <div className="bg-black border rounded-lg shadow-md">
-             <FullCalendar
-                ref={calendarRef1}
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}
-                initialView="dayGridMonth"
-                editable={true}
-                selectable={true}
-                selectMirror={true}
-                dayMaxEvents={true}
-                weekends={true}
-                dateClick={(dateInfo) => handleDateClick1(dateInfo.date)}
-            />
+             
             </div>
           )}
         </div>
-
-        {/* Second Dropdown and Calendar */}
+  
+       
         <div className="mb-8 bg-[#1A1926] rounded-lg shadow-md">
           <div className="p-8">
             <button
@@ -101,28 +108,21 @@ export default function Home() {
           </div>
           {isCalendarOpen2 && (
             <div className="bg-black border rounded-lg shadow-md">
-             <FullCalendar
-              ref={calendarRef2}
-              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin]}
-              initialView="dayGridMonth"
-              editable={true}
-              selectable={true}
-              selectMirror={true}
-              dayMaxEvents={true}
-              weekends={true}
-              dateClick={(dateInfo) => handleDateClick2(dateInfo.date)}
-            />
+              
             </div>
           )}
         </div>
-
-        {/* Download PDF Button */}
-        <div className="flex text-center">
-          <button onClick={handleDownloadPDF} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded">
-            Download PDF File
+  
+        
+        <div className="text-center">
+          <button onClick={handleDownloadPDF} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Share Text File
           </button>
         </div>
+        
       </div>
+      */}
     </div>
   );
+  
 }
