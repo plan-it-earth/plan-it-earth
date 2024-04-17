@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/pages/calendar/page.jsx", "app/pages/calendar/createnote/page.jsx", "app/pages/exportorshare/viewshared/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/pages/calendar/page.jsx", "app/pages/calendar/createnote/page.jsx", "app/Components/CustomTooltip.jsx", "app/pages/exportorshare/sharewith/page.jsx", "app/pages/exportorshare/viewshared/page.jsx"],
   "exclude": ["node_modules"]
 }

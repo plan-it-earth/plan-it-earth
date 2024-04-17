@@ -5,6 +5,7 @@ import { onAuthStateChanged, User as firebaseUser } from 'firebase/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { doc, onSnapshot } from 'firebase/firestore';
 import UserContext from './UserContext';
+import { CalendarProvider } from '../Context/CalendarProvider';
 
 export interface UserData {
     email: string;
@@ -47,7 +48,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }, []);
     return (
         <UserContext.Provider value={userData}>
-            {children}
+            <CalendarProvider>
+                {children}
+            </CalendarProvider>
         </UserContext.Provider>
     )
 }
