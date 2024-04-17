@@ -44,10 +44,7 @@ export default function Calendar() {
     }, [router, userData]);
 
     const handleDateClick = () => {
-        console.log('date clicked');
-
-        // print events to console
-        console.log(calendarRef.current.getApi().getEvents());
+        // If we want to add functionality to click on a date, we can add it here
     }
 
     const handleEventClick = (eventInfo) => {
@@ -90,7 +87,6 @@ export default function Calendar() {
                         {
                             events: async (fetchInfo, successCallback, failureCallback) => {
                                 const events = await fetchEvents(userData);
-                                console.log(events);
                                 if (events) {
                                     successCallback(events);
                                 } else {
