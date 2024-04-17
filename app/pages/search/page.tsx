@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, Suspense } from 'react';
 import Header from '../../Components/Header';
 import UserContext from '../../lib/firebase/UserContext';
 import { db }  from '../../../firebaseConfig';
@@ -21,6 +21,14 @@ interface Event {
 }
 
 export default function Search () {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <SearchComponent />
+        </Suspense>
+    );
+}
+
+function SearchComponent() {
     const [events, setEvents] = useState<Event[]>([]);
     const [loading, setLoading] = useState(true);
     const { userData } = useContext(UserContext);
