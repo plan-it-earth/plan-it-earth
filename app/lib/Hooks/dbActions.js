@@ -27,7 +27,7 @@ export const storeEvents = async (userData, calendarApi) => {
 
 // Returns an array of the users events using the Event object structure
 // event {
-//     id               // Unique Identifier, doesnt need to be printed
+//     id               // Unique Identifier
 //     title            // Title of the event
 //     start            // Date and time of the event given in Javascripts Date() object
 //     groupId          // A label of the type of activity it is
