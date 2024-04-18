@@ -16,7 +16,6 @@ export default function CreateNote() {
     const [time, setTime] = useState('');
 
     const [isDateValid, setIsDateValid] = useState(true);
-    const [isAlarmValid, setIsAlarmValid] = useState(true);
 
     const router = useRouter();
     const { calendarApi } = useCalendarApi();
@@ -45,12 +44,12 @@ export default function CreateNote() {
     const handleTimeChange =(event) => {
         setFormData(prev => ({ ...prev, time: event.target.value }));
         setTime(event.target.value);
-        setIsAlarmValid(true);
     };
 
     const handleDateChange = (event) => {
         const { name, value } = event.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+        validateDate(value);
     };
 
     const validateDate = (inputDate) => {
@@ -58,12 +57,6 @@ export default function CreateNote() {
         const currentDate = new Date();
         setIsDateValid(input >= currentDate);
     };
-
-    const validateAlarm = (event) => {
-        if (time === '') {
-            setIsAlarmValid(false);
-        }
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -154,7 +147,7 @@ export default function CreateNote() {
                         {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}
                         <div>
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
-                            <select id="alarm" onChange={validateAlarm} className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
+                            <select id="alarm" className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
                                 <option value="-1">none</option>
                                 <option value="5">5 minutes before event</option>
                                 <option value="10">10 minutes before event</option>
@@ -166,7 +159,6 @@ export default function CreateNote() {
                                 <option value = "5760"> 4 days before event</option>
                                 <option value = "7200"> 5 days before event</option>
                             </select>
-                            {isAlarmValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid alarm: add time</p>}
                         </div>
                     </div>
                     <div className="flex flex-col justify-center">

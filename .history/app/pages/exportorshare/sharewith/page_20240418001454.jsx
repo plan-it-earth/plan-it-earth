@@ -73,7 +73,7 @@ export default function Home() {
       <Header />
       <Image src={Exportorshareicon} alt="export share logo" height={100} width={100} className="mx-auto mb-6 mt-16" />
       <h2 className="flex flex-col items-center justify-center text-2xl font-semibold mb-6">Pick a date range to share</h2>
-      <form onSubmit={handleSubmit} className="px-2">
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 max-w-md pt-8 px-10 border border-white bg-[#1A1926] rounded-md justify-center mx-auto">
           <div className="flex flex-col w-full gap-2">
             <label>Share with:</label>

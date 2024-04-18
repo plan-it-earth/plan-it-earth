@@ -45,12 +45,13 @@ export default function CreateNote() {
     const handleTimeChange =(event) => {
         setFormData(prev => ({ ...prev, time: event.target.value }));
         setTime(event.target.value);
-        setIsAlarmValid(true);
+        validateAlarm(event);
     };
 
     const handleDateChange = (event) => {
         const { name, value } = event.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+        setIsAlarmValid(true);
     };
 
     const validateDate = (inputDate) => {

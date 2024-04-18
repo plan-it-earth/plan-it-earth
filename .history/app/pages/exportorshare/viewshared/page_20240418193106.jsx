@@ -61,7 +61,7 @@ export default function ViewShared() {
     <div className="bg-[#16141C] min-h-screen">
       <Header />
       <div className="max-w-md mx-auto px-2 mt-16">
-        <h2 className="flex flex-col text-center items-center justify-center text-2xl font-semibold mb-6 mt-16">
+        <h2 className="flex flex-col items-center justify-center text-2xl font-semibold mb-6 mt-16">
           Select a shared calendar to view
         </h2>
         <div className="mb-8 bg-[#1A1926] rounded-lg shadow-md">

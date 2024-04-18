@@ -44,7 +44,7 @@ export default function Header() {
             <Image onClick={routeToCalendar} src={logo} alt="Plan-It-Earth" height={50} width={50} className="h-30 w-30 mt-1 cursor-pointer hover:opacity-85 md:h-35 md:h-35"/>
             <div className="hidden w-24 lg:block"></div>
             <Search />
-            <div className="flex flex-row h-full items-center space-x-2 md:gap-20">
+            <div className="flex flex-row h-full items-center space-x-5 md:gap-20">
                 <Image onClick={routeToAlarm} src={alarm} alt="Alarm" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
                 <Image onClick={routeToExportOrShare} src={share} alt="Share" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
                 <button onClick={() => logOut()} className="px-3 py-2 rounded-md text-xs font-medium bg-[#E53265] outline-none border-none shadow hover:brightness-110 md:px-5 md:py-2 md:text-sm">Sign out</button>

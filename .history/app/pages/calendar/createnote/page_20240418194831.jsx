@@ -45,12 +45,12 @@ export default function CreateNote() {
     const handleTimeChange =(event) => {
         setFormData(prev => ({ ...prev, time: event.target.value }));
         setTime(event.target.value);
-        setIsAlarmValid(true);
     };
 
     const handleDateChange = (event) => {
         const { name, value } = event.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+        validateDate(value);
     };
 
     const validateDate = (inputDate) => {
@@ -166,7 +166,6 @@ export default function CreateNote() {
                                 <option value = "5760"> 4 days before event</option>
                                 <option value = "7200"> 5 days before event</option>
                             </select>
-                            {isAlarmValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid alarm: add time</p>}
                         </div>
                     </div>
                     <div className="flex flex-col justify-center">
