@@ -27,7 +27,7 @@ export const storeEvents = async (userData, calendarApi) => {
 
 // Returns an array of the users events using the Event object structure
 // event {
-//     id               // Unique Identifier, doesnt need to be printed
+//     id               // Unique Identifier
 //     title            // Title of the event
 //     start            // Date and time of the event given in Javascripts Date() object
 //     groupId          // A label of the type of activity it is
@@ -44,6 +44,19 @@ export const fetchEvents = async (userData) => {
     }
 
     const uid = userData.uid;
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+        // Convert the json string to an array of events
+        return JSON.parse(docSnap.data().events);
+    } else {
+        console.log("No such document!");
+        return null;
+    }
+};
+
+export const fetchEventsByID = async (uid) => {
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
     
