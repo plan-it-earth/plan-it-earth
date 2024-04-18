@@ -25,9 +25,9 @@ const AlarmRow: React.FC<AlarmRowProps> = ({ title, time, alarm, id }) => {
     
     return (
         <div className="flex flex-row gap-4 text-xs sm:text-sm text-center w-full justify-around text-[#A7A7A7] items-center">
-            <p className="flex w-40 lg:w-52 lg:ml-4 justify-center text-center">{title}</p>
-            <p className="flex w-40 lg:w-52 lg:ml-14 text-center">{time}</p>
-            <select id="alarm" defaultValue={alarm} value={alarmValue} onChange={changeAlarm} className="flex w-28 md:w-40 lg:w-56 mr-4 text-center bg-[#35334D] rounded-md shadow-md h-10 px-2 focus:outline-none">
+            <p className="flex w-40 justify-center text-center">{title}</p>
+            <p className="flex w-40 text-center">{time}</p>
+            <select id="alarm" defaultValue={alarm} value={alarmValue} onChange={changeAlarm} className="flex w-28 text-center bg-[#35334D] rounded-md shadow-md h-10 px-2 focus:outline-none">
                 <option value="-1">none</option>
                 <option value="5">5 minutes</option>
                 <option value="10">10 minutes</option>

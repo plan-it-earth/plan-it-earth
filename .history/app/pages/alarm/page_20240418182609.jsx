@@ -53,9 +53,9 @@ export default function Alarm() {
                     <h1>Time</h1>
                     <h1>Alarm</h1>
                 </div>
-                <div className="flex flex-col w-full gap-6 mt-6">
+                <div className="flex flex-col w-full gap-6 mt-6 px-4">
                     {events.length > 0 ? (
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-6 px-4">
                             {events.map(event => (
                                 <AlarmRow key={event.id} title={event.title} time={formatDate(event.start)} alarm={event.extendedProps.alarm} id={event.id} />
                             ))}
