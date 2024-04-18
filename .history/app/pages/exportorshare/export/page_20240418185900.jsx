@@ -55,7 +55,7 @@ export default function Home() {
       <Header />
       <Image src={Exportorshareicon} alt="export share logo" height={100} width={100} className="mx-auto mb-6 mt-16" />
       <h2 className="flex flex-col items-center justify-center text-2xl font-semibold mb-6 mt-16">Pick a date range to export</h2>
-      <div className="max-w-md mx-auto mt-16 px-2">
+      <div className="max-w-md mx-auto mt-16 px-4">
         {/* First Dropdown and Calendar */}
         <div className="mb-8 bg-[#1A1926] rounded-lg shadow-md">
           <div className="p-8">

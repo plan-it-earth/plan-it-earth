@@ -14,6 +14,7 @@ export default function CreateNote() {
     const [imageUrl, setImageUrl] = useState('');
 
     const [time, setTime] = useState('');
+    const [isTimeValid, setIsTimeValid] = useState(true);
 
     const [isDateValid, setIsDateValid] = useState(true);
 
@@ -42,9 +43,18 @@ export default function CreateNote() {
 
 
     const handleTimeChange =(event) => {
-        setFormData(prev => ({ ...prev, time: event.target.value }));
         setTime(event.target.value);
     };
+
+
+    const validateTime = () => {
+        const [hours, minutes] = time.split(':').map(Number);
+        if (hours < 13 && minutes < 60) {
+        setIsTimeValid(true); 
+        } else {
+        setIsTimeValid(false); 
+        }
+    }
 
     const handleDateChange = (event) => {
         const { name, value } = event.target;
@@ -56,7 +66,7 @@ export default function CreateNote() {
         const input = new Date(inputDate);
         const currentDate = new Date();
         setIsDateValid(input >= currentDate);
-    };
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -120,7 +130,7 @@ export default function CreateNote() {
         <div className="bg-[#16141C] min-h-screen ">
             <Header />
             <h2 className="flex items-center justify-center text-2xl font-medium mt-16">Create Note</h2>
-            <div className="max-w-md mx-2 sm:mx-auto mt-10 p-8 bg-[#1A1926] rounded-lg shadow-md border border-white">
+            <div className="max-w-md mx-auto mt-10 p-8 bg-[#1A1926] rounded-lg shadow-md border border-white">
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                     <div>
 
