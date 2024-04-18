@@ -60,7 +60,8 @@ export default function Home() {
       await setDoc(docRef, {
         startDate: startDate,
         endDate: endDate,
-        uid: currUserUID
+        uid: currUserUID,
+        email: currUserEmail
       });
 
       router.push('/pages/calendar')
