@@ -17,8 +17,20 @@ const AlarmRow: React.FC<AlarmRowProps> = ({ title, time, alarm, id }) => {
         // Update the alarm value in the database
     };
 
-    console.log(time);
+    const [isDateValid, setIsDateValid] = useState(true);
 
+
+    /*
+    const validateDate = () => {
+        var currentDate = new Date();
+        //var date = event.date.value
+        if (date <= currentDate){
+            setIsDateValid(true);
+        } else {
+            setIsDateValid(false);
+        }
+    }
+    */
     
     return (
         <div className="flex row w-full ml-4 justify-around text-[#A7A7A7] items-center">

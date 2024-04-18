@@ -17,8 +17,6 @@ const AlarmRow: React.FC<AlarmRowProps> = ({ title, time, alarm, id }) => {
         // Update the alarm value in the database
     };
 
-    console.log(time);
-
     
     return (
         <div className="flex row w-full ml-4 justify-around text-[#A7A7A7] items-center">
