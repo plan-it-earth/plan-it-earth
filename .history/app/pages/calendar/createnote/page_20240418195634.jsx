@@ -90,7 +90,7 @@ export default function CreateNote() {
             });
         } else {
             // All day event
-            let start = new Date(date.value.replace(/-/g, '\/'));
+            let start = new Date(date.value);
     
             calendarApi.addEvent({
                 id: calendarApi.getEvents().length + 1,
