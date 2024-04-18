@@ -1,19 +1,38 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import Header from '../../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import UserContext from '../../../lib/firebase/UserContext';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '@/firebaseConfig';
 
 export default function ViewShared() {
-  // Sample array of shared calendars (replace with actual data)
-  const sharedCalendars = [
-    { id: 1, email: 'user1@example.com', calendarData: {} },
-    { id: 2, email: 'user2@example.com', calendarData: {} },
-    { id: 3, email: 'user3@example.com', calendarData: {} },
-  ];0
-
+  const { userData } = useContext(UserContext);
   const [selectedEmail, setSelectedEmail] = useState('');
   const [selectedCalendarData, setSelectedCalendarData] = useState(null);
+  const [sharedCalendars, setSharedCalendars] = useState([]);
+  
+  // Returns an array of strings consisting of emails 
+  // that have shared their calendar with the current user
+  const getSharedCalendars = useCallback(async () => {
+    const sharedCalendars = [];
+    const uid = userData.uid;
+    const q = collection(db, "users", uid, "sharedCalendars");
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      sharedCalendars.push({
+        email: data.email,
+      });
+    });
+
+    return sharedCalendars;
+  }, [userData]);
+
+  useEffect(() => {
+    getSharedCalendars().then(calendars => setSharedCalendars(calendars));
+  }, [getSharedCalendars]);
 
   const handleSelectChange = (e) => {
     const selectedEmail = e.target.value;
