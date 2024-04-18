@@ -55,3 +55,16 @@ export const fetchEvents = async (userData) => {
         return null;
     }
 };
+
+export const fetchEventsByID = async (uid) => {
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+        // Convert the json string to an array of events
+        return JSON.parse(docSnap.data().events);
+    } else {
+        console.log("No such document!");
+        return null;
+    }
+};
