@@ -4,8 +4,9 @@ import Header from '../../../Components/Header';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import UserContext from '../../../lib/firebase/UserContext';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from '@/firebaseConfig';
+import { fetchEventsByID } from '@/app/lib/Hooks/dbActions';
 
 export default function ViewShared() {
   const { userData } = useContext(UserContext);
@@ -34,12 +35,26 @@ export default function ViewShared() {
     getSharedCalendars().then(calendars => setSharedCalendars(calendars));
   }, [getSharedCalendars]);
 
-  const handleSelectChange = (e) => {
+  // TODO: Fetch the calendar data for the selected email, current solution (The lines using selectedCalendar)
+  //       is not the best. Using the given uid, use the fetchEventsByID function to get the calendar data
+  //       and set it to selectedCalendarData
+  const handleSelectChange = async (e) => {
     const selectedEmail = e.target.value;
-    const selectedCalendar = sharedCalendars.find(calendar => calendar.email === selectedEmail);
     setSelectedEmail(selectedEmail);
-    setSelectedCalendarData(selectedCalendar ? selectedCalendar.calendarData : null);
-    console.log(`Selected email changed to: ${selectedEmail}`);
+
+    // Fetch the calendar data for the selected email
+    const uid = userData.uid;
+    const docRef = doc(db, "users", uid, "sharedCalendars", selectedEmail);
+    const docSnap = await getDoc(docRef);
+    if(!docSnap.exists()) {
+      console.log("Failed to retrieve shared calendar data");
+      return;
+    }
+    const sharedUID = docSnap.data().uid;
+    const selectedCalendar = await fetchEventsByID(sharedUID);
+
+    // Set the selected calendar data
+    setSelectedCalendarData(selectedCalendar);
   };
 
   return (
@@ -71,7 +86,7 @@ export default function ViewShared() {
               <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
-                events={selectedCalendarData.events}
+                events={selectedCalendarData}
               />
             </div>
           </div>
