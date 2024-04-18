@@ -81,7 +81,7 @@ export const exportEventArray = async (eventsArray) => {
                     reader.readAsDataURL(blob);
                     reader.onloadend = () => {
                         const base64String = reader.result;
-                        eventContent.push({ image: base64String, width: 250, style: 'image'});
+                        eventContent.push({ image: base64String, width: 500, style: 'image'});
                         resolve();
                     };
                     reader.onerror = reject;

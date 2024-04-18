@@ -15,10 +15,10 @@ interface Event {
     title: string;
     start: string;
     groupId?: string;
-    extendedProps: {
-        alarm: string;
-        image: string;
-        description: string;
+    extependedProps?: {
+        alarm?: string;
+        image?: string;
+        description?: string;
     };
 }
 
@@ -124,8 +124,8 @@ function SearchComponent() {
                 <div>
                     <ul className="flex flex-col mt-6 items-center px-6 py-6 w-fit mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
                         {events.map((event: Event) => (
-                            <li className="flex items-center gap-4" key={event.id}>{event.title} @ {event.start}
-                                {event.extendedProps.image && <Image src={event.extendedProps.image} alt="image" height={50} width={50} />}
+                            <li key={event.id}>{event.title} @ {event.start}
+                                {event.extependedProps.image !== null && <Image src={event.image} alt="image" height={50} width={50} />}
                             </li>
                         ))}
                     </ul>

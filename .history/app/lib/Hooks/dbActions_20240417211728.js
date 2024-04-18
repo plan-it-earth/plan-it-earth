@@ -55,19 +55,3 @@ export const fetchEvents = async (userData) => {
         return null;
     }
 };
-
-export const deleteEvent = async (id, userData) => {
-    const uid = userData.uid;
-    const docRef = doc(db, "users", uid);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        let events = JSON.parse(docSnap.data().events);
-        events = events.filter(event => event.id !== id);
-        await updateDoc(docRef, {
-            events: JSON.stringify(events)
-        });
-    } else {
-        console.log("No such document!");
-    }
-}

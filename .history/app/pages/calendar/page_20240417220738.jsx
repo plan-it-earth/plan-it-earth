@@ -49,14 +49,13 @@ export default function Calendar() {
 
     const handleEventClick = (eventInfo) => {
         const id = eventInfo.event.id;
-        const groupId = eventInfo.event.groupId;
         const title = eventInfo.event._def.title;
         const label = eventInfo.event._def.extendedProps.label;
         const description = eventInfo.event._def.extendedProps.description;
         const alarm = eventInfo.event._def.extendedProps.alarm;
         const image = eventInfo.event._def.extendedProps.image;
 
-        setModalData({id, groupId, title, label, description, alarm, image});
+        setModalData({id, title, label, description, alarm, image});
         setIsModalOpen(true);
     };
 

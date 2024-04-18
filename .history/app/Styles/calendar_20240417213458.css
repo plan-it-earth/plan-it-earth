@@ -2,11 +2,11 @@
     --fc-border-color: #7C7C7C;
 }
 
-.group- {
+.group {
     cursor: pointer;
 }
 
-.group-:hover {
+.group:hover {
     opacity: .9;
 }
 

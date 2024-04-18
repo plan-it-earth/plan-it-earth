@@ -56,7 +56,9 @@ export const fetchEvents = async (userData) => {
     }
 };
 
-export const deleteEvent = async (id, userData) => {
+export const deleteEvent = async (id) => {
+    calendarApi.getEventById(id).remove();
+
     const uid = userData.uid;
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);

@@ -8,17 +8,16 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { fetchEvents } from '../../lib/Hooks/dbActions';
 import { exportEventArray } from '../../lib/exportEventArray';
-import Image from 'next/image';
 
 interface Event {
     id: string;
     title: string;
     start: string;
     groupId?: string;
-    extendedProps: {
-        alarm: string;
-        image: string;
-        description: string;
+    extependedProps?: {
+        alarm?: string;
+        image?: string;
+        description?: string;
     };
 }
 
@@ -121,12 +120,10 @@ function SearchComponent() {
                 </div>
             </div>
             {events.length > 0 ? (
-                <div>
-                    <ul className="flex flex-col mt-6 items-center px-6 py-6 w-fit mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
+                <div className="flex flex-col mt-6 items-center px-6 py-6 w-fit mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
+                    <ul className="">
                         {events.map((event: Event) => (
-                            <li className="flex items-center gap-4" key={event.id}>{event.title} @ {event.start}
-                                {event.extendedProps.image && <Image src={event.extendedProps.image} alt="image" height={50} width={50} />}
-                            </li>
+                            <li key={event.id}>{event.title} @ {event.start}</li>
                         ))}
                     </ul>
                     <div className="flex justify-center mx-auto">

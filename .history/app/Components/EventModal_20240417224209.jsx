@@ -23,7 +23,7 @@ export default function EventModal({ id, groupId, title, label, description, ala
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center" onClick={onClose}>
             <div className="relative flex flex-col md:flex-row bg-[#35334D] text-white rounded-lg shadow-lg overflow-hidden w-11/12 md:w-1/2 lg:w-1/3 border-white border" onClick={stopPropagation}>
                 <div className="p-6 flex-grow items-center gap-2">
-                    {groupId !== "" && <Image className="cursor-pointer hover:opacity-90" src={trash} alt={"delete"} height={20} width={20} onClick={deleteEventModal} />}
+                    <Image className="cursor-pointer hover:opacity-90" src={trash} alt={"delete"} height={25} width={25} onClick={deleteEventModal} />
                     <h2 className="text-xl font-bold mb-2 text-center">{title}</h2>
                     {label && <p className="mb-1 text-center">Type: {label}</p>}
                     {description && <p className="mb-1 text-center">Description: {description}</p>}

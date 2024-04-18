@@ -56,7 +56,7 @@ export default function Calendar() {
         const alarm = eventInfo.event._def.extendedProps.alarm;
         const image = eventInfo.event._def.extendedProps.image;
 
-        setModalData({id, groupId, title, label, description, alarm, image});
+        setModalData({id, title, label, description, alarm, image});
         setIsModalOpen(true);
     };
 
