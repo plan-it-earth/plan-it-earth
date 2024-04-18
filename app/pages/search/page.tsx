@@ -7,6 +7,7 @@ import { doc, getDoc, updateDoc, collection } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { fetchEvents } from '../../lib/Hooks/dbActions';
+import { exportEventArray } from '../../lib/exportEventArray';
 
 interface Event {
     id: string;
@@ -50,6 +51,11 @@ function SearchComponent() {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
+        const updatedEvents = events.map(e => ({
+            ...e,
+            start: new Date(e.start)
+        }));
+        exportEventArray(updatedEvents);
     };
 
     useEffect(() => {
@@ -77,7 +83,6 @@ function SearchComponent() {
             }
 
             let fetchedEvents = await fetchEvents(userData);
-            fetchedEvents = JSON.parse(fetchedEvents);
 
             let title = searchParams.get('search') || '';
             const filteredEvents = (fetchedEvents as Event[]).filter((event) => {
