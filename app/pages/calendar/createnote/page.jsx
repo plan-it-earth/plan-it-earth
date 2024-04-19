@@ -153,11 +153,6 @@ export default function CreateNote() {
                         <div className="flex flex-row justify-between gap-4">
                             <input type="date" id="date" name="date" required value={formData.date} onChange={handleDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
                             <input type="time" id="time" name="time" value={time} onChange={handleTimeChange} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
-                            {/*<input type="text" id="time" name="time" value={time} onChange={handleTimeChange} onBlur={validateTime} placeholder="12:00" className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-20 text-center focus:outline-none"/>
-                            <select id="am/pm" className="text-white bg-gray-600 mt-1 p-2 rounded-md focus:outline-none">
-                                <option value="AM">AM</option>
-                                <option value="PM">PM</option>
-                            </select>*/}
                         </div>
                         {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}
                         <div>

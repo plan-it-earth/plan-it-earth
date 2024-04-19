@@ -103,7 +103,7 @@ export default function Calendar() {
                         }
                     ]}
                 />}
-                {isModalOpen && <EventModal {...modalData} onClose={closeModal} />}
+                {isModalOpen && <EventModal {...modalData} onClose={closeModal} trashCan={true} />}
             </main>
             {!isModalOpen && <div className="fixed bottom-5 inset-x-0 flex justify-center z-10">
                 <Link className="bg-[#E53265] text-white w-12 h-12 rounded-full flex items-center justify-center"
