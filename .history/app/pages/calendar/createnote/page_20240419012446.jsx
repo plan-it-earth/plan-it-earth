@@ -84,7 +84,7 @@ export default function CreateNote() {
             calendarApi.addEvent({
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
-                start: start.toISOString(),
+                startStr: start.toISOString(),
                 groupId: label.value,
                 extendedProps: {
                     alarm: alarm.value,

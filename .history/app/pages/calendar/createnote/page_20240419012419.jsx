@@ -77,14 +77,12 @@ export default function CreateNote() {
 
         if(time.value) {
             console.log(time.value);
-            //let start = new Date(date.value.replace(/-/g, '\/') + "T" + time.value);
-            let start = new Date(`${date.value}T${time.value}`);
-
-
+            let start = new Date(date.value.replace(/-/g, '\/') + "T" + time.value);
+    
             calendarApi.addEvent({
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
-                start: start.toISOString(),
+                startStr: start.toISOString(),
                 groupId: label.value,
                 extendedProps: {
                     alarm: alarm.value,

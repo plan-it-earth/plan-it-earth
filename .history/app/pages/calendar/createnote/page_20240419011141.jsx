@@ -69,22 +69,18 @@ export default function CreateNote() {
         event.preventDefault();
         var title = document.getElementById("title");
         var date = document.getElementById("date");
-        var time = document.getElementById("time");
         var alarm = document.getElementById("alarm");
         var image = document.getElementById("image");
         var label = document.getElementById("label");
         var description = document.getElementById("description");
 
         if(time.value) {
-            console.log(time.value);
-            //let start = new Date(date.value.replace(/-/g, '\/') + "T" + time.value);
-            let start = new Date(`${date.value}T${time.value}`);
-
-
+            let start = new Date(date.value.replace(/-/g, '\/') + "T" + time.value);
+    
             calendarApi.addEvent({
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
-                start: start.toISOString(),
+                start: start,
                 groupId: label.value,
                 extendedProps: {
                     alarm: alarm.value,
