@@ -158,6 +158,7 @@ export default function CreateNote() {
                         <label className="block text-sm font-normal mt-3 text-gray-200">Select Alarm:</label>
                             <select id="alarm" onChange={validateAlarm} className="text-white bg-gray-600 mt-1 p-2 rounded-md w-full focus:outline-none">
                                 <option value="-1">none</option>
+                                <option value ="0">at the time of event </option>
                                 <option value="5">5 minutes before event</option>
                                 <option value="10">10 minutes before event</option>
                                 <option value="15">15 minutes before event</option>
