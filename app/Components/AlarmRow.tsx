@@ -1,7 +1,8 @@
 'use client'
 
 import {useState, useContext} from 'react';
-
+import { updateAlarm } from '../lib/Hooks/dbActions';
+import UserContext from '../lib/firebase/UserContext';
 
 type AlarmRowProps = {
     title: string;
@@ -12,32 +13,23 @@ type AlarmRowProps = {
 
 const AlarmRow: React.FC<AlarmRowProps> = ({ title, time, alarm, id }) => {
     
-    const updateAlarm = (event:any) => {
+    const [alarmValue, setAlarmValue] = useState(alarm);
+    const { userData } = useContext(UserContext);
+
+    const changeAlarm = (event:any) => {
         const newAlarm = event.target.value;
-        // Update the alarm value in the database
-    };
-
-    const [isDateValid, setIsDateValid] = useState(true);
-
-
-    /*
-    const validateDate = () => {
-        var currentDate = new Date();
-        //var date = event.date.value
-        if (date <= currentDate){
-            setIsDateValid(true);
-        } else {
-            setIsDateValid(false);
-        }
+        setAlarmValue(newAlarm);
+        updateAlarm(id, newAlarm, userData);
     }
-    */
+
     
     return (
-        <div className="flex row w-full ml-4 justify-around text-[#A7A7A7] items-center">
-            <p>{title}</p>
-            <p className="">{time}</p>
-            <select id="alarm" defaultValue={alarm} /*onBlur={validateDate}*/ onChange={updateAlarm} className="bg-[#35334D] rounded-md shadow-md h-10 px-2 w-fit focus:outline-none">
+        <div className="flex flex-row gap-4 text-xs sm:text-sm text-center w-full justify-around text-[#A7A7A7] items-center">
+            <p className="flex w-40 lg:w-52 lg:ml-4 justify-center text-center">{title}</p>
+            <p className="flex w-40 lg:w-52 lg:ml-14 text-center">{time}</p>
+            <select id="alarm" defaultValue={alarm} value={alarmValue} onChange={changeAlarm} className="flex w-28 md:w-40 lg:w-56 mr-4 text-center bg-[#35334D] rounded-md shadow-md h-10 px-2 focus:outline-none">
                 <option value="-1">none</option>
+                <option value ="0">at the time of event </option>
                 <option value="5">5 minutes</option>
                 <option value="10">10 minutes</option>
                 <option value="15">15 minutes</option>
@@ -48,7 +40,6 @@ const AlarmRow: React.FC<AlarmRowProps> = ({ title, time, alarm, id }) => {
                 <option value = "5760"> 4 days before event</option>
                 <option value = "7200"> 5 days before event</option>
             </select>
-            {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid time</p>}
         </div>
     );
 };

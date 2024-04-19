@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import { useCalendarApi } from '../lib/Context/CalendarProvider'; 
+import { checkAlarms } from '../lib/checkAlarms';
+
 import Search from './Search';
 
 import logo from '../Images/headerlogo.png';
@@ -26,6 +29,7 @@ function logOut() {
 
 export default function Header() {
     const router = useRouter();
+    const { calendarApi } = useCalendarApi();
 
     const routeToAlarm = () => {
         router.push('/pages/alarm')
@@ -39,12 +43,25 @@ export default function Header() {
         router.push('/pages/calendar')
     }
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            console.log("In interval");
+            checkAlarms(calendarApi.getEvents());
+        }, 60000); // 60000 milliseconds = 1 minute
+    
+        // Clear interval on component unmount
+        return () => clearInterval(intervalId);
+    }, [calendarApi]);
+
     return (
-        <div className="flex h-24 w-full px-2 py-5 bg-[#1A1926] shadow justify-between md:px-10">
-            <Image onClick={routeToCalendar} src={logo} alt="Plan-It-Earth" height={50} width={50} className="h-30 w-30 mt-1 cursor-pointer hover:opacity-85 md:h-35 md:h-35"/>
-            <div className="hidden w-24 lg:block"></div>
+        <div className="flex h-24 w-full px-2 py-5 bg-[#1A1926] shadow justify-around md:px-10">
+            <div className="flex flex-row h-full items-center space-x-2 md:gap-20">
+                <Image onClick={routeToCalendar} src={logo} alt="Plan-It-Earth" height={50} width={50} className="h-30 w-30 mt-1 cursor-pointer hover:opacity-85 md:h-35 md:h-35"/>
+                <div className="hidden lg:w-12 lg:block"></div>
+                <div className="hidden lg:w-12 lg:block"></div>
+            </div>
             <Search />
-            <div className="flex flex-row h-full items-center space-x-5 md:gap-20">
+            <div className="flex flex-row h-full items-center space-x-2 md:gap-20">
                 <Image onClick={routeToAlarm} src={alarm} alt="Alarm" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
                 <Image onClick={routeToExportOrShare} src={share} alt="Share" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>
                 <button onClick={() => logOut()} className="px-3 py-2 rounded-md text-xs font-medium bg-[#E53265] outline-none border-none shadow hover:brightness-110 md:px-5 md:py-2 md:text-sm">Sign out</button>

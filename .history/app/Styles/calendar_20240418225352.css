@@ -1,0 +1,134 @@
+:root {
+    --fc-border-color: #7C7C7C;
+}
+
+@media (max-width: 400px) {
+    .fc-daygrid-day-number {
+        font-size: 10px;
+    }
+
+    .fc-event-title {
+        font-size: 10px;
+    }
+
+    .fc-daygrid-day-frame {
+        height: 100%;
+        width: 100%;
+    }
+
+    .fc-daygrid-event {
+        
+    }
+
+    .fc-event {
+        font-size: 0px;
+    }
+
+    .fc-button-group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .fc-next-button, .fc-prev-button {
+        height: 40px;
+        width: 40px;
+    }
+
+    .fc-header-toolbar {
+        font-size: 12px;
+    }
+
+    .fc-view-harness {
+        height: 800px;
+        
+    }
+}
+
+.group- {
+    cursor: pointer;
+}
+
+.group-:hover {
+    opacity: .9;
+}
+
+.group-UserEvent {
+    background-color: darkred;
+    cursor: pointer;
+}
+
+.group-UserEvent:hover {
+    background-color: darkred;
+    opacity: .9;
+}
+
+.group-Assignment {
+    background-color: darkgreen;
+    cursor: pointer;
+}
+
+.group-Assignment:hover {
+    background-color: darkgreen;
+    opacity: .9;
+}
+
+.group-Lecture {
+    background-color: blueviolet;
+    cursor: pointer;
+}
+
+.group-Lecture:hover {
+    background-color: blueviolet;
+    opacity: .9;
+}
+
+.group-Lecture {
+    background-color: cadetblue;
+    cursor: pointer;
+}
+
+.group-Lecture:hover {
+    background-color: cadetblue;
+    opacity: .9;
+}
+
+.group-Lab {
+    background-color: darkorange;
+    cursor: pointer;
+}
+
+.group-Lab:hover {
+    background-color: darkorange;
+    opacity: .9;
+}
+
+.group-OfficeHours {
+    background-color: blue;
+    cursor: pointer;
+}
+
+.group-OfficeHours:hover {
+    background-color: blue;
+    opacity: .9;
+}
+
+.group-Quiz {
+    background-color: darkgoldenrod;
+    cursor: pointer;
+}
+
+.group-Quiz:hover {
+    background-color: darkgoldenrod;
+    opacity: .9;
+}
+
+.group-Exam {
+    background-color: indigo;
+    cursor: pointer;
+}
+
+.group-Exam:hover {
+    background-color: indigo;
+    opacity: .9;
+}
+
