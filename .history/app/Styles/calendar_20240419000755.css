@@ -5,27 +5,24 @@
 @media (max-width: 800px) {
     .fc-daygrid-day-number {
         font-size: 10px;
-        z-index: 1;
     }
 
     .fc-event-title {
-        font-size: 8px;
+        font-size: 10px;
     }
 
     .fc-daygrid-day-frame {
         font-size: 10px;
         display: flex;
-        flex-direction: column;        
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
     }
 
-    .fc-daygrid-day-events {
-        z-index: 2;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        transform: translateY(-15%);
+    .fc-daygrid-more-link {
+        justify-self: end;
     }
+
 
     .fc-event {
         font-size: 0px;

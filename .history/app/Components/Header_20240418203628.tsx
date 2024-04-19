@@ -43,8 +43,8 @@ export default function Header() {
         <div className="flex h-24 w-full px-2 py-5 bg-[#1A1926] shadow justify-around md:px-10">
             <div className="flex flex-row h-full items-center space-x-2 md:gap-20">
                 <Image onClick={routeToCalendar} src={logo} alt="Plan-It-Earth" height={50} width={50} className="h-30 w-30 mt-1 cursor-pointer hover:opacity-85 md:h-35 md:h-35"/>
-                <div className="hidden lg:w-12 lg:block"></div>
-                <div className="hidden lg:w-12 lg:block"></div>
+                <div className="hidden md:w-12 md:block"></div>
+                <div className="hidden md:w-12 md:block"></div>
             </div>
             <Search />
             <div className="flex flex-row h-full items-center space-x-2 md:gap-20">

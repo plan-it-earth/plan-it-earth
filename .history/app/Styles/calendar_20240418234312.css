@@ -2,30 +2,44 @@
     --fc-border-color: #7C7C7C;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 400px) {
     .fc-daygrid-day-number {
         font-size: 10px;
-        z-index: 1;
     }
 
     .fc-event-title {
-        font-size: 8px;
+        font-size: 10px;
     }
 
     .fc-daygrid-day-frame {
         font-size: 10px;
         display: flex;
-        flex-direction: column;        
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .fc-daygrid-day-top {
+        order: 1;
     }
 
     .fc-daygrid-day-events {
-        z-index: 2;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        transform: translateY(-15%);
+        order: 2;
+        flex-grow: 1;
+        padding: 1px;
     }
+
+    .fc-daygrid-event {
+        margin: 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .fc-daygrid-more-link {
+        display: flex;
+        justify-self: flex-end;
+    }
+
 
     .fc-event {
         font-size: 0px;

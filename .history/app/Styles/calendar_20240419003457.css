@@ -9,7 +9,7 @@
     }
 
     .fc-event-title {
-        font-size: 8px;
+        font-size: 10px;
     }
 
     .fc-daygrid-day-frame {
@@ -20,11 +20,7 @@
 
     .fc-daygrid-day-events {
         z-index: 2;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        transform: translateY(-15%);
+        padding-top: 10px;
     }
 
     .fc-event {
