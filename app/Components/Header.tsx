@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import { useCalendarApi } from '../lib/Context/CalendarProvider'; 
+import { checkAlarms } from '../lib/checkAlarms';
+
 import Search from './Search';
 
 import logo from '../Images/headerlogo.png';
@@ -26,6 +29,7 @@ function logOut() {
 
 export default function Header() {
     const router = useRouter();
+    const { calendarApi } = useCalendarApi();
 
     const routeToAlarm = () => {
         router.push('/pages/alarm')
@@ -38,6 +42,16 @@ export default function Header() {
     const routeToCalendar = () => {
         router.push('/pages/calendar')
     }
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            console.log("In interval");
+            checkAlarms(calendarApi.getEvents());
+        }, 60000); // 60000 milliseconds = 1 minute
+    
+        // Clear interval on component unmount
+        return () => clearInterval(intervalId);
+    }, [calendarApi]);
 
     return (
         <div className="flex h-24 w-full px-2 py-5 bg-[#1A1926] shadow justify-around md:px-10">
