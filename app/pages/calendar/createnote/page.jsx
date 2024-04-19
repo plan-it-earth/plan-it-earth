@@ -64,7 +64,7 @@ export default function CreateNote() {
             setIsAlarmValid(false);
         }
     }
-
+    let alarmTime = null;
     const handleSubmit = (event) => {
         event.preventDefault();
         var title = document.getElementById("title");
@@ -78,6 +78,9 @@ export default function CreateNote() {
         if(time.value) {
             let start = new Date(`${date.value}T${time.value}`);
 
+            if(alarm.value !== "-1") {
+                alarmTime = new Date(start.getTime() - alarm.value * 60000);
+            }
 
             calendarApi.addEvent({
                 id: calendarApi.getEvents().length + 1,
@@ -87,7 +90,8 @@ export default function CreateNote() {
                 extendedProps: {
                     alarm: alarm.value,
                     image: imageUrl,
-                    description: description.value
+                    description: description.value,
+                    alarmTime: alarmTime
                 },
             });
         } else {
@@ -103,7 +107,8 @@ export default function CreateNote() {
                 extendedProps: {
                     alarm: alarm.value,
                     image: imageUrl,
-                    description: description.value
+                    description: description.value,
+                    alarmTime: null
                 },
             });
         }
@@ -114,7 +119,8 @@ export default function CreateNote() {
              Alarm: ${alarm.value},
              Image: ${imageUrl}, 
              Label: ${label.value}, 
-             Description: ${description.value}` 
+             Description: ${description.value},
+             Alarm Time: ${alarmTime}` 
         );
         
         // Add event to database
