@@ -76,6 +76,8 @@ export default function CreateNote() {
         var description = document.getElementById("description");
 
         if(time.value) {
+            console.log(time.value);
+            //let start = new Date(date.value.replace(/-/g, '\/') + "T" + time.value);
             let start = new Date(`${date.value}T${time.value}`);
 
 
