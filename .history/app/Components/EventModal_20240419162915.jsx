@@ -17,27 +17,7 @@ export default function EventModal({ id, groupId, title, label, description, ala
         calendarApi.getEventById(id).remove();
         deleteEvent(id, userData);
         onClose();
-    };
-
-    const formatAlarmTime = (minutes) => {
-        const days = Math.floor(minutes / 1440);
-        const hours = Math.floor((minutes % 1440) / 60);
-        const remainingMinutes = minutes % 60;
-        
-        if (days > 0) {
-            return `${days} day${days > 1 ? 's' : ''} before`;
-        } else if (hours > 0) {
-            return `${hours} hour${hours > 1 ? 's' : ''} before`;
-        } else if (days === 0 && hours === 0 && remainingMinutes === 0) {
-            return `At time of event`;
-        } else {
-            return `${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''} before`;
-        }
-
-
-    };
-
-
+    }
     
     return (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center" onClick={onClose}>
@@ -47,7 +27,7 @@ export default function EventModal({ id, groupId, title, label, description, ala
                     <h2 className="text-xl font-bold mb-2 text-center">{title}</h2>
                     {label && <p className="mb-1 text-center">Type: {label}</p>}
                     {description && <p className="mb-1 text-center">Description: {description}</p>}
-                    {alarm && alarm !== "-1" && <p className="mb-1 text-center">Alarm: {formatAlarmTime(parseInt(alarm))}</p>}
+                    {alarm && alarm !== "-1" && alarn !=="0" && <p className="mb-1 text-center">Alarm: {alarm} minutes before</p>}
                     {image && (
                         <div className="flex mt-4 justify-center">
                             <Image src={image} alt="Event image" height={500} width={500} className="rounded-md"/>

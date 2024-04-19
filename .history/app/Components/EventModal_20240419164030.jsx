@@ -28,7 +28,7 @@ export default function EventModal({ id, groupId, title, label, description, ala
             return `${days} day${days > 1 ? 's' : ''} before`;
         } else if (hours > 0) {
             return `${hours} hour${hours > 1 ? 's' : ''} before`;
-        } else if (days === 0 && hours === 0 && remainingMinutes === 0) {
+        } else if (days === 0 && hours === 0) {
             return `At time of event`;
         } else {
             return `${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''} before`;

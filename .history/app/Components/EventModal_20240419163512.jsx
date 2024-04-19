@@ -28,13 +28,9 @@ export default function EventModal({ id, groupId, title, label, description, ala
             return `${days} day${days > 1 ? 's' : ''} before`;
         } else if (hours > 0) {
             return `${hours} hour${hours > 1 ? 's' : ''} before`;
-        } else if (days === 0 && hours === 0 && remainingMinutes === 0) {
-            return `At time of event`;
         } else {
             return `${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''} before`;
         }
-
-
     };
 
 
@@ -47,6 +43,7 @@ export default function EventModal({ id, groupId, title, label, description, ala
                     <h2 className="text-xl font-bold mb-2 text-center">{title}</h2>
                     {label && <p className="mb-1 text-center">Type: {label}</p>}
                     {description && <p className="mb-1 text-center">Description: {description}</p>}
+                    {alarm && alarm !== "-1" && alarn !=="0" && <p className="mb-1 text-center">Alarm: {alarm} minutes before</p>}
                     {alarm && alarm !== "-1" && <p className="mb-1 text-center">Alarm: {formatAlarmTime(parseInt(alarm))}</p>}
                     {image && (
                         <div className="flex mt-4 justify-center">
