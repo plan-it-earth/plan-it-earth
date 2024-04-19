@@ -122,7 +122,7 @@ function SearchComponent() {
             </div>
             {events.length > 0 ? (
                 <div className="flex flex-col px-2">
-                    <ul className="flex flex-col mt-6 items-center px-24 py-6 w-full sm:w-fit mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
+                    <ul className="flex flex-col mt-6 items-center px-22 py-6 w-full sm:w-fit mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
                         {events.map((event: Event) => (
                             <li className="flex items-center gap-4" key={event.id}>{event.title} @ {event.start}
                                 {event.extendedProps.image && <Image src={event.extendedProps.image} alt="image" height={50} width={50} />}

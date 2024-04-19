@@ -109,7 +109,7 @@ function SearchComponent() {
             <h1 className="text-center text-2xl font-medium mt-16">Search</h1>
             <div className="flex flex-col justify-center mx-auto mt-16">
                 <h3 className="text-xl font-normal mb-4 text-center">Select start and end date</h3>
-                <div className="flex flex-row gap-6">
+                <div className="flex flex-row gap-2">
                     <div>
                         <label className="">Start:</label>
                         <input type="date" value={startDate} onChange={handleStartDateChange} className="w-full text-center mt-2 h-10 mb-6 mx-auto bg-[#1A1926] text-white rounded-lg shadow-lg border-none focus:outline-none" />
@@ -121,8 +121,8 @@ function SearchComponent() {
                 </div>
             </div>
             {events.length > 0 ? (
-                <div className="flex flex-col px-2">
-                    <ul className="flex flex-col mt-6 items-center px-24 py-6 w-full sm:w-fit mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
+                <div className="flex flex-col">
+                    <ul className="flex flex-col mt-6 items-center px-6 py-6 w-full mx-auto gap-4 bg-[#35334D] text-white border-white border rounded-lg shadow-lg">
                         {events.map((event: Event) => (
                             <li className="flex items-center gap-4" key={event.id}>{event.title} @ {event.start}
                                 {event.extendedProps.image && <Image src={event.extendedProps.image} alt="image" height={50} width={50} />}

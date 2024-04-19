@@ -46,6 +46,7 @@ export default function Header() {
                 <div className="hidden sm:w-12 sm:block"></div>
                 <div className="hidden sm:w-12 sm:block"></div>
             </div>
+            {/*<div className="hidden w-24 lg:block"></div>*/}
             <Search />
             <div className="flex flex-row h-full items-center space-x-2 md:gap-20">
                 <Image onClick={routeToAlarm} src={alarm} alt="Alarm" height={35} width={35} className="h-8 w-8 cursor-pointer hover:opacity-85"/>

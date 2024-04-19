@@ -19,7 +19,7 @@ export default function Search() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-row mx-auto h-10 w-36 items-center gap-2 self-center bg-[#fff] rounded-lg md:w-96 sm:w-80">
+        <form onSubmit={handleSubmit} className="flex flex-row mx-auto h-10 w-36 items-center gap-2 bg-[#fff] rounded-lg md:w-96 sm:w-80 md:gap-4 md:ml-16">
             <button type="submit" className="border-none bg-none">
                 <Image src={search} alt='Search' height={18} width={18} className="h-4 w-4 ml-2 cursor-pointer md:ml-3"/>
             </button>
