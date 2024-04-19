@@ -62,7 +62,7 @@ function SearchComponent() {
     useEffect(() => {
         // get current date
         const today = new Date();
-        const month = today.getMonth() + 1;
+        const month = today.getMonth();
         const day = today.getDate();
         const year = today.getFullYear();
         
