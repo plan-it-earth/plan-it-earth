@@ -99,7 +99,7 @@ export default function ViewShared() {
               onChange={handleSelectChange}
               className="block w-full text-sm font-medium text-gray-700 bg-transparent border-b border-gray-500 focus:outline-none focus:border-blue-500"
             >
-              <option disabled value="">Select calendar to view...</option>
+              <option value="">Select calendar to view...</option>
               {sharedCalendars.map(calendar => (
                 <option key={calendar.id} value={calendar.email}>{calendar.email}</option>
               ))}
