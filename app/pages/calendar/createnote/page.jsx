@@ -66,7 +66,7 @@ export default function CreateNote() {
     };
 
     const validateAlarm = (event) => {
-        if (time === '') {
+        if (startTime === '') {
             setIsAlarmValid(false);
         }
     }
@@ -88,8 +88,6 @@ export default function CreateNote() {
             end = new Date(endDate.value);
             end.setDate(end.getDate() + 1);
         }
-
-        console.log('start and end',start, end);
 
         if (end <= start) {
             setIsDateValid(false);
@@ -136,6 +134,26 @@ export default function CreateNote() {
                         alarmTime: alarmTime
                     },
                 });
+            } else if(!endDate.value && startTime.value) {
+                let start = new Date(`${startDate.value}T${startTime.value}`);
+
+                if(alarm.value !== "-1") {
+                    alarmTime = new Date(start.getTime() - alarm.value * 60000);
+                }
+
+                calendarApi.addEvent({
+                    id: calendarApi.getEvents().length + 1,
+                    title: title.value,
+                    start: start.toISOString(),
+                    end: '',
+                    groupId: label.value,
+                    extendedProps: {
+                        alarm: alarm.value,
+                        image: imageUrl,
+                        description: description.value,
+                        alarmTime: alarmTime
+                    },
+                });
             } else {
                 // All day event
                 let start = new Date(startDate.value.replace(/-/g, '\/'));
@@ -157,17 +175,6 @@ export default function CreateNote() {
                     },
                 });
             }
-        
-            console.log(
-                `Title: ${title.value},
-                 StartDate: ${startDate.value},
-                 EndDate: ${endDate.value},
-                 Alarm: ${alarm.value},
-                 Image: ${imageUrl}, 
-                 Label: ${label.value}, 
-                 Description: ${description.value},
-                 Alarm Time: ${alarmTime}` 
-            );
             
             // Add event to database
             storeEvents(userData, calendarApi);
