@@ -45,7 +45,6 @@ export default function Header() {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            console.log("In interval");
             checkAlarms(calendarApi.getEvents());
         }, 60000); // 60000 milliseconds = 1 minute
     

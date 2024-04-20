@@ -9,29 +9,40 @@ import { db } from '@/firebaseConfig';
 import { fetchEventsByID } from '@/app/lib/Hooks/dbActions';
 import Image from 'next/image';
 import Exportorshareicon from '../../../Images/exportorshareicon.png';
-import EventModal from '../../../Components/EventModal';
 
 export default function ViewShared() {
   const { userData } = useContext(UserContext);
   const [selectedEmail, setSelectedEmail] = useState('');
   const [selectedCalendarData, setSelectedCalendarData] = useState(null);
   const [sharedCalendars, setSharedCalendars] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState(null);
  
   // Returns an array of strings consisting of emails 
   // that have shared their calendar with the current user
   const getSharedCalendars = useCallback(async () => {
     const sharedCalendars = [];
     const uid = userData.uid;
-    const q = collection(db, "users", uid, "sharedCalendars");
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      sharedCalendars.push({
-        email: data.email,
-      });
+    if (uid) {
+      const q = collection(db, "users", uid, "sharedCalendars");
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        sharedCalendars.push({
+          email: data.email,
+        });
+    }
+  
     });
+
+    const handleEventClick = (eventInfo) => {
+      const title = eventInfo.event._def.title;
+      const label = eventInfo.event._def.extendedProps.label;
+      const description = eventInfo.event._def.extendedProps.description;
+      const alarm = eventInfo.event._def.extendedProps.alarm;
+      const image = eventInfo.event._def.extendedProps.image;
+
+      setModalData({title, label, description, alarm, image});
+      setIsModalOpen(true);
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -67,28 +78,11 @@ export default function ViewShared() {
     setSelectedCalendarData(selectedCalendar);
   };
 
-  const handleEventClick = async (eventInfo) => {
-    const id = eventInfo.event.id;
-    const title = eventInfo.event._def.title;
-    const groupId = eventInfo.event.groupId;
-    const label = eventInfo.event._def.extendedProps.label;
-    const description = eventInfo.event._def.extendedProps.description;
-    const alarm = eventInfo.event._def.extendedProps.alarm;
-    const image = eventInfo.event._def.extendedProps.image;
-
-    setModalData({ id, groupId, title, label, description, alarm, image });
-    setIsModalOpen(true);
-};
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="bg-[#16141C] min-h-screen">
       <Header />
       <Image src={Exportorshareicon} alt="export share logo" height={100} width={100} className="mx-auto mb-6 mt-16" />
-      <div className="w-full px-3 sm:px-12 lg:px-60 mx-auto mt-16">
+      <div className="max-w-md mx-auto px-2 mt-16">
         <h2 className="flex flex-col text-center items-center justify-center text-2xl font-semibold mb-6 mt-16">
           Select a shared calendar to view
         </h2>
@@ -99,7 +93,7 @@ export default function ViewShared() {
               onChange={handleSelectChange}
               className="block w-full text-sm font-medium text-gray-700 bg-transparent border-b border-gray-500 focus:outline-none focus:border-blue-500"
             >
-              <option disabled value="">Select calendar to view...</option>
+              <option value="">Select calendar to view...</option>
               {sharedCalendars.map(calendar => (
                 <option key={calendar.id} value={calendar.email}>{calendar.email}</option>
               ))}
@@ -108,20 +102,17 @@ export default function ViewShared() {
         </div>
 
         {/* Display shared calendar */}
-        {selectedCalendarData && !isModalOpen && (
+        {selectedCalendarData && (
           <div className="mb-8 bg-[#1A1926] rounded-lg shadow-md">
             <div className="p-8">
               <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
                 events={selectedCalendarData}
-                eventClick={handleEventClick}
-                eventClassNames={(eventInfo) => `group-${eventInfo.event.groupId}`}
               />
             </div>
           </div>
         )}
-        {isModalOpen && <EventModal {...modalData} onClose={closeModal} isTrash={false} />}
       </div>
     </div>
   );

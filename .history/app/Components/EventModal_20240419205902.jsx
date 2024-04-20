@@ -5,7 +5,7 @@ import { deleteEvent } from '../lib/Hooks/dbActions';
 import UserContext from '../lib/firebase/UserContext';
 import { useContext } from 'react';
 
-export default function EventModal({ id, groupId, title, label, description, alarm, image, onClose, isTrash }) {
+export default function EventModal({ id, groupId, title, label, description, alarm, image, onClose }, isTrash) {
     const { calendarApi } = useCalendarApi();
     const { userData } = useContext(UserContext);
 

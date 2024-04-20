@@ -65,115 +65,88 @@ export default function CreateNote() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const validateDate = (inputDate) => {
+        const input = new Date(inputDate);
+        const currentDate = new Date();
+        setIsDateValid(input >= currentDate);
+    };
+
     const validateAlarm = (event) => {
         if (time === '') {
             setIsAlarmValid(false);
         }
     }
-
-
-    const validateDatesAndTimes = () => {
+    let alarmTime = null;
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        var title = document.getElementById("title");
         var startDate = document.getElementById("startDate");
         var startTime = document.getElementById("startTime");
         var endDate = document.getElementById("endDate");
         var endTime = document.getElementById("endTime");
-        
-        let start, end;
+        var alarm = document.getElementById("alarm");
+        var image = document.getElementById("image");
+        var label = document.getElementById("label");
+        var description = document.getElementById("description");
 
-        if (startTime.value && endTime.value) {
-            start = new Date(`${startDate.value}T${startTime.value}`);
-            end = new Date(`${endDate.value}T${endTime.value}`);
-        } else {
-            start = new Date(startDate.value);
-            end = new Date(endDate.value);
-            end.setDate(end.getDate() + 1);
-        }
+        if(startTime.value && endTime.value) {
+            let start = new Date(`${startDate.value}T${startTime.value}`);
+            let end = new Date(`${endDate.value}T${endTime.value}`);
 
-        console.log('start and end',start, end);
-
-        if (end <= start) {
-            setIsDateValid(false);
-            return false;
-        } else {
-            setIsDateValid(true);
-            return true;
-        }
-    };
-
-    let alarmTime = null;
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (isDateValid && isAlarmValid) {
-            var title = document.getElementById("title");
-            var startDate = document.getElementById("startDate");
-            var startTime = document.getElementById("startTime");
-            var endDate = document.getElementById("endDate");
-            var endTime = document.getElementById("endTime");
-            var alarm = document.getElementById("alarm");
-            var image = document.getElementById("image");
-            var label = document.getElementById("label");
-            var description = document.getElementById("description");
-
-            if(startTime.value && endTime.value) {
-                let start = new Date(`${startDate.value}T${startTime.value}`);
-                let end = new Date(`${endDate.value}T${endTime.value}`);
-
-                if(alarm.value !== "-1") {
-                    alarmTime = new Date(start.getTime() - alarm.value * 60000);
-                }
-
-                calendarApi.addEvent({
-                    id: calendarApi.getEvents().length + 1,
-                    title: title.value,
-                    start: start.toISOString(),
-                    end: end.toISOString(),
-                    groupId: label.value,
-                    extendedProps: {
-                        alarm: alarm.value,
-                        image: imageUrl,
-                        description: description.value,
-                        alarmTime: alarmTime
-                    },
-                });
-            } else {
-                // All day event
-                let start = new Date(startDate.value.replace(/-/g, '\/'));
-                let end = new Date(endDate.value.replace(/-/g, '\/'));
-                end.setDate(end.getDate() + 1);
-        
-                calendarApi.addEvent({
-                    id: calendarApi.getEvents().length + 1,
-                    title: title.value,
-                    start: start,
-                    end: end,
-                    groupId: label.value,
-                    allDay: 'true',
-                    extendedProps: {
-                        alarm: alarm.value,
-                        image: imageUrl,
-                        description: description.value,
-                        alarmTime: null
-                    },
-                });
+            if(alarm.value !== "-1") {
+                alarmTime = new Date(start.getTime() - alarm.value * 60000);
             }
-        
-            console.log(
-                `Title: ${title.value},
-                 StartDate: ${startDate.value},
-                 EndDate: ${endDate.value},
-                 Alarm: ${alarm.value},
-                 Image: ${imageUrl}, 
-                 Label: ${label.value}, 
-                 Description: ${description.value},
-                 Alarm Time: ${alarmTime}` 
-            );
-            
-            // Add event to database
-            storeEvents(userData, calendarApi);
+
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start.toISOString(),
+                end: end.toISOString(),
+                groupId: label.value,
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value,
+                    alarmTime: alarmTime
+                },
+            });
+        } else {
+            // All day event
+            let start = new Date(startDate.value.replace(/-/g, '\/'));
+            let end = new Date(endDate.value.replace(/-/g, '\/'));
+            console.log(end);
     
-            router.push('/pages/calendar');
+            calendarApi.addEvent({
+                id: calendarApi.getEvents().length + 1,
+                title: title.value,
+                start: start,
+                end: end.toISOString(),
+                groupId: label.value,
+                allDay: 'true',
+                extendedProps: {
+                    alarm: alarm.value,
+                    image: imageUrl,
+                    description: description.value,
+                    alarmTime: null
+                },
+            });
         }
+
+        console.log(
+            `Title: ${title.value},
+             StartDate: ${startDate.value},
+             EndDate: ${endDate.value},
+             Alarm: ${alarm.value},
+             Image: ${imageUrl}, 
+             Label: ${label.value}, 
+             Description: ${description.value},
+             Alarm Time: ${alarmTime}` 
+        );
+        
+        // Add event to database
+        storeEvents(userData, calendarApi);
+
+        router.push('/pages/calendar');
     }
 
     return (
@@ -198,13 +171,13 @@ export default function CreateNote() {
 
                         <label className="block text-sm font-normal mt-3 text-gray-200">From:</label>
                         <div className="flex flex-row justify-between gap-4">
-                            <input type="date" id="startDate" name="startDate" required value={formData.date} onChange={handleStartDateChange} onBlur={validateDatesAndTimes} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
-                            <input type="time" id="startTime" name="startTime" value={startTime} onChange={handleStartTimeChange} onBlur={validateDatesAndTimes} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
+                            <input type="date" id="startDate" name="startDate" required value={formData.date} onChange={handleStartDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
+                            <input type="time" id="startTime" name="startTime" value={startTime} onChange={handleStartTimeChange} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
                         </div>
                         <label classname="block text-sm font-normal mt-6 text-gray-200">To:</label>
                         <div className="flex flex-row justify-between gap-4">
-                            <input type="date" id="endDate" name="endDate" value={formData.date} onChange={handleEndDateChange} onBlur={validateDatesAndTimes} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
-                            <input type="time" id="endTime" name="startTime" value={endTime} onChange={handleEndTimeChange} onBlur={validateDatesAndTimes} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
+                            <input type="date" id="endDate" name="endDate" value={formData.date} onChange={handleEndDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
+                            <input type="time" id="endTime" name="startTime" value={endTime} onChange={handleEndTimeChange} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
                         </div>
                         {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}
                         <div>
