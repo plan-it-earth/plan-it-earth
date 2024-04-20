@@ -65,6 +65,12 @@ export default function CreateNote() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const validateDate = (inputDate) => {
+        const input = new Date(inputDate);
+        const currentDate = new Date();
+        setIsDateValid(input >= currentDate);
+    };
+
     const validateAlarm = (event) => {
         if (time === '') {
             setIsAlarmValid(false);
@@ -74,24 +80,11 @@ export default function CreateNote() {
 
     const validateDatesAndTimes = () => {
         var startDate = document.getElementById("startDate");
-        var startTime = document.getElementById("startTime");
-        var endDate = document.getElementById("endDate");
-        var endTime = document.getElementById("endTime");
-        
-        let start, end;
 
-        if (startTime.value && endTime.value) {
-            start = new Date(`${startDate.value}T${startTime.value}`);
-            end = new Date(`${endDate.value}T${endTime.value}`);
-        } else {
-            start = new Date(startDate.value);
-            end = new Date(endDate.value);
-            end.setDate(end.getDate() + 1);
-        }
-
-        console.log('start and end',start, end);
-
-        if (end <= start) {
+        const start = new Date(`${formData.startDate}T${formData.startTime}`);
+        const end = new Date(`${formData.endDate}T${formData.endTime}`);
+        console.log('start', start, 'end', end);
+        if (end < start) {
             setIsDateValid(false);
             return false;
         } else {
@@ -104,7 +97,7 @@ export default function CreateNote() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (isDateValid && isAlarmValid) {
+        if (validateDatesAndTimes()) {
             var title = document.getElementById("title");
             var startDate = document.getElementById("startDate");
             var startTime = document.getElementById("startTime");
@@ -198,13 +191,13 @@ export default function CreateNote() {
 
                         <label className="block text-sm font-normal mt-3 text-gray-200">From:</label>
                         <div className="flex flex-row justify-between gap-4">
-                            <input type="date" id="startDate" name="startDate" required value={formData.date} onChange={handleStartDateChange} onBlur={validateDatesAndTimes} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
-                            <input type="time" id="startTime" name="startTime" value={startTime} onChange={handleStartTimeChange} onBlur={validateDatesAndTimes} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
+                            <input type="date" id="startDate" name="startDate" required value={formData.date} onChange={handleStartDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
+                            <input type="time" id="startTime" name="startTime" value={startTime} onChange={handleStartTimeChange} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
                         </div>
                         <label classname="block text-sm font-normal mt-6 text-gray-200">To:</label>
                         <div className="flex flex-row justify-between gap-4">
-                            <input type="date" id="endDate" name="endDate" value={formData.date} onChange={handleEndDateChange} onBlur={validateDatesAndTimes} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
-                            <input type="time" id="endTime" name="startTime" value={endTime} onChange={handleEndTimeChange} onBlur={validateDatesAndTimes} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
+                            <input type="date" id="endDate" name="endDate" value={formData.date} onChange={handleEndDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
+                            <input type="time" id="endTime" name="startTime" value={endTime} onChange={handleEndTimeChange} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
                         </div>
                         {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}
                         <div>

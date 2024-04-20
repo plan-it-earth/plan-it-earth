@@ -121,7 +121,7 @@ export default function ViewShared() {
             </div>
           </div>
         )}
-        {isModalOpen && <EventModal {...modalData} onClose={closeModal} isTrash={false} />}
+        {isModalOpen && <EventModal {...modalData} onClose={closeModal} trashCan={false} />}
       </div>
     </div>
   );

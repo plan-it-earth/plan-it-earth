@@ -65,6 +65,12 @@ export default function CreateNote() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const validateDate = (inputDate) => {
+        const input = new Date(inputDate);
+        const currentDate = new Date();
+        setIsDateValid(input >= currentDate);
+    };
+
     const validateAlarm = (event) => {
         if (time === '') {
             setIsAlarmValid(false);
@@ -84,8 +90,8 @@ export default function CreateNote() {
             start = new Date(`${startDate.value}T${startTime.value}`);
             end = new Date(`${endDate.value}T${endTime.value}`);
         } else {
-            start = new Date(startDate.value);
-            end = new Date(endDate.value);
+            start = new Date(startDate);
+            end = new Date(endDate);
             end.setDate(end.getDate() + 1);
         }
 

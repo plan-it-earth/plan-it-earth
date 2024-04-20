@@ -65,6 +65,12 @@ export default function CreateNote() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const validateDate = (inputDate) => {
+        const input = new Date(inputDate);
+        const currentDate = new Date();
+        setIsDateValid(input >= currentDate);
+    };
+
     const validateAlarm = (event) => {
         if (time === '') {
             setIsAlarmValid(false);
