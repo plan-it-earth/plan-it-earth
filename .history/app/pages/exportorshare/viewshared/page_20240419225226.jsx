@@ -88,7 +88,7 @@ export default function ViewShared() {
     <div className="bg-[#16141C] min-h-screen">
       <Header />
       <Image src={Exportorshareicon} alt="export share logo" height={100} width={100} className="mx-auto mb-6 mt-16" />
-      <div className="w-full px-3 sm:px-12 lg:px-60 mx-auto mt-16">
+      <div className="w-full px-3 sm:px-12 mx-auto mt-16">
         <h2 className="flex flex-col text-center items-center justify-center text-2xl font-semibold mb-6 mt-16">
           Select a shared calendar to view
         </h2>
