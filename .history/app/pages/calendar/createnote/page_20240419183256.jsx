@@ -45,22 +45,17 @@ export default function CreateNote() {
 
     const handleStartTimeChange =(event) => {
         setFormData(prev => ({ ...prev, time: event.target.value }));
-        setStartTime(event.target.value);
+        setTime(event.target.value);
         setIsAlarmValid(true);
     };
 
     const handleEndTimeChange = (event) => {
         setFormData(prev => ({ ...prev, time: event.target.value }));
-        setEndTime(event.target.value);
+        setTime(event.target.value);
         setIsAlarmValid(true);
     };
 
-    const handleStartDateChange = (event) => {
-        const { name, value } = event.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
-
-    const handleEndDateChange = (event) => {
+    const handleDateChange = (event) => {
         const { name, value } = event.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
@@ -98,7 +93,6 @@ export default function CreateNote() {
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
                 start: start.toISOString(),
-                end: endTime,
                 groupId: label.value,
                 extendedProps: {
                     alarm: alarm.value,
@@ -115,7 +109,6 @@ export default function CreateNote() {
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
                 start: start,
-                end: endTime,
                 groupId: label.value,
                 allDay: 'true',
                 extendedProps: {
@@ -165,12 +158,11 @@ export default function CreateNote() {
 
                         <label className="block text-sm font-normal mt-3 text-gray-200">From:</label>
                         <div className="flex flex-row justify-between gap-4">
-                            <input type="date" id="date" name="startDate" required value={formData.date} onChange={handleStartDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
+                            <input type="date" id="date" name="startDate" required value={formData.date} onChange={handleDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
                             <input type="time" id="time" name="startTime" value={startTime} onChange={handleStartTimeChange} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
                         </div>
-                        <label classname="block text-sm font-normal mt-6 text-gray-200">To:</label>
                         <div className="flex flex-row justify-between gap-4">
-                            <input type="date" id="date" name="endDate" required value={formData.date} onChange={handleEndDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
+                            <input type="date" id="date" name="endDate" required value={formData.date} onChange={handleDateChange} className="text-white bg-gray-600 mt-1 px-3 py-2 rounded-md w-full dark focus:outline-none" />
                             <input type="time" id="time" name="startTime" value={endTime} onChange={handleEndTimeChange} className="text-white text-center bg-gray-600 mt-1 px-3 py-2 rounded-md h-full w-full focus:outline-none" />
                         </div>
                         {isDateValid ? null : <p className="flex text-red-500 text-sm w-full m-1 justify-start">Invalid date</p>}

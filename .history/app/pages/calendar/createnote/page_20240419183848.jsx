@@ -45,13 +45,13 @@ export default function CreateNote() {
 
     const handleStartTimeChange =(event) => {
         setFormData(prev => ({ ...prev, time: event.target.value }));
-        setStartTime(event.target.value);
+        setTime(event.target.value);
         setIsAlarmValid(true);
     };
 
     const handleEndTimeChange = (event) => {
         setFormData(prev => ({ ...prev, time: event.target.value }));
-        setEndTime(event.target.value);
+        setTime(event.target.value);
         setIsAlarmValid(true);
     };
 
@@ -98,7 +98,6 @@ export default function CreateNote() {
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
                 start: start.toISOString(),
-                end: endTime,
                 groupId: label.value,
                 extendedProps: {
                     alarm: alarm.value,
@@ -115,7 +114,6 @@ export default function CreateNote() {
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
                 start: start,
-                end: endTime,
                 groupId: label.value,
                 allDay: 'true',
                 extendedProps: {

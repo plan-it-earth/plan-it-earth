@@ -98,7 +98,6 @@ export default function CreateNote() {
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
                 start: start.toISOString(),
-                end: endTime,
                 groupId: label.value,
                 extendedProps: {
                     alarm: alarm.value,
@@ -115,7 +114,7 @@ export default function CreateNote() {
                 id: calendarApi.getEvents().length + 1,
                 title: title.value,
                 start: start,
-                end: endTime,
+                end: end,
                 groupId: label.value,
                 allDay: 'true',
                 extendedProps: {
