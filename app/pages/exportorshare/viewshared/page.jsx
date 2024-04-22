@@ -63,8 +63,17 @@ export default function ViewShared() {
     const sharedUID = docSnap.data().uid;
     const selectedCalendar = await fetchEventsByID(sharedUID);
 
+    // Filter events to only show events between startDate and endDate
+    const startDate = new Date(docSnap.data().startDate);
+    const endDate = new Date(docSnap.data().endDate);
+    console.log(startDate + ' ' + endDate)
+    const filteredCalendar = selectedCalendar.filter(event => {
+      const eventStart = new Date(event.start);
+      return eventStart >= startDate && eventStart <= endDate;
+    });
+
     // Set the selected calendar data
-    setSelectedCalendarData(selectedCalendar);
+    setSelectedCalendarData(filteredCalendar);
   };
 
   const handleEventClick = async (eventInfo) => {
